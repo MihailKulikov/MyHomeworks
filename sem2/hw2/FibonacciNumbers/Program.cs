@@ -4,11 +4,11 @@ namespace FibonacciNumbers
 {
     class Program
     {
-        static int Fib(int n)
+        private static int Fib(int position)
         {
             int next = 1;
             int current = 0;
-            for (int i = 0; i < n; ++i)
+            for (var i = 0; i < position; ++i)
             {
                 next += current;
                 current = next - current;
@@ -16,10 +16,12 @@ namespace FibonacciNumbers
 
             return current;
         }
+
         static void Main(string[] args)
         {
-            int n = int.Parse(Console.ReadLine());
-            Console.WriteLine($"{n}-ое число Фибоначчи = {Fib(n)}");
+            Console.WriteLine("Enter the position number of the desired fibonacci number");
+            int position = int.Parse(Console.ReadLine());
+            Console.WriteLine($"{position}th Fibonacci number = {Fib(position)}");
         }
     }
 }
