@@ -4,7 +4,7 @@ namespace Factorial
 {
     class Program
     {
-        static int Factorial(int n)
+        private static int Factorial(int n)
         {
             if (n <= 1)
             {
@@ -13,10 +13,12 @@ namespace Factorial
 
             return n * Factorial(n - 1);
         }
+
         static void Main(string[] args)
         {
+            Console.WriteLine("Enter the number whose factorial you want to calculate:");
             int n = int.Parse(Console.ReadLine());
-            Console.WriteLine($"{n}! = {Factorial(n)}");
+            Console.WriteLine($"{n}! = {Factorial(n)}"); 
         }
     }
 }
