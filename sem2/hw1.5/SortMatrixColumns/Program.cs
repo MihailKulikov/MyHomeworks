@@ -4,6 +4,8 @@ namespace SortMatrixColumns
 {
     public class Column : IComparable<Column>
     {
+        public int[] elements;
+
         public int CompareTo(Column other)
         {
             if (other == null) return 1;
@@ -11,7 +13,6 @@ namespace SortMatrixColumns
             return elements[0].CompareTo(other.elements[0]);
         }
 
-        public int[] elements;
         public Column(int[] elements)
         {
             this.elements = elements;
@@ -28,31 +29,31 @@ namespace SortMatrixColumns
             Console.WriteLine("Enter the number of columns:");
             int columnCount = int.Parse(Console.ReadLine());
 
-            Column[] matrix = new Column[columnCount];
-            for (int i = 0; i < matrix.Length; ++i)
+            var matrix = new Column[columnCount];
+            for (var i = 0; i < matrix.Length; ++i)
             {
                 matrix[i] = new Column(new int[rowCount]);
             }
 
-            Console.WriteLine("Enter matrix elements with a space:");
-            string input = Console.ReadLine();
-            string[] variables = input.Split(new char[] { ' ' });
-            int index = 0;
+            Console.WriteLine("Enter matrix elements separated by space:");
+            var input = Console.ReadLine();
+            var variables = input.Split(new char[] { ' ' });
+            var index = 0;
 
-            for (int i = 0; i < rowCount; ++i)
+            for (var i = 0; i < rowCount; ++i)
             {
-                for (int j = 0; j < matrix.Length; ++j)
+                for (var j = 0; j < matrix.Length; ++j)
                 {
                     matrix[j].elements[i] = int.Parse(variables[index]);
                     index++;
                 }
             }
 
-            Array.Sort<Column>(matrix);
+            Array.Sort(matrix);
 
-            for (int i = 0; i < rowCount; ++i)
+            for (var i = 0; i < rowCount; ++i)
             {
-                for (int j = 0; j < matrix.Length; ++j)
+                for (var j = 0; j < matrix.Length; ++j)
                 {
                     Console.Write($"{matrix[j].elements[i]} ");
                 }
