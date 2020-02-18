@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace SpiralOutput
 {
@@ -49,17 +50,15 @@ namespace SpiralOutput
         {
             Console.WriteLine("Enter the size of the matrix:");
             int size = int.Parse(Console.ReadLine());
-            Console.WriteLine("Enter elements of the matrix separated by space:");
-            var variables = Console.ReadLine().Split(new char[] { ' ' });
             var matrix = new int[size, size];
-            var index = 0;
 
             for (var i = 0; i < matrix.GetLength(0); ++i)
             {
+                Console.WriteLine($"Enter elements of the {i + 1}th of the matrix separated by space:");
+                var elements = Console.ReadLine().Split(new char[] { ' ' }).Select(int.Parse).ToArray();
                 for (var j = 0; j < matrix.GetLength(1); ++j)
                 {
-                    matrix[i, j] = int.Parse(variables[index]);
-                    index++;
+                    matrix[i,j] = elements[j];
                 }
             }
 
