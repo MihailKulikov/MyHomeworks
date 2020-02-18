@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace SortMatrixColumns
 {
@@ -34,18 +35,15 @@ namespace SortMatrixColumns
             {
                 matrix[i] = new Column(new int[rowCount]);
             }
-
-            Console.WriteLine("Enter matrix elements separated by space:");
-            var input = Console.ReadLine();
-            var variables = input.Split(new char[] { ' ' });
-            var index = 0;
-
+            
             for (var i = 0; i < rowCount; ++i)
             {
+                Console.WriteLine($"Enter the elements of the {i + 1}th row of the matrix separated by space:");
+                var input = Console.ReadLine();
+                var variables = input.Split(new char[] { ' ' }).Select(int.Parse).ToArray();
                 for (var j = 0; j < matrix.Length; ++j)
                 {
-                    matrix[j].elements[i] = int.Parse(variables[index]);
-                    index++;
+                    matrix[j].elements[i] = variables[j];
                 }
             }
 
