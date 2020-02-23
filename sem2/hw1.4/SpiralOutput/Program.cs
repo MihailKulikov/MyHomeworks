@@ -58,7 +58,7 @@ namespace SpiralOutput
                 var elements = Console.ReadLine().Split(new char[] { ' ' }).Select(int.Parse).ToArray();
                 for (var j = 0; j < matrix.GetLength(1); ++j)
                 {
-                    matrix[i,j] = elements[j];
+                    matrix[i, j] = elements[j];
                 }
             }
 
