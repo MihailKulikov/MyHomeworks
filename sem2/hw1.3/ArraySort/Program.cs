@@ -12,7 +12,7 @@ namespace ArraySort
             a = a - b;
         }
 
-        private static void ShellSort(ref int[] array)
+        private static void ShellSort(int[] array)
         {
             var step = array.Length / 2;
             while (step >= 1)
@@ -35,7 +35,7 @@ namespace ArraySort
         {
             Console.WriteLine("Enter elements of the array separated by space:");
             var buffer = Console.ReadLine().Split(new char[] { ' ' }).Select(int.Parse).ToArray() ;
-            ShellSort(ref buffer);
+            ShellSort(buffer);
             foreach (var i in buffer)
             {   
                 Console.Write($"{i} ");
