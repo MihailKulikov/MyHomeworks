@@ -1,9 +1,16 @@
 ﻿using System;
-
+using System.Collections.Generic;
 namespace LinkedListRealisation
 {
+    /// <summary>
+    /// Represents a singly linked list. Provides methods to search and manipulate lists.
+    /// </summary>
+    /// <typeparam name="T">Value type.</typeparam>
     public class LinkedList<T>
     {
+        /// <summary>
+        /// Represent the item of LinkedList.
+        /// </summary>
         private class Node
         {
             public T Value { get; set; }
@@ -23,9 +30,18 @@ namespace LinkedListRealisation
         private Node Tail { get; set; }
         public int Length { get; private set; }
 
+        /// <summary>
+        /// Checks if the LinkedList is empty.
+        /// </summary>
+        /// <returns></returns>
         public bool IsEmpty()
             => Head == null;
 
+        /// <summary>
+        /// Finds the item in Linked List with the desired position number.
+        /// </summary>
+        /// <param name="index">Position number counting from 0.</param>
+        /// <returns>The item with the desired position number</returns>
         private Node FindNodeByIndex(int index)
         {
             var current = Head;
@@ -37,6 +53,11 @@ namespace LinkedListRealisation
             return current;
         }
 
+        /// <summary>
+        /// Adds the item with the desired value to the desired position.
+        /// </summary>
+        /// <param name="value">Item value.</param>
+        /// <param name="index">Position number counting from 0.</param>
         public void AddElementByIndex(T value, int index)
         {
             if ((index > Length) || (index < 0))
@@ -76,6 +97,10 @@ namespace LinkedListRealisation
             Length++;
         }
 
+        /// <summary>
+        /// Removes the item with the desired position.
+        /// </summary>
+        /// <param name="index">Position number counting from 0.</param>
         public void RemoveElementByIndex(int index)
         {
             if ((index >= Length) || (index < 0))
@@ -105,6 +130,11 @@ namespace LinkedListRealisation
             Length--;
         }
 
+        /// <summary>
+        /// Returns the value of the item with the desired position.
+        /// </summary>
+        /// <param name="index">Position number counting from 0.</param>
+        /// <returns>The value of the item with the desired position</returns>
         public T GetValueByIndex(int index)
         {
             if ((index >= Length) || (index < 0))
@@ -115,6 +145,11 @@ namespace LinkedListRealisation
             return FindNodeByIndex(index).Value;
         }
 
+        /// <summary>
+        /// Sets the value of the item with the desired position.
+        /// </summary>
+        /// <param name="value">Desired value</param>
+        /// <param name="index">Desired position</param>
         public void SetValueByIndex(T value, int index)
         {
             if ((index >= Length) || (index < 0))
@@ -130,6 +165,9 @@ namespace LinkedListRealisation
             FindNodeByIndex(index).Value = value;
         }
 
+        /// <summary>
+        /// Prints the values of all items of LinkedList in the console.
+        /// </summary>
         public void PrintList()
         {
             var current = Head;
