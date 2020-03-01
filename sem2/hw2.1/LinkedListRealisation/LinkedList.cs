@@ -41,7 +41,7 @@ namespace LinkedListRealisation
         /// Finds the item in Linked List with the desired position number.
         /// </summary>
         /// <param name="index">Position number counting from 0.</param>
-        /// <returns>The item with the desired position number</returns>
+        /// <returns>The item with the desired position number.</returns>
         private Node FindNodeByIndex(int index)
         {
             var current = Head;
@@ -134,7 +134,7 @@ namespace LinkedListRealisation
         /// Returns the value of the item with the desired position.
         /// </summary>
         /// <param name="index">Position number counting from 0.</param>
-        /// <returns>The value of the item with the desired position</returns>
+        /// <returns>The value of the item with the desired position.</returns>
         public T GetValueByIndex(int index)
         {
             if ((index >= Length) || (index < 0))
@@ -148,8 +148,8 @@ namespace LinkedListRealisation
         /// <summary>
         /// Sets the value of the item with the desired position.
         /// </summary>
-        /// <param name="value">Desired value</param>
-        /// <param name="index">Desired position</param>
+        /// <param name="value">Desired value.</param>
+        /// <param name="index">Position number counting from 0.</param>
         public void SetValueByIndex(T value, int index)
         {
             if ((index >= Length) || (index < 0))
