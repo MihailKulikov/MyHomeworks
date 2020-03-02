@@ -43,7 +43,6 @@ namespace LinkedListRealisation
 
         private Node head;
         private Node tail;
-        private int length;
 
         /// <summary>
         /// Gets the number of nodes actually contained in the LinkedList.
