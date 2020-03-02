@@ -2,12 +2,18 @@
 
 namespace StackCalculator
 {
+    /// <summary>
+    /// Represents a simple last-in-first-out (LIFO) collection of double. Uses array.
+    /// </summary>
     public class StackWithArray : IStack
     {
         public int Count { get; private set; }
         private double[] _array;
 
-        public StackWithArray() { _array = new double[0]; Count = 0; }
+        /// <summary>
+        /// Initializes a new instance of the Stack class that is empty and has the default initial capacity.
+        /// </summary>
+        public StackWithArray() { _array = new double[0];}
 
         public double Pop()
         {
