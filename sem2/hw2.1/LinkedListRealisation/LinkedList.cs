@@ -9,16 +9,31 @@ namespace LinkedListRealisation
     public class LinkedList<T>
     {
         /// <summary>
-        /// Represent the item of LinkedList.
+        /// Represents a node in a LinkedList.
         /// </summary>
         private class Node
         {
+            /// <summary>
+            /// Gets and sets the value contained in the node.
+            /// </summary>
             public T Value { get; set; }
 
+            /// <summary>
+            /// Gets and sets the next node in the LinkedList.
+            /// </summary>
             public Node Next { get; set; }
 
+            /// <summary>
+            /// Initializes a new instance of the Node class, containing the specified value.
+            /// </summary>
+            /// <param name="value">The value to contain in the Node.</param>
             public Node(T value) => Value = value;
 
+            /// <summary>
+            /// Initializes a new instance of the Node class, containing the specified value and the link on the next node.
+            /// </summary>
+            /// <param name="value">The value to contain in the Node.</param>
+            /// <param name="next">The link on the next node to contain in the Node.</param>
             public Node(T value, Node next)
             {
                 Value = value;
@@ -26,16 +41,21 @@ namespace LinkedListRealisation
             }
         }
 
-        private Node Head { get; set; }
-        private Node Tail { get; set; }
-        public int Length { get; private set; }
+        private Node head;
+        private Node tail;
+        private int length;
+
+        /// <summary>
+        /// Gets the number of nodes actually contained in the LinkedList.
+        /// </summary>
+        public int Length { get; private set;}
 
         /// <summary>
         /// Checks if the LinkedList is empty.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>True if the LinkedList is empty, and false if not.</returns>
         public bool IsEmpty()
-            => Head == null;
+            => head == null;
 
         /// <summary>
         /// Finds the item in Linked List with the desired position number.
@@ -44,7 +64,7 @@ namespace LinkedListRealisation
         /// <returns>The item with the desired position number.</returns>
         private Node FindNodeByIndex(int index)
         {
-            var current = Head;
+            var current = head;
             for (var i = 0; i < index; i++)
             {
                 current = current.Next ?? throw new ArgumentOutOfRangeException(nameof(index));
@@ -72,19 +92,19 @@ namespace LinkedListRealisation
 
             if (IsEmpty())
             {
-                Head = new Node(value);
-                Tail = Head;
+                head = new Node(value);
+                tail = head;
             }
             else
             {
                 if (index == 0)
                 {
-                    Head = new Node(value, Head);
+                    head = new Node(value, head);
                 }
                 else if (index == Length)
                 {
-                    Tail.Next = new Node(value);
-                    Tail = Tail.Next;
+                    tail.Next = new Node(value);
+                    tail = tail.Next;
                 }
                 else
                 {
@@ -110,15 +130,15 @@ namespace LinkedListRealisation
 
             if (index == 0)
             {
-                Head = Head.Next;
+                head = head.Next;
             }
             else
             {
                 var previous = FindNodeByIndex(index - 1);
                 if (previous.Next.Next == null)
                 {
-                    Tail = previous;
-                    Tail.Next = null;
+                    tail = previous;
+                    tail.Next = null;
                 }
                 else
                 {
@@ -126,7 +146,7 @@ namespace LinkedListRealisation
                 }
             }
 
-            if (IsEmpty()) Tail = null;
+            if (IsEmpty()) tail = null;
             Length--;
         }
 
@@ -170,7 +190,7 @@ namespace LinkedListRealisation
         /// </summary>
         public void PrintList()
         {
-            var current = Head;
+            var current = head;
             while (current != null)
             {
                 Console.Write($"{current.Value} ");
