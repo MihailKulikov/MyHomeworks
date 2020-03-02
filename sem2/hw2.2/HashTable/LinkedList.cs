@@ -7,20 +7,35 @@ namespace HashTable
     /// <summary>
     /// Represents a singly linked list. Provides methods to search and manipulate lists.
     /// </summary>
-    /// <typeparam name="T">Value type.</typeparam>
+    /// <typeparam name="T">Specifies the element type of the linked list.</typeparam>
     public class LinkedList<T>:IEnumerable<T>
     {
         /// <summary>
-        /// Represent the item of LinkedList.
+        /// Represent the node in the LinkedList.
         /// </summary>
         private class Node
         {
+            /// <summary>
+            /// Gets and sets the value contained in the node.
+            /// </summary>
             public T Value { get; set; }
 
+            /// <summary>
+            /// Gets and sets the next node in the LinkedList.
+            /// </summary>
             public Node Next { get; set; }
 
+            /// <summary>
+            /// Initializes a new instance of the Node class, containing the specified value.
+            /// </summary>
+            /// <param name="value">The value to contain in the Node.</param>
             public Node(T value) => Value = value;
 
+            /// <summary>
+            /// Initializes a new instance of the Node class, containing the specified value and the link on the next node.
+            /// </summary>
+            /// <param name="value">The value to contain in the Node.</param>
+            /// <param name="next">The link on the next node to contain in the Node.</param>
             public Node(T value, Node next)
             {
                 Value = value;
@@ -28,16 +43,20 @@ namespace HashTable
             }
         }
 
-        private Node Head { get; set; }
-        private Node Tail { get; set; }
+        private Node head;
+        private Node tail;
+
+        /// <summary>
+        /// Gets the number of nodes actually contained in the LinkedList.
+        /// </summary>
         public int Length { get; private set; }
 
         /// <summary>
         /// Checks if the LinkedList is empty.
         /// </summary>
-        /// <returns>True if LinkedList is empty, and false if not.</returns>
+        /// <returns>True if the LinkedList is empty; otherwise, false.</returns>
         public bool IsEmpty()
-            => Head == null;
+            => head == null;
 
         /// <summary>
         /// Finds the item in Linked List with the desired position number.
@@ -46,7 +65,7 @@ namespace HashTable
         /// <returns>The item with the desired position number.</returns>
         private Node FindNodeByIndex(int index)
         {
-            var current = Head;
+            var current = head;
             for (var i = 0; i < index; i++)
             {
                 current = current.Next ?? throw new ArgumentOutOfRangeException(nameof(index));
@@ -58,7 +77,7 @@ namespace HashTable
         /// <summary>
         /// Adds the item with the desired value to the desired position.
         /// </summary>
-        /// <param name="value">Item value.</param>
+        /// <param name="value">The value of the element to add.</param>
         /// <param name="index">Position number counting from 0.</param>
         public void AddElementByIndex(T value, int index)
         {
@@ -74,19 +93,19 @@ namespace HashTable
 
             if (IsEmpty())
             {
-                Head = new Node(value);
-                Tail = Head;
+                head = new Node(value);
+                tail = head;
             }
             else
             {
                 if (index == 0)
                 {
-                    Head = new Node(value, Head);
+                    head = new Node(value, head);
                 }
                 else if (index == Length)
                 {
-                    Tail.Next = new Node(value);
-                    Tail = Tail.Next;
+                    tail.Next = new Node(value);
+                    tail = tail.Next;
                 }
                 else
                 {
@@ -112,15 +131,15 @@ namespace HashTable
 
             if (index == 0)
             {
-                Head = Head.Next;
+                head = head.Next;
             }
             else
             {
                 var previous = FindNodeByIndex(index - 1);
                 if (previous.Next.Next == null)
                 {
-                    Tail = previous;
-                    Tail.Next = null;
+                    tail = previous;
+                    tail.Next = null;
                 }
                 else
                 {
@@ -128,7 +147,7 @@ namespace HashTable
                 }
             }
 
-            if (IsEmpty()) Tail = null;
+            if (IsEmpty()) tail = null;
             Length--;
         }
 
@@ -150,7 +169,7 @@ namespace HashTable
         /// <summary>
         /// Sets the value of the item with the desired position.
         /// </summary>
-        /// <param name="value">Desired value.</param>
+        /// <param name="value">The value of the element to set.</param>
         /// <param name="index">Position number counting from 0.</param>
         public void SetValueByIndex(T value, int index)
         {
@@ -172,7 +191,7 @@ namespace HashTable
         /// </summary>
         public void PrintList()
         {
-            var current = Head;
+            var current = head;
             while (current != null)
             {
                 Console.Write($"{current.Value} ");
@@ -181,10 +200,10 @@ namespace HashTable
         }
 
         /// <summary>
-        /// Checks for the item with desirable value.
+        /// Determines whether the LinkedList contains a specific value.
         /// </summary>
-        /// <param name="value">Value of the item</param>
-        /// <returns>True if contains, and false if not.</returns>
+        /// <param name="value">The value to locate in the LinkedList.</param>
+        /// <returns>True if the LinkedList contains an element with the specified value; otherwise, false.</returns>
         public bool IsContains(T value)
         {
             if (value == null)
@@ -192,7 +211,7 @@ namespace HashTable
                 throw new ArgumentNullException(nameof(value));
             }
             if (IsEmpty()) return false;
-            var current = Head;
+            var current = head;
             while (current != null)
             {
                 if (current.Value.Equals(value))
@@ -206,15 +225,15 @@ namespace HashTable
         /// <summary>
         /// Removes item with desirable value from LinkedList.
         /// </summary>
-        /// <param name="value">Value of the item.</param>
-        /// <returns>True if item was removed, and false if not</returns>
+        /// <param name="value">The value to remove.</param>
+        /// <returns>True if item was removed; otherwise false.</returns>
         public bool RemoveItemsByValue(T value)
         {
             if (value == null)
             {
                 throw  new ArgumentNullException(nameof(value));
             }
-            Node current = Head;
+            Node current = head;
             Node previous = null;
 
             while (current != null)
@@ -225,13 +244,13 @@ namespace HashTable
                     {
                         previous.Next = current.Next;
                         if (current.Next == null)
-                            Tail = previous;
+                            tail = previous;
                     }
                     else
                     {
-                        Head = Head.Next;
-                        if (Head == null)
-                            Tail = null;
+                        head = head.Next;
+                        if (head == null)
+                            tail = null;
                     }
                     Length--;
                     return true;
@@ -250,7 +269,7 @@ namespace HashTable
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            Node current = Head;
+            Node current = head;
             while (current != null)
             {
                 yield return current.Value;

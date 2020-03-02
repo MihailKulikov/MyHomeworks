@@ -5,15 +5,18 @@ namespace HashTable
     /// <summary>
     /// Represents a hash table. Provides methods to check for an item and manipulate hash table.
     /// </summary>
-    /// <typeparam name="T">Type of items</typeparam>
+    /// <typeparam name="T">Specifies the element type of the hash table.</typeparam>
     public class HashTable<T>
     {
         private LinkedList<T>[] _buckets;
         private const int Size = 4;
         private int _itemCount;
         private const int LoadFactor = 2;
-        private const int TheNumberToIncrease = 2;
+        private const int NumberToIncrease = 2;
 
+        /// <summary>
+        /// Initializes a new, empty instance of the HashTable class using the default initial capacity, load factor.
+        /// </summary>
         public HashTable()
         {
             _buckets = new LinkedList<T>[Size];
@@ -25,7 +28,7 @@ namespace HashTable
         }
         
         /// <summary>
-        /// Checks load average of the hash table.
+        /// Checks load average of the HashTable.
         /// </summary>
         private void CheckAverageLoad()
         {
@@ -38,7 +41,7 @@ namespace HashTable
         /// </summary>
         private void EnlargeHashTable()
         {
-            var newBuckets = new LinkedList<T>[_buckets.Length*TheNumberToIncrease];
+            var newBuckets = new LinkedList<T>[_buckets.Length*NumberToIncrease];
             for (int i = 0; i < newBuckets.Length; i++)
             {
                 newBuckets[i] = new LinkedList<T>();
@@ -56,7 +59,7 @@ namespace HashTable
         /// <summary>
         /// Сounts the index of the chain for this value using a hash function.
         /// </summary>
-        /// <param name="value">Value of the item.</param>
+        /// <param name="value">The value of the element to add.</param>
         /// <param name="lengthOfBuckets">Length of the current buckets</param>
         /// <returns>Index of the chain in which the element should be placed.</returns>
         private int GetArrayPosition(T value, int lengthOfBuckets)
@@ -69,9 +72,9 @@ namespace HashTable
         }
 
         /// <summary>
-        /// Adds the item with desirable value to the hash table.
+        /// Adds the item with desirable value to the HashTable.
         /// </summary>
-        /// <param name="value">Value of the item.</param>
+        /// <param name="value">The value of the element to add.</param>
         public void Add(T value)
         {
             if (value == null)
@@ -88,9 +91,9 @@ namespace HashTable
         }
 
         /// <summary>
-        /// Removes the item with desirable value from the hash table.
+        /// Removes the item with desirable value from the hashTable.
         /// </summary>
-        /// <param name="value">Value of the item.</param>
+        /// <param name="value">The value of the element to remove.</param>
         public void Remove(T value)
         {
             if (value == null)
@@ -103,10 +106,10 @@ namespace HashTable
         }
 
         /// <summary>
-        /// Checks for the item with desirable value.
+        /// Determines whether the HashTable contains a specific value.
         /// </summary>
-        /// <param name="value">Value of the item</param>
-        /// <returns>True if contains, and false if not.</returns>
+        /// <param name="value">The value to locate in the HashTable.</param>
+        /// <returns>True if the Hashtable contains an element with the specified value; otherwise, false.</returns>
         public bool IsContains(T value)
             => _buckets[GetArrayPosition(value, _buckets.Length)].IsContains(value);
 
