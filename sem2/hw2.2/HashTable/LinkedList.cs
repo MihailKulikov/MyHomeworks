@@ -8,7 +8,7 @@ namespace HashTable
     /// Represents a singly linked list. Provides methods to search and manipulate lists.
     /// </summary>
     /// <typeparam name="T">Specifies the element type of the linked list.</typeparam>
-    public class LinkedList<T>:IEnumerable<T>
+    public class LinkedList<T>: IEnumerable<T>
     {
         /// <summary>
         /// Represent the node in the LinkedList.
@@ -264,7 +264,7 @@ namespace HashTable
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable)this).GetEnumerator();
+            return ((IEnumerable<T>)this).GetEnumerator();
         }
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()

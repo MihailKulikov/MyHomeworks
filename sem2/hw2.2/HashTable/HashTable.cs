@@ -33,7 +33,9 @@ namespace HashTable
         private void CheckAverageLoad()
         {
             if (_itemCount / _buckets.Length >= LoadFactor)
+            {
                 EnlargeHashTable();
+            }
         }
 
         /// <summary>
@@ -41,16 +43,18 @@ namespace HashTable
         /// </summary>
         private void EnlargeHashTable()
         {
-            var newBuckets = new LinkedList<T>[_buckets.Length*NumberToIncrease];
+            var newBuckets = new LinkedList<T>[_buckets.Length * NumberToIncrease];
             for (int i = 0; i < newBuckets.Length; i++)
             {
                 newBuckets[i] = new LinkedList<T>();
             }
 
-            foreach(var chain in _buckets)
-            foreach (var item in chain)
+            foreach (var chain in _buckets)
             {
-                newBuckets[GetArrayPosition(item, newBuckets.Length)].AddElementByIndex(item, 0);
+                foreach (var item in chain)
+                {
+                    newBuckets[GetArrayPosition(item, newBuckets.Length)].AddElementByIndex(item, 0);
+                }
             }
 
             _buckets = newBuckets;
@@ -102,7 +106,9 @@ namespace HashTable
             }
 
             if (_buckets[GetArrayPosition(value, _buckets.Length)].RemoveItemsByValue(value))
+            {
                 _itemCount--;
+            }
         }
 
         /// <summary>
