@@ -16,15 +16,6 @@ namespace StackCalculator
             public Node Next { get; }
 
             /// <summary>
-            /// Initializes a new instance of the Node class, containing the specified value.
-            /// </summary>
-            /// <param name="value">The value to contain in the Node</param>
-            public Node(double value)
-            {
-                Value = value;
-            }
-
-            /// <summary>
             /// Initializes a new instance of the Node class, containing the specified value and link on the next node.
             /// </summary>
             /// <param name="value">The value to contain in the Node</param>
@@ -42,7 +33,7 @@ namespace StackCalculator
 
         public void Push(double value)
         {
-            _head = _head == null ? new Node(value) : new Node(value, _head);
+            _head = new Node(value, _head);
 
             Count++;
         }

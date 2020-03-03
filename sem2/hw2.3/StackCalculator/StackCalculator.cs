@@ -15,7 +15,7 @@ namespace StackCalculator
         /// <param name="stack">The stack which the StackCalculator will use.</param>
         public StackCalculator(IStack stack)
         {
-            this._stack = stack;
+            _stack = stack;
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace StackCalculator
                 throw new ArgumentNullException(nameof(input));
             }
             var operandsAndOperations = input.Split(' ');
-            foreach(var item in operandsAndOperations)
+            foreach (var item in operandsAndOperations)
             {
                 if (double.TryParse(item, out double number))
                 {
@@ -55,26 +55,26 @@ namespace StackCalculator
                     {
                         case "+":
                             {
-                                var operands = GetTwoOperands();
-                                _stack.Push(operands.Item2 + operands.Item1);
+                                var (first, second) = GetTwoOperands();
+                                _stack.Push(second + first);
                                 break;
                             }
                         case "-":
                             {
-                                var operands = GetTwoOperands();
-                                _stack.Push(operands.Item2 - operands.Item1);
+                                var (first, second) = GetTwoOperands();
+                                _stack.Push(second - first);
                                 break;
                             }
                         case "*":
                             {
-                                var operands = GetTwoOperands();
-                                _stack.Push(operands.Item2 * operands.Item1);
+                                var (first, second) = GetTwoOperands();
+                                _stack.Push(first * second);
                                 break;
                             }
                         case "/":
                             {
-                                var operands = GetTwoOperands();
-                                _stack.Push(operands.Item2 / operands.Item1);
+                                var(first, second) = GetTwoOperands();
+                                _stack.Push(second / first);
                                 break;
                             }
                         default:
