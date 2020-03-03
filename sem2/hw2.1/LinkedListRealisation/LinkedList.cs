@@ -93,24 +93,24 @@ namespace LinkedListRealisation
             {
                 head = new Node(value);
                 tail = head;
+                Length++;
+                return;
+            }
+
+            if (index == 0)
+            {
+                head = new Node(value, head);
+            }
+            else if (index == Length)
+            {
+                tail.Next = new Node(value);
+                tail = tail.Next;
             }
             else
             {
-                if (index == 0)
-                {
-                    head = new Node(value, head);
-                }
-                else if (index == Length)
-                {
-                    tail.Next = new Node(value);
-                    tail = tail.Next;
-                }
-                else
-                {
-                    var previous = FindNodeByIndex(index - 1);
-                    var current = new Node(value, previous.Next);
-                    previous.Next = current;
-                }
+                var previous = FindNodeByIndex(index - 1);
+                var current = new Node(value, previous.Next);
+                previous.Next = current;
             }
 
             Length++;
@@ -145,7 +145,11 @@ namespace LinkedListRealisation
                 }
             }
 
-            if (IsEmpty()) tail = null;
+            if (IsEmpty())
+            {
+                tail = null;
+            }
+
             Length--;
         }
 
