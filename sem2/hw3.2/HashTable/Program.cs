@@ -6,7 +6,7 @@ namespace HashTable
     {
         private static void Main()
         {
-            var hashTable = new HashTable<string>();
+            var hashTable = new HashTable(new PolynomialRollingHashFunction());
             hashTable.Add("test1");
             hashTable.Add("test2");
             hashTable.Print();
@@ -23,6 +23,7 @@ namespace HashTable
             hashTable.Remove("test228");
             hashTable.Remove("test6");
             Console.WriteLine($"\nis \"test7\" in hashTable? {hashTable.IsContains("test7")}");
+            hashTable.ChangeHashFunction(new StandardHashFunction());
             Console.WriteLine($"is \"test4\" in hashTable? {hashTable.IsContains("test4")}\n");
             hashTable.Print();
         }

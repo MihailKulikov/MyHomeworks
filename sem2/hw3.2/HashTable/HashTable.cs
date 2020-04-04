@@ -1,29 +1,33 @@
 ﻿using System;
+using System.Collections;
+using System.Linq;
 
 namespace HashTable
 {
     /// <summary>
     /// Represents a hash table. Provides methods to check for an item and manipulate hash table.
     /// </summary>
-    /// <typeparam name="T">Specifies the element type of the hash table.</typeparam>
-    public class HashTable<T>
+    public class HashTable : IEnumerable
     {
-        private LinkedList<T>[] _buckets;
-        private const int Size = 4;
+        private LinkedList<string>[] _buckets;
         private int _itemCount;
+        private IHashFunction _hashFunction;
+        
+        private const int Size = 4;
         private const int LoadFactor = 2;
         private const int NumberToIncrease = 2;
 
         /// <summary>
         /// Initializes a new, empty instance of the HashTable class using the default initial capacity, load factor.
         /// </summary>
-        public HashTable()
+        public HashTable(IHashFunction hashFunction)
         {
-            _buckets = new LinkedList<T>[Size];
+            _hashFunction = hashFunction;
+            _buckets = new LinkedList<string>[Size];
             _itemCount = 0;
             for (var i = 0; i < _buckets.Length; i++)
             {
-                _buckets[i] = new LinkedList<T>();
+                _buckets[i] = new LinkedList<string>();
             }
         }
         
@@ -34,19 +38,19 @@ namespace HashTable
         {
             if (_itemCount / _buckets.Length >= LoadFactor)
             {
-                EnlargeHashTable();
+                EnlargeHashTable(NumberToIncrease);
             }
         }
 
         /// <summary>
-        /// Increases the number of elements in the buckets.
+        /// Increases the number of elements in the buckets by the selected number of times.
         /// </summary>
-        private void EnlargeHashTable()
+        private void EnlargeHashTable(int numberToIncrease)
         {
-            var newBuckets = new LinkedList<T>[_buckets.Length * NumberToIncrease];
+            var newBuckets = new LinkedList<string>[_buckets.Length * numberToIncrease];
             for (var i = 0; i < newBuckets.Length; i++)
             {
-                newBuckets[i] = new LinkedList<T>();
+                newBuckets[i] = new LinkedList<string>();
             }
 
             foreach (var chain in _buckets)
@@ -66,16 +70,16 @@ namespace HashTable
         /// <param name="value">The value of the element to add.</param>
         /// <param name="lengthOfBuckets">Length of the current buckets</param>
         /// <returns>Index of the chain in which the element should be placed.</returns>
-        private int GetArrayPosition(T value, int lengthOfBuckets)
+        private int GetArrayPosition(string value, int lengthOfBuckets)
         {
-            return Math.Abs(value.GetHashCode() % lengthOfBuckets);
+            return Math.Abs(_hashFunction.GetHashCode(value)) % lengthOfBuckets;
         }
 
         /// <summary>
         /// Adds the item with desirable value to the HashTable.
         /// </summary>
         /// <param name="value">The value of the element to add.</param>
-        public void Add(T value)
+        public void Add(string value)
         {
             if (value == null)
             {
@@ -91,10 +95,20 @@ namespace HashTable
         }
 
         /// <summary>
+        /// Changes current hash function to the entered hash function.
+        /// </summary>
+        /// <param name="newHashFunction"></param>
+        public void ChangeHashFunction(IHashFunction newHashFunction)
+        {
+            _hashFunction = newHashFunction;
+            EnlargeHashTable(1);
+        }
+        
+        /// <summary>
         /// Removes the item with desirable value from the hashTable.
         /// </summary>
         /// <param name="value">The value of the element to remove.</param>
-        public void Remove(T value)
+        public void Remove(string value)
         {
             if (value == null)
             {
@@ -112,7 +126,7 @@ namespace HashTable
         /// </summary>
         /// <param name="value">The value to locate in the HashTable.</param>
         /// <returns>True if the Hashtable contains an element with the specified value; otherwise, false.</returns>
-        public bool IsContains(T value)
+        public bool IsContains(string value)
             => _buckets[GetArrayPosition(value, _buckets.Length)].IsContains(value);
 
         /// <summary>
@@ -125,6 +139,11 @@ namespace HashTable
                 chain?.PrintList();
             }
             Console.WriteLine();
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return _buckets.SelectMany(bucket => bucket).GetEnumerator();
         }
     }
 }
