@@ -18,7 +18,7 @@ namespace HashTable
             /// <summary>
             /// Gets and sets the value contained in the node.
             /// </summary>
-            public T Value { get; set; }
+            public T Value { get; }
 
             /// <summary>
             /// Gets and sets the next node in the LinkedList.
@@ -42,21 +42,21 @@ namespace HashTable
                 Next = next;
             }
         }
-
-        private Node head;
-        private Node tail;
+        
+        private Node _head;
+        private Node _tail;
 
         /// <summary>
         /// Gets the number of nodes actually contained in the LinkedList.
         /// </summary>
-        public int Length { get; private set; }
+        private int Length { get; set; }
 
         /// <summary>
         /// Checks if the LinkedList is empty.
         /// </summary>
         /// <returns>True if the LinkedList is empty; otherwise, false.</returns>
-        public bool IsEmpty()
-            => head == null;
+        private bool IsEmpty()
+            => _head == null;
 
         /// <summary>
         /// Finds the item in Linked List with the desired position number.
@@ -65,7 +65,7 @@ namespace HashTable
         /// <returns>The item with the desired position number.</returns>
         private Node FindNodeByIndex(int index)
         {
-            var current = head;
+            var current = _head;
             for (var i = 0; i < index; i++)
             {
                 current = current.Next ?? throw new ArgumentOutOfRangeException(nameof(index));
@@ -93,19 +93,19 @@ namespace HashTable
 
             if (IsEmpty())
             {
-                head = new Node(value);
-                tail = head;
+                _head = new Node(value);
+                _tail = _head;
             }
             else
             {
                 if (index == 0)
                 {
-                    head = new Node(value, head);
+                    _head = new Node(value, _head);
                 }
                 else if (index == Length)
                 {
-                    tail.Next = new Node(value);
-                    tail = tail.Next;
+                    _tail.Next = new Node(value);
+                    _tail = _tail.Next;
                 }
                 else
                 {
@@ -119,79 +119,11 @@ namespace HashTable
         }
 
         /// <summary>
-        /// Removes the item with the desired position.
-        /// </summary>
-        /// <param name="index">Position number counting from 0.</param>
-        public void RemoveElementByIndex(int index)
-        {
-            if ((index >= Length) || (index < 0))
-            {
-                throw new ArgumentOutOfRangeException(nameof(index));
-            }
-
-            if (index == 0)
-            {
-                head = head.Next;
-            }
-            else
-            {
-                var previous = FindNodeByIndex(index - 1);
-                if (previous.Next.Next == null)
-                {
-                    tail = previous;
-                    tail.Next = null;
-                }
-                else
-                {
-                    previous.Next = previous.Next.Next;
-                }
-            }
-
-            if (IsEmpty()) tail = null;
-            Length--;
-        }
-
-        /// <summary>
-        /// Returns the value of the item with the desired position.
-        /// </summary>
-        /// <param name="index">Position number counting from 0.</param>
-        /// <returns>The value of the item with the desired position.</returns>
-        public T GetValueByIndex(int index)
-        {
-            if ((index >= Length) || (index < 0))
-            {
-                throw new ArgumentOutOfRangeException(nameof(index));
-            }
-
-            return FindNodeByIndex(index).Value;
-        }
-
-        /// <summary>
-        /// Sets the value of the item with the desired position.
-        /// </summary>
-        /// <param name="value">The value of the element to set.</param>
-        /// <param name="index">Position number counting from 0.</param>
-        public void SetValueByIndex(T value, int index)
-        {
-            if ((index >= Length) || (index < 0))
-            {
-                throw new ArgumentOutOfRangeException(nameof(index));
-            }
-
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-
-            FindNodeByIndex(index).Value = value;
-        }
-
-        /// <summary>
         /// Prints the values of all items of LinkedList in the console.
         /// </summary>
         public void PrintList()
         {
-            var current = head;
+            var current = _head;
             while (current != null)
             {
                 Console.Write($"{current.Value} ");
@@ -211,7 +143,7 @@ namespace HashTable
                 throw new ArgumentNullException(nameof(value));
             }
             if (IsEmpty()) return false;
-            var current = head;
+            var current = _head;
             while (current != null)
             {
                 if (current.Value.Equals(value))
@@ -233,7 +165,7 @@ namespace HashTable
             {
                 throw  new ArgumentNullException(nameof(value));
             }
-            Node current = head;
+            Node current = _head;
             Node previous = null;
 
             while (current != null)
@@ -244,13 +176,13 @@ namespace HashTable
                     {
                         previous.Next = current.Next;
                         if (current.Next == null)
-                            tail = previous;
+                            _tail = previous;
                     }
                     else
                     {
-                        head = head.Next;
-                        if (head == null)
-                            tail = null;
+                        _head = _head.Next;
+                        if (_head == null)
+                            _tail = null;
                     }
                     Length--;
                     return true;
@@ -269,7 +201,7 @@ namespace HashTable
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            Node current = head;
+            Node current = _head;
             while (current != null)
             {
                 yield return current.Value;

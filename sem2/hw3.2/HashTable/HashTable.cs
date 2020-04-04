@@ -44,7 +44,7 @@ namespace HashTable
         private void EnlargeHashTable()
         {
             var newBuckets = new LinkedList<T>[_buckets.Length * NumberToIncrease];
-            for (int i = 0; i < newBuckets.Length; i++)
+            for (var i = 0; i < newBuckets.Length; i++)
             {
                 newBuckets[i] = new LinkedList<T>();
             }
@@ -68,10 +68,6 @@ namespace HashTable
         /// <returns>Index of the chain in which the element should be placed.</returns>
         private int GetArrayPosition(T value, int lengthOfBuckets)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
             return Math.Abs(value.GetHashCode() % lengthOfBuckets);
         }
 
