@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a interface of the stack.
     /// </summary>
-    interface IStack
+    public interface IStack
     {
         /// <summary>
         /// Removes and returns the number at the top of the Stack.

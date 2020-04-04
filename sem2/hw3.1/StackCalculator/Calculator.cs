@@ -5,7 +5,7 @@ namespace StackCalculator
     /// <summary>
     /// Represents a calculator for executing expression in reverse polish notation.
     /// </summary>
-    class StackCalculator
+    public class Calculator
     {
         private readonly IStack _stack;
 
@@ -13,7 +13,7 @@ namespace StackCalculator
         /// Initializes a new instance of the StackCalculator class with the desirable stack.
         /// </summary>
         /// <param name="stack">The stack which the StackCalculator will use.</param>
-        public StackCalculator(IStack stack)
+        public Calculator(IStack stack)
         {
             _stack = stack;
         }
@@ -26,7 +26,7 @@ namespace StackCalculator
         {
             if (_stack.Count < 2)
             {
-                throw new Exception("Incorrect input string");
+                throw new InvalidInputExpressionException("The entered expression has an invalid format.");
             }
 
             return (_stack.Pop(), _stack.Pop());
@@ -36,12 +36,13 @@ namespace StackCalculator
         /// Executes the expression in reverse polish notation and print the result in the console.
         /// </summary>
         /// <param name="input">The expression in a string format.</param>
-        public void ExecuteLine(string input)
+        public double ExecuteLine(string input)
         {
             if (input == null)
             {
                 throw new ArgumentNullException(nameof(input));
             }
+            
             var operandsAndOperations = input.Split(' ');
             foreach (var item in operandsAndOperations)
             {
@@ -78,18 +79,19 @@ namespace StackCalculator
                                 break;
                             }
                         default:
-                            {
-                                throw new Exception("Incorrect input string.");
-                            }
+                        {
+                            throw new InvalidInputExpressionException("The entered expression has an invalid format.");
+                        }
                     }
                 }
             }
+            
             if (_stack.Count != 1)
             {
-                throw new Exception("Incorrect input string.");
+                throw new InvalidInputExpressionException("The entered expression has an invalid format.");
             }
-
-            Console.WriteLine(_stack.Pop());
+            
+            return _stack.Pop();
         }
     }
 }

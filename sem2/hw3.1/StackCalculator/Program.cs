@@ -16,15 +16,15 @@ namespace StackCalculator
                 case "1":
                 {
                     var stack = new StackWithArray();
-                    var stackCalculator = new StackCalculator(stack);
-                    stackCalculator.ExecuteLine(Console.ReadLine());
+                    var stackCalculator = new Calculator(stack);
+                    Console.WriteLine(stackCalculator.ExecuteLine(Console.ReadLine()));
                     break;
                 }
                 case "2":
                 {
                     var stack = new StackWithList();
-                    var stackCalculator = new StackCalculator(stack);
-                    stackCalculator.ExecuteLine(Console.ReadLine());
+                    var stackCalculator = new Calculator(stack);
+                    Console.WriteLine(stackCalculator.ExecuteLine(Console.ReadLine()));
                     break;
                 }
                 default:

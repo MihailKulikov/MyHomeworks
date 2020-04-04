@@ -19,7 +19,7 @@ namespace StackCalculator
         {
             if (Count == 0)
             {
-                throw new Exception("Stack is empty.");
+                throw new InvalidOperationException("Stack is empty.");
             }
             var topOfStack = _array[0];
             var newArray = new double[Count - 1];

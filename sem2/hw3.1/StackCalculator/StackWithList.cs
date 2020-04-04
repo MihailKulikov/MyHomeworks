@@ -42,7 +42,7 @@ namespace StackCalculator
         {
             if (Count == 0)
             {
-                throw new Exception("Stack is empty.");
+                throw new InvalidOperationException("Stack is empty.");
             }
 
             var topOfStack = _head.Value;
