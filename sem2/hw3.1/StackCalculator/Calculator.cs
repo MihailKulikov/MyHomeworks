@@ -75,6 +75,9 @@ namespace StackCalculator
                         case "/":
                             {
                                 var(first, second) = GetTwoOperands();
+                                if (first == 0)
+                                    throw new DivideByZeroException("Divide by zero happen.");
+                                
                                 _stack.Push(second / first);
                                 break;
                             }
