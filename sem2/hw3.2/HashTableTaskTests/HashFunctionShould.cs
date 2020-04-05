@@ -1,4 +1,5 @@
-﻿using HashTable;
+﻿using System;
+using HashTableTask;
 using NUnit.Framework;
 using FluentAssertions;
 
@@ -27,6 +28,13 @@ namespace HashTableTaskTests
             var inputStringCopy = (string)InputString.Clone();
 
             _hashFunction.GetHashCode(InputString).Should().Be(_hashFunction.GetHashCode(inputStringCopy));
+        }
+
+        [Test]
+        public void Throw_ArgumentNullException_WhenInputIsNull()
+        {
+            _hashFunction.Invoking(x => x.GetHashCode(null))
+                .Should().Throw<ArgumentNullException>();
         }
     }
 }

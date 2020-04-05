@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-namespace HashTable
+namespace HashTableTask
 {
     /// <summary>
     /// Represents a singly linked list. Provides methods to search and manipulate lists.

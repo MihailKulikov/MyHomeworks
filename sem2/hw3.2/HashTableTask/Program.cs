@@ -1,14 +1,11 @@
 ﻿using System;
-
-namespace HashTable
+namespace HashTableTask
 {
-    internal class Program
+    internal static class Program
     {
         private static void Main()
         {
-            var hashTable = new HashTable(Console.Out, new PolynomialRollingHashFunction());
-            hashTable.Add("test1");
-            hashTable.Add("test2");
+            var hashTable = new HashTable(Console.Out, new PolynomialRollingHashFunction()) {"test1", "test2"};
             hashTable.Print();
             hashTable.Add("test3");
             hashTable.Add("test4");

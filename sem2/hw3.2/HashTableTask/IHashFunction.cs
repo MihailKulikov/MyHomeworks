@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata;
-
-namespace HashTable
+﻿namespace HashTableTask
 {
     /// <summary>
     /// Represents a hash function. Provides methods to get hash code.

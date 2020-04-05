@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HashTable
+namespace HashTableTask
 {
     /// <summary>
     /// Represents a polynomial rolling hash function. Provides methods to get hash code.
@@ -9,6 +9,9 @@ namespace HashTable
     {
         public int GetHashCode(string data)
         {
+            if (data == null)
+                throw new ArgumentNullException(nameof(data));
+            
             const int p = 31;
             const int m = int.MaxValue;
             int hashValue = 0;

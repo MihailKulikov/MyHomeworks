@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace HashTable
+namespace HashTableTask
 {
     /// <summary>
     /// Represents a hash table. Provides methods to check for an item and manipulate hash table.
@@ -89,12 +89,10 @@ namespace HashTable
             {
                 throw new ArgumentNullException(nameof(value));
             }
-            
-            if (!IsContains(value))
-            {
-                _buckets[GetArrayPosition(value, _buckets.Length)].AddElementByIndex(value, 0);
-            }
 
+            if (IsContains(value)) return;
+            
+            _buckets[GetArrayPosition(value, _buckets.Length)].AddElementByIndex(value, 0);
             _itemCount++;
             CheckAverageLoad();
         }
@@ -102,7 +100,7 @@ namespace HashTable
         /// <summary>
         /// Changes current hash function to the entered hash function.
         /// </summary>
-        /// <param name="newHashFunction"></param>
+        /// <param name="newHashFunction">New hash function for a hash table.</param>
         public void ChangeHashFunction(IHashFunction newHashFunction)
         {
             _hashFunction = newHashFunction;
@@ -143,7 +141,8 @@ namespace HashTable
             {
                 chain?.PrintList();
             }
-            Console.WriteLine();
+            
+            _writer.WriteLine();
         }
 
         IEnumerator<string> IEnumerable<string>.GetEnumerator()

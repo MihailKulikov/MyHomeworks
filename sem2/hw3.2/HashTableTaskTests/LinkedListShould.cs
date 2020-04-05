@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using FluentAssertions;
-using HashTable;
+using HashTableTask;
 using NUnit.Framework;
 
 namespace HashTableTaskTests
