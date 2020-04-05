@@ -1,12 +1,18 @@
 ﻿using System;
+using System.IO;
 
 namespace ExpressionTreeTask
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            Console.WriteLine("Hello World!");
+            var parser = new Parser();
+
+            var input = File.ReadAllText("input.txt");
+            var tree = parser.BuildTree(input);
+            Console.WriteLine(tree.Print());
+            Console.WriteLine(tree.Calculate());
         }
     }
 }
