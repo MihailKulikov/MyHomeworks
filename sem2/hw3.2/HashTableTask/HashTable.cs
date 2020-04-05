@@ -18,7 +18,7 @@ namespace HashTable
         private const int NumberToIncrease = 2;
 
         /// <summary>
-        /// Initializes a new, empty instance of the HashTable class using the default initial capacity, load factor.
+        /// Initializes a new, empty instance of the HashTableTask class using the default initial capacity, load factor.
         /// </summary>
         public HashTable(IHashFunction hashFunction)
         {
@@ -32,7 +32,7 @@ namespace HashTable
         }
         
         /// <summary>
-        /// Checks load average of the HashTable.
+        /// Checks load average of the HashTableTask.
         /// </summary>
         private void CheckAverageLoad()
         {
@@ -76,7 +76,7 @@ namespace HashTable
         }
 
         /// <summary>
-        /// Adds the item with desirable value to the HashTable.
+        /// Adds the item with desirable value to the HashTableTask.
         /// </summary>
         /// <param name="value">The value of the element to add.</param>
         public void Add(string value)
@@ -122,9 +122,9 @@ namespace HashTable
         }
 
         /// <summary>
-        /// Determines whether the HashTable contains a specific value.
+        /// Determines whether the HashTableTask contains a specific value.
         /// </summary>
-        /// <param name="value">The value to locate in the HashTable.</param>
+        /// <param name="value">The value to locate in the HashTableTask.</param>
         /// <returns>True if the Hashtable contains an element with the specified value; otherwise, false.</returns>
         public bool IsContains(string value)
             => _buckets[GetArrayPosition(value, _buckets.Length)].IsContains(value);
