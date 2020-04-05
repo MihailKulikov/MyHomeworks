@@ -17,12 +17,6 @@ namespace StackCalculatorTest
             _calculator = new Calculator(_stack);
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            Setup();
-        }
-
         [Test] 
         public void Throw_ArgumentNullException()
         {
