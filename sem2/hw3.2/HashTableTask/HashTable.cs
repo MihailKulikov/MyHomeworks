@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace HashTable
@@ -7,11 +9,12 @@ namespace HashTable
     /// <summary>
     /// Represents a hash table. Provides methods to check for an item and manipulate hash table.
     /// </summary>
-    public class HashTable : IEnumerable
+    public class HashTable : IEnumerable<string>
     {
-        private LinkedList<string>[] _buckets;
+        private LinkedList[] _buckets;
         private int _itemCount;
         private IHashFunction _hashFunction;
+        private readonly TextWriter _writer;
         
         private const int Size = 4;
         private const int LoadFactor = 2;
@@ -20,14 +23,15 @@ namespace HashTable
         /// <summary>
         /// Initializes a new, empty instance of the HashTableTask class using the default initial capacity, load factor.
         /// </summary>
-        public HashTable(IHashFunction hashFunction)
+        public HashTable(TextWriter writer, IHashFunction hashFunction)
         {
+            _writer = writer;
             _hashFunction = hashFunction;
-            _buckets = new LinkedList<string>[Size];
+            _buckets = new LinkedList[Size];
             _itemCount = 0;
             for (var i = 0; i < _buckets.Length; i++)
             {
-                _buckets[i] = new LinkedList<string>();
+                _buckets[i] = new LinkedList(writer);
             }
         }
         
@@ -47,10 +51,10 @@ namespace HashTable
         /// </summary>
         private void EnlargeHashTable(int numberToIncrease)
         {
-            var newBuckets = new LinkedList<string>[_buckets.Length * numberToIncrease];
+            var newBuckets = new LinkedList[_buckets.Length * numberToIncrease];
             for (var i = 0; i < newBuckets.Length; i++)
             {
-                newBuckets[i] = new LinkedList<string>();
+                newBuckets[i] = new LinkedList(_writer);
             }
 
             foreach (var chain in _buckets)
@@ -85,6 +89,7 @@ namespace HashTable
             {
                 throw new ArgumentNullException(nameof(value));
             }
+            
             if (!IsContains(value))
             {
                 _buckets[GetArrayPosition(value, _buckets.Length)].AddElementByIndex(value, 0);
@@ -115,7 +120,7 @@ namespace HashTable
                 throw new ArgumentNullException(nameof(value));
             }
 
-            if (_buckets[GetArrayPosition(value, _buckets.Length)].RemoveItemsByValue(value))
+            if (_buckets[GetArrayPosition(value, _buckets.Length)].RemoveItemByValue(value))
             {
                 _itemCount--;
             }
@@ -141,9 +146,14 @@ namespace HashTable
             Console.WriteLine();
         }
 
-        public IEnumerator GetEnumerator()
+        IEnumerator<string> IEnumerable<string>.GetEnumerator()
         {
             return _buckets.SelectMany(bucket => bucket).GetEnumerator();
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return ((IEnumerable<string>) this).GetEnumerator();
         }
     }
 }

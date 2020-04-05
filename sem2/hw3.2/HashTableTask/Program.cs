@@ -6,7 +6,7 @@ namespace HashTable
     {
         private static void Main()
         {
-            var hashTable = new HashTable(new PolynomialRollingHashFunction());
+            var hashTable = new HashTable(Console.Out, new PolynomialRollingHashFunction());
             hashTable.Add("test1");
             hashTable.Add("test2");
             hashTable.Print();

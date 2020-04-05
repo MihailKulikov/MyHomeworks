@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 
 namespace HashTable
 {
     /// <summary>
     /// Represents a singly linked list. Provides methods to search and manipulate lists.
     /// </summary>
-    /// <typeparam name="T">Specifies the element type of the linked list.</typeparam>
-    public class LinkedList<T>: IEnumerable<T>
+    public class LinkedList: IEnumerable<string>
     {
         /// <summary>
         /// Represent the node in the LinkedList.
@@ -18,7 +18,7 @@ namespace HashTable
             /// <summary>
             /// Gets and sets the value contained in the node.
             /// </summary>
-            public T Value { get; }
+            public string Value { get; }
 
             /// <summary>
             /// Gets and sets the next node in the LinkedList.
@@ -29,14 +29,14 @@ namespace HashTable
             /// Initializes a new instance of the Node class, containing the specified value.
             /// </summary>
             /// <param name="value">The value to contain in the Node.</param>
-            public Node(T value) => Value = value;
+            public Node(string value) => Value = value;
 
             /// <summary>
             /// Initializes a new instance of the Node class, containing the specified value and the link on the next node.
             /// </summary>
             /// <param name="value">The value to contain in the Node.</param>
             /// <param name="next">The link on the next node to contain in the Node.</param>
-            public Node(T value, Node next)
+            public Node(string value, Node next)
             {
                 Value = value;
                 Next = next;
@@ -45,7 +45,17 @@ namespace HashTable
         
         private Node _head;
         private Node _tail;
-
+        private readonly TextWriter _writer;
+        
+        /// <summary>
+        /// Initializes a new instance of the LinkedList class with selected TextWriter.
+        /// </summary>
+        /// <param name="writer">Input TextWriter for prints element of LinkedLints</param>
+        public LinkedList(TextWriter writer)
+        {
+            _writer = writer;
+        }
+        
         /// <summary>
         /// Gets the number of nodes actually contained in the LinkedList.
         /// </summary>
@@ -79,9 +89,9 @@ namespace HashTable
         /// </summary>
         /// <param name="value">The value of the element to add.</param>
         /// <param name="index">Position number counting from 0.</param>
-        public void AddElementByIndex(T value, int index)
+        public void AddElementByIndex(string value, int index)
         {
-            if ((index > Length) || (index < 0))
+            if (index > Length || index < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(index));
             }
@@ -126,7 +136,7 @@ namespace HashTable
             var current = _head;
             while (current != null)
             {
-                Console.Write($"{current.Value} ");
+                _writer.Write($"{current.Value} ");
                 current = current.Next;
             }
         }
@@ -136,12 +146,13 @@ namespace HashTable
         /// </summary>
         /// <param name="value">The value to locate in the LinkedList.</param>
         /// <returns>True if the LinkedList contains an element with the specified value; otherwise, false.</returns>
-        public bool IsContains(T value)
+        public bool IsContains(string value)
         {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
             }
+            
             if (IsEmpty()) return false;
             var current = _head;
             while (current != null)
@@ -159,13 +170,14 @@ namespace HashTable
         /// </summary>
         /// <param name="value">The value to remove.</param>
         /// <returns>True if item was removed; otherwise false.</returns>
-        public bool RemoveItemsByValue(T value)
+        public bool RemoveItemByValue(string value)
         {
             if (value == null)
             {
                 throw  new ArgumentNullException(nameof(value));
             }
-            Node current = _head;
+            
+            var current = _head;
             Node previous = null;
 
             while (current != null)
@@ -194,19 +206,19 @@ namespace HashTable
             return false;
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public IEnumerator<string> GetEnumerator()
         {
-            return ((IEnumerable<T>)this).GetEnumerator();
-        }
-
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
-        {
-            Node current = _head;
+            var current = _head;
             while (current != null)
             {
                 yield return current.Value;
                 current = current.Next;
             }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable<string>) this).GetEnumerator();
         }
     }
 }
