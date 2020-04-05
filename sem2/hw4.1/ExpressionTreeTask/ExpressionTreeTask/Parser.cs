@@ -2,8 +2,16 @@
 
 namespace ExpressionTreeTask
 {
+    /// <summary>
+    /// Represents parser. Provides methods to build expression tree from expression in prefix notation.
+    /// </summary>
     public class Parser
     {
+        /// <summary>
+        /// Build expression tree from introduced expression in prefix notation.
+        /// </summary>
+        /// <param name="expression">Expression in prefix notation.</param>
+        /// <returns>Root of the expression tree.</returns>
         public INode BuildTree(string expression)
         {
             if (int.TryParse(expression, out var number))
@@ -24,19 +32,19 @@ namespace ExpressionTreeTask
                 '-' => new SubtractionNode(BuildTree(firstOperand), BuildTree(secondOperand)),
                 '*' => new MultiplicationNode(BuildTree(firstOperand), BuildTree(secondOperand)),
                 '/' => new DivisionNode(BuildTree(firstOperand), BuildTree(secondOperand)),
-                _ => throw new InvalidInputExpressionException("Unknown symbol.")
+                _ => throw new InvalidInputExpressionException("Unknown operation.")
             };
         }
 
         private (string, string) GetTwoOperands(string expression)
         {
-            if (char.IsDigit(expression[0]))
+            if (char.IsDigit(expression[0]) || expression[0] == '-')
             {
                 var i = 1;
-                while (expression[i] != ' ' && expression[i] !='(')
+                while (expression[i] != ' ' && expression[i] != '(' && i < expression.Length - 1)
                 {
                     if (!char.IsDigit(expression[i]))
-                        throw new InvalidInputExpressionException();
+                        throw new InvalidInputExpressionException("The entered expression has an invalid format.");
 
                     i++;
                 }
@@ -50,7 +58,7 @@ namespace ExpressionTreeTask
             }
 
             if (expression[0] != '(')
-                throw new InvalidInputExpressionException();
+                throw new InvalidInputExpressionException("The entered expression has an invalid format.");
 
             var count = 1;
             for (var i = 1; i < expression.Length - 1; i++)
@@ -71,7 +79,7 @@ namespace ExpressionTreeTask
                 return (firstOperand, expression);
             }
             
-            throw new InvalidExpressionException();
+            throw new InvalidExpressionException("The entered expression has an invalid format.");
         }
     }
 }
