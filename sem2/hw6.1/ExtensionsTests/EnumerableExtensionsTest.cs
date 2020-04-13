@@ -28,7 +28,7 @@ namespace ExtensionsTests
             
             new object[]
             {
-                new[] {"12", "42", "0"}, new Func<string, int>(item => int.Parse(item)),
+                new[] {"12", "42", "0"}, new Func<string, int>(int.Parse),
                 new[] {12, 42, 0}
             },
         };
