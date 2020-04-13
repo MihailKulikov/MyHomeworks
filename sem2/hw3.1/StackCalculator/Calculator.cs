@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace StackCalculator
 {
@@ -46,9 +47,9 @@ namespace StackCalculator
             var operandsAndOperations = input.Split(' ');
             foreach (var item in operandsAndOperations)
             {
-                if (double.TryParse(item, out double number))
+                if (double.TryParse(item, out _))
                 {
-                    _stack.Push(number);
+                    _stack.Push(double.Parse(item, CultureInfo.CurrentCulture));
                 }
                 else
                 {
