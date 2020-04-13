@@ -2,10 +2,12 @@ before_build:
   - nuget restore sem2/hw1/Factorial.sln
   - nuget restore sem2/hw1.4/hw1.4.sln
   
-build:
-  project: sem2/hw1/Factorial.sln
-          
-build:
-  project: sem2/hw1.4/hw1.4.sln
+environment:
+  matrix:
+  - solution_name: sem2/hw1/Factorial.sln
+  - solution_name: sem2/hw1.4/hw1.4.sln 
   
+build_script:
+  - msbuild %solution_name%
+ 
 test_script:
