@@ -9,6 +9,8 @@ namespace StackCalculator
     public class Calculator
     {
         private readonly IStack _stack;
+        private const NumberStyles Style = NumberStyles.AllowDecimalPoint;
+        private static readonly CultureInfo Culture = CultureInfo.InvariantCulture;
 
         /// <summary>
         /// Initializes a new instance of the StackCalculator class with the desirable stack.
@@ -47,9 +49,9 @@ namespace StackCalculator
             var operandsAndOperations = input.Split(' ');
             foreach (var item in operandsAndOperations)
             {
-                if (double.TryParse(item, out _))
+                if (double.TryParse(item, Style, Culture, out var number))
                 {
-                    _stack.Push(double.Parse(item, CultureInfo.CurrentCulture));
+                    _stack.Push(number);
                 }
                 else
                 {

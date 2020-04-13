@@ -27,25 +27,25 @@ namespace StackCalculatorTest
         [Test]
         public void ReturnInputSingleNumber()
         {
-            _calculator.ExecuteLine("12,5").Should().Be(12.5);
+            _calculator.ExecuteLine("12.5").Should().Be(12.5);
         }
         
         [Test]
         public void Sum_TwoNumbers_Correctly()
         {
-            _calculator.ExecuteLine("1,2 2,5 +").Should().Be(3.7);
+            _calculator.ExecuteLine("1.2 2.5 +").Should().Be(3.7);
         }
 
         [Test]
         public void Subtract_TwoNumbers_Correctly()
         {
-            _calculator.ExecuteLine("1,2 2,5 -").Should().Be(-1.3);
+            _calculator.ExecuteLine("1.2 2.5 -").Should().Be(-1.3);
         }
 
         [Test]
         public void Multiply_TwoNumbers_Correctly()
         {
-            _calculator.ExecuteLine("3,5 6,7 *").Should().Be(23.45);
+            _calculator.ExecuteLine("3.5 6.7 *").Should().Be(23.45);
         }
 
         [Test]
