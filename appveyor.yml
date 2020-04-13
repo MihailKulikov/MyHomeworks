@@ -8,10 +8,10 @@ before_build:
   
 build:
   project: sem2/hw1/Factorial.sln
-  project: sem2/hw1.4/hw1.4.sln
-  project: sem2/hw1.5/hw1.5.sln
-  project: sem2/hw2.1/hw2.1.sln
-  prpject: sem2/hw2.2/hw2.2.sln
-  project: sem2/hw2.3/hw2.3.sln
+           sem2/hw1.4/hw1.4.sln
+           sem2/hw1.5/hw1.5.sln
+           sem2/hw2.1/hw2.1.sln
+           sem2/hw2.2/hw2.2.sln
+           sem2/hw2.3/hw2.3.sln
   
 test_script:
