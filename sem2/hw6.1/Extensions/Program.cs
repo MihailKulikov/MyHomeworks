@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Extensions
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             var test = new List<string> {"I", "am", "here"};
 
