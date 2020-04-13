@@ -13,3 +13,6 @@ environment:
   
 build_script:
   - msbuild %solution_name%
+
+test_script:
+  - dotnet test %solution_name%
