@@ -4,13 +4,19 @@
     {
         private static void Main()
         {
-            var mapInitializer = new MapInitializer();
-            var map = mapInitializer.LoadMapFromFile(@"C:\Users\kulik\Desktop\spbu\sem2\hw6.2\Map.txt");
+            const char wallSymbol = '#';
+            const char freeSpaceSymbol = ' ';
+            const char characterSymbol = '@';
+
+            var mapInitializer = new MapInitializer(freeSpaceSymbol, characterSymbol, wallSymbol);
+            var map = mapInitializer.LoadMapFromFile("ConsoleGame.Maps.Map.txt");
+            
+            var mapWriter = new MapConsoleWriter(wallSymbol, freeSpaceSymbol, characterSymbol);
+            mapWriter.WriteMap(map);
+
             var eventLoop = new EventLoop();
             var game = new Game(map);
-            var mapWriter = new MapConsoleWriter('#', ' ', '@');
-            mapWriter.WriteMap(map);
-            game.CharacterMove += mapWriter.MoveCharacter;
+            game.CharacterMoveHandler += mapWriter.MoveCharacter;
             eventLoop.DownHandler += game.OnDown;
             eventLoop.UpHandler += game.OnUp;
             eventLoop.RightHandler += game.OnRight;

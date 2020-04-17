@@ -6,7 +6,7 @@ namespace ConsoleGame
     public class Game
     {
         private readonly List<Cell>[] _map;
-        public event EventHandler<MoveCharacterEventArgs> CharacterMove;
+        public event EventHandler<MoveCharacterEventArgs> CharacterMoveHandler = (sender, args) => { };
         private (int x, int y) _characterPosition;
         
         public Game(List<Cell>[] map)
@@ -66,14 +66,14 @@ namespace ConsoleGame
         
         private bool IsTheCellSuitable((int x, int y) pos)
         {
-            if (pos.x < 0 || pos.x > _map.Length) return false;
-            if (pos.y < 0 || pos.y > _map[pos.x].Count) return false;
+            if (pos.x < 0 || pos.x > _map.Length - 1) return false;
+            if (pos.y < 0 || pos.y > _map[pos.x].Count - 1) return false;
             return _map[pos.x][pos.y] == Cell.FreeSpace;
         }
 
         protected virtual void OnMoveCharacter(MoveCharacterEventArgs e)
         {
-            CharacterMove?.Invoke(this, e);
+            CharacterMoveHandler?.Invoke(this, e);
         }
     }
 }

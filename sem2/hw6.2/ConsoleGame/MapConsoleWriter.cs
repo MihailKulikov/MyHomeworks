@@ -11,9 +11,9 @@ namespace ConsoleGame
 
         public MapConsoleWriter(char wallSymbol, char freeSpaceSymbol, char characterSymbol)
         {
-            this._wallSymbol = wallSymbol;
-            this._freeSpaceSymbol = freeSpaceSymbol;
-            this._characterSymbol = characterSymbol;
+            _wallSymbol = wallSymbol;
+            _freeSpaceSymbol = freeSpaceSymbol;
+            _characterSymbol = characterSymbol;
         }
 
         public void MoveCharacter(object sender, MoveCharacterEventArgs args)
@@ -33,6 +33,8 @@ namespace ConsoleGame
         
         public void WriteMap(IEnumerable<List<Cell>> map)
         {
+            Console.SetCursorPosition(0, 0);
+
             foreach (var line in map)
             {
                 foreach (var cell in line)
