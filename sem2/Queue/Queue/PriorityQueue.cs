@@ -86,6 +86,9 @@ namespace Queue
         /// <returns>The object that is removed from the beginning of the priority queue.</returns>
         public T Dequeue()
         {
+            if (IsEmpty())
+                throw new QueueIsEmptyException();
+            
             var topElement = _head.Value;
             RemoveElementByIndex(0);
 
