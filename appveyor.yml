@@ -9,8 +9,10 @@ environment:
   - solution_name: sem2/hw2.1/hw2.1.sln
   - solution_name: sem2/hw2.2/hw2.2.sln
   - solution_name: sem2/hw2.3/hw2.3.sln
+  - solution_name: sem2/Queue/Queue.sln
   
 build_script:
   - msbuild %solution_name%
  
 test_script:
+  - dotnet test %solution_name%
