@@ -2,7 +2,7 @@
 {
     internal static class Program
     {
-        private static void Main(string[] args)
+        private static void Main()
         {
             var mapInitializer = new MapInitializer();
             var map = mapInitializer.LoadMapFromFile(@"C:\Users\kulik\Desktop\spbu\sem2\hw6.2\Map.txt");

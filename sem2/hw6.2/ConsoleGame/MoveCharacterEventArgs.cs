@@ -6,8 +6,8 @@ namespace ConsoleGame
     {
         public MoveCharacterEventArgs((int x, int y) from, (int x, int y) to)
         {
-            this.From = from;
-            this.To = to;
+            From = from;
+            To = to;
         }
 
         public (int, int) From { get; }

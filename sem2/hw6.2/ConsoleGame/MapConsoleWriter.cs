@@ -23,9 +23,9 @@ namespace ConsoleGame
             var (fromX, fromY) = args.From;
             var (toX, toY) = args.To;
             
-            Console.SetCursorPosition(fromX, fromY);
+            Console.SetCursorPosition(fromY, fromX);
             Console.Write(_freeSpaceSymbol);
-            Console.SetCursorPosition(toX, toY);
+            Console.SetCursorPosition(toY, toX);
             Console.Write(_characterSymbol);
             
             Console.SetCursorPosition(lastColumnNumber,lastLineNumber);

@@ -6,12 +6,12 @@ namespace ConsoleGame
     public class Game
     {
         private readonly List<Cell>[] _map;
-        public event EventHandler<MoveCharacterEventArgs> CharacterMove = null!;
+        public event EventHandler<MoveCharacterEventArgs> CharacterMove;
         private (int x, int y) _characterPosition;
         
         public Game(List<Cell>[] map)
         {
-            this._map = map;
+            _map = map;
 
             _characterPosition = FindCharacterPosition();
         }
@@ -57,7 +57,7 @@ namespace ConsoleGame
         private void TryChangeCharacterPosition((int x, int y) newCharacterPosition)
         {
             if (!IsTheCellSuitable(newCharacterPosition)) return;
-            var e = new MoveCharacterEventArgs(_characterPosition,newCharacterPosition);
+            var e = new MoveCharacterEventArgs(_characterPosition, newCharacterPosition);
             OnMoveCharacter(e);
             _map[_characterPosition.x][_characterPosition.y] = Cell.FreeSpace;
             _map[newCharacterPosition.x][newCharacterPosition.y] = Cell.Character;
