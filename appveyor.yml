@@ -4,6 +4,7 @@ before_build:
 environment:
   matrix:
   - solution_name: sem2/hw3.2/hw3.2.sln
+  - solution_name: sem2/hw3.1/hw3.1.sln
   - solution_name: sem2/hw1/Factorial.sln
   - solution_name: sem2/hw1.4/hw1.4.sln 
   - solution_name: sem2/hw1.5/hw1.5.sln
@@ -13,6 +14,6 @@ environment:
   
 build_script:
   - msbuild %solution_name%
- 
+
 test_script:
   - dotnet test %solution_name%
