@@ -3,6 +3,7 @@ before_build:
   
 environment:
   matrix:
+  - solution_name: sem2/hw6.1/hw6.1.sln
   - solution_name: sem2/hw3.2/hw3.2.sln
   - solution_name: sem2/hw3.1/hw3.1.sln
   - solution_name: sem2/hw1/Factorial.sln
