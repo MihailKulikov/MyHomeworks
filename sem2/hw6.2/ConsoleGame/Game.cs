@@ -6,30 +6,19 @@ namespace ConsoleGame
     public class Game
     {
         private readonly List<Cell>[] _map;
-        public event EventHandler<MoveCharacterEventArgs> CharacterMoveHandler = (sender, args) => { };
+        private readonly IMapWriter _mapWriter;
         private (int x, int y) _characterPosition;
         
-        public Game(List<Cell>[] map)
+        public Game(List<Cell>[] map, (int x, int y) characterPosition, IMapWriter mapWriter)
         {
             _map = map;
-
-            _characterPosition = FindCharacterPosition();
-        }
-
-        private (int, int) FindCharacterPosition()
-        {
-            for (var x = 0; x < _map.Length; x++)
-            {
-                for (var y = 0; y < _map[x].Count; y++)
-                {
-                    if (_map[x][y] == Cell.Character)
-                        return (x, y);
-                }
-            }
+            _mapWriter = mapWriter;
+            _characterPosition = characterPosition;
             
-            throw new InvalidMapException("There is no character.");
+            _mapWriter.WriteMap(_map);
+            _mapWriter.WriteCellOnTargetPosition(_characterPosition, Cell.Character);
         }
-        
+
         public void OnLeft(object sender, EventArgs args)
         {
             var newCharacterPosition = (_characterPosition.x, _characterPosition.y - 1);
@@ -57,10 +46,9 @@ namespace ConsoleGame
         private void TryChangeCharacterPosition((int x, int y) newCharacterPosition)
         {
             if (!IsTheCellSuitable(newCharacterPosition)) return;
-            var e = new MoveCharacterEventArgs(_characterPosition, newCharacterPosition);
-            OnMoveCharacter(e);
-            _map[_characterPosition.x][_characterPosition.y] = Cell.FreeSpace;
-            _map[newCharacterPosition.x][newCharacterPosition.y] = Cell.Character;
+            
+            _mapWriter.WriteCellOnTargetPosition(_characterPosition, Cell.FreeSpace);
+            _mapWriter.WriteCellOnTargetPosition(newCharacterPosition, Cell.Character);
             _characterPosition = newCharacterPosition;
         }
         
@@ -69,11 +57,6 @@ namespace ConsoleGame
             if (pos.x < 0 || pos.x > _map.Length - 1) return false;
             if (pos.y < 0 || pos.y > _map[pos.x].Count - 1) return false;
             return _map[pos.x][pos.y] == Cell.FreeSpace;
-        }
-
-        protected virtual void OnMoveCharacter(MoveCharacterEventArgs e)
-        {
-            CharacterMoveHandler?.Invoke(this, e);
         }
     }
 }

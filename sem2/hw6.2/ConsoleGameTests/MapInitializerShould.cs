@@ -10,12 +10,12 @@ namespace ConsoleGameTests
         private const char WallSymbol = '#';
         private const char FreeSpaceSymbol = ' ';
         private const char CharacterSymbol = '@';
-        private MapInitializer _mapInitializer;
+        private GameInitializer _mapInitializer;
 
         [SetUp]
         public void Setup()
         {
-            _mapInitializer = new MapInitializer(FreeSpaceSymbol, CharacterSymbol, WallSymbol);
+            _mapInitializer = new GameInitializer(FreeSpaceSymbol, CharacterSymbol, WallSymbol);
         }
 
         [Test]

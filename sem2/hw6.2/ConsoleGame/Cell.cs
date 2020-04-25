@@ -2,8 +2,8 @@
 {
     public enum Cell
     {
-        FreeSpace,
-        Wall,
-        Character
+        FreeSpace = ' ',
+        Wall = '#',
+        Character = '@'
     }
 }

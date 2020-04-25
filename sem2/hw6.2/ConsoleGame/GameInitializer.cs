@@ -5,20 +5,9 @@ using System.Reflection;
 
 namespace ConsoleGame
 {
-    public class MapInitializer
+    public class GameInitializer
     {
-        private readonly char _wallSymbol;
-        private readonly char _characterSymbol;
-        private readonly char _freeSpaceSymbol;
-
-        public MapInitializer(char freeSpaceSymbol, char characterSymbol, char wallSymbol)
-        {
-            _freeSpaceSymbol = freeSpaceSymbol;
-            _characterSymbol = characterSymbol;
-            _wallSymbol = wallSymbol;
-        }
-
-        private string GetFileData(string path)
+        private static string GetFileData(string path)
         {
             var assembly = Assembly.GetExecutingAssembly();
             using var stream = assembly.GetManifestResourceStream(path);
@@ -26,36 +15,39 @@ namespace ConsoleGame
             return reader.ReadToEnd();
         }
 
-        public List<Cell>[] LoadMapFromFile(string path)
+        public static Game LoadGameWithSpecifiedMapWriterFromFile(string path, IMapWriter mapWriter)
         {
             var fileData = GetFileData(path).Split(Environment.NewLine);
             var characterWasAdded = false;
-
+            (int x, int y) characterPosition = (0, 0);
+            
             var map = new List<Cell>[fileData.Length];
             for (var i = 0; i < map.Length; i++)
             {
                 map[i] = new List<Cell>();
             }
-            
+
             for (var x = 0; x < fileData.Length; x++)
             {
                 for (var y = 0; y < fileData[x].Length; y++)
                 {
-                    if (fileData[x][y] == _wallSymbol)
+                    if (Enum.TryParse<Cell>(((int)fileData[x][y]).ToString(), out var cell))
                     {
-                        map[x].Add(Cell.Wall);
-                    }
-                    else if (fileData[x][y] == _characterSymbol)
-                    {
-                        if (characterWasAdded)
-                            throw new InvalidMapException("There can only be one character.");
-
-                        map[x].Add(Cell.Character);
-                        characterWasAdded = true;
-                    }
-                    else if (fileData[x][y] == _freeSpaceSymbol)
-                    {
-                        map[x].Add(Cell.FreeSpace);
+                        if (cell == Cell.Character)
+                        {
+                            if (characterWasAdded)
+                            {
+                                throw new InvalidMapException("There are several characters.");
+                            }
+                            
+                            characterWasAdded = true;
+                            characterPosition = (x, y);
+                            map[x].Add(Cell.FreeSpace);
+                        }
+                        else
+                        {
+                            map[x].Add(cell);
+                        }
                     }
                     else
                     {
@@ -66,8 +58,8 @@ namespace ConsoleGame
 
             if(!characterWasAdded)
                 throw new InvalidMapException("There is no character.");
-
-            return map;
+            
+            return new Game(map, characterPosition, mapWriter);
         }
     }
 }
