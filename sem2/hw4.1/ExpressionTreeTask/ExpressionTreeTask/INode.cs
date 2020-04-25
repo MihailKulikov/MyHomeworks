@@ -1,5 +1,8 @@
 ﻿namespace ExpressionTreeTask
 {
+    /// <summary>
+    /// Represents a node in expression tree.
+    /// </summary>
     public interface INode
     {
         /// <summary>

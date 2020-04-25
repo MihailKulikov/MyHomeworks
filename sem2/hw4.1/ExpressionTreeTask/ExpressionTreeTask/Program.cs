@@ -10,7 +10,7 @@ namespace ExpressionTreeTask
             var parser = new Parser();
 
             var input = File.ReadAllText("input.txt");
-            var tree = parser.BuildTree(input);
+            var tree = Parser.BuildTree(input);
             Console.WriteLine(tree.Print());
             Console.WriteLine(tree.Calculate());
         }

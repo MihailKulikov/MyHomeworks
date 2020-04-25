@@ -8,22 +8,13 @@
         private readonly int _value;
 
         /// <summary>
-        /// Initializes a new instance of the MultiplicationNode with introduced number.
+        /// Initializes a new instance of the NumberNode with introduced number.
         /// </summary>
         /// <param name="value">Introduced number.</param>
-        public NumberNode(int value)
-        {
-            _value = value;
-        }
+        public NumberNode(int value) => _value = value;
 
-        public int Calculate()
-        {
-            return _value;
-        }
+        public int Calculate() => _value;
 
-        public string Print()
-        {
-            return _value.ToString();
-        }
+        public string Print() => _value.ToString();
     }
 }

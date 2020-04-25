@@ -17,7 +17,7 @@ namespace ExpressionTreeTests
         [Test]
         public void Build_Correctly_Tree_From_SingleNumber()
         {
-            var tree = _parser.BuildTree("42");
+            var tree = Parser.BuildTree("42");
 
             tree.Calculate().Should().Be(42);
         }
@@ -28,7 +28,7 @@ namespace ExpressionTreeTests
         [Test]
         public void Build_Correctly_Tree_From_Expression_With_UnaryMinus(string expression, int result)
         {
-            var tree = _parser.BuildTree(expression);
+            var tree = Parser.BuildTree(expression);
 
             tree.Calculate().Should().Be(result);
         }
@@ -36,7 +36,7 @@ namespace ExpressionTreeTests
         [Test]
         public void Throw_InvalidInputExpressionException_If_ExpressionContains_UnknownOperation()
         {
-            _parser.Invoking(x => x.BuildTree("(^ 3 (% 5 3))"))
+            _parser.Invoking(x => Parser.BuildTree("(^ 3 (% 5 3))"))
                 .Should().Throw<InvalidInputExpressionException>().WithMessage("Unknown operation.");
         }
 
@@ -47,7 +47,7 @@ namespace ExpressionTreeTests
         [Test]
         public void Throw_InvalidInputExpressionException_If_Expression_Is_Incorrect(string expression)
         {
-            _parser.Invoking(x => x.BuildTree(expression))
+            _parser.Invoking(x => Parser.BuildTree(expression))
                 .Should().Throw<InvalidInputExpressionException>();
         }
 
@@ -57,7 +57,7 @@ namespace ExpressionTreeTests
         [Test]
         public void BuildCorrectlyTree_If_Expression_Is_Correct(string expression, int result)
         {
-            _parser.BuildTree(expression).Calculate().Should().Be(result);
+            Parser.BuildTree(expression).Calculate().Should().Be(result);
         }
     }
 }

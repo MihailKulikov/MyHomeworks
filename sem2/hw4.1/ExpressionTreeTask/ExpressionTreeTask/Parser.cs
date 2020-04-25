@@ -12,7 +12,7 @@ namespace ExpressionTreeTask
         /// </summary>
         /// <param name="expression">Expression in prefix notation.</param>
         /// <returns>Root of the expression tree.</returns>
-        public INode BuildTree(string expression)
+        public static INode BuildTree(string expression)
         {
             if (int.TryParse(expression, out var number))
                 return new NumberNode(number);
@@ -36,7 +36,7 @@ namespace ExpressionTreeTask
             };
         }
 
-        private (string, string) GetTwoOperands(string expression)
+        private static (string, string) GetTwoOperands(string expression)
         {
             if (char.IsDigit(expression[0]) || expression[0] == '-')
             {
