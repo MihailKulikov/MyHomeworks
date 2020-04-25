@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace UniqueListRealisation
 {
@@ -6,9 +7,9 @@ namespace UniqueListRealisation
     {
         static void Main(string[] args)
         {
-            var list = new UniqueList<int>(){1,2,2,1};
-
-            Console.ReadKey();
+            LinkedList<int> ololo = new UniqueList<int>();
+            ololo.AddElementByIndex(1, 0);
+            ololo.AddElementByIndex(1, 0);
         }
     }
 }
