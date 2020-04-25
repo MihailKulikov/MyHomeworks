@@ -6,10 +6,10 @@
     public class MultiplicationNode : OperationNode
     {
         /// <summary>
-        /// Initializes a new instance of the MultiplicationNode with introduced left child and right child.
+        /// Initializes a new instance of the <see cref="MultiplicationNode"/> with introduced left child and right child.
         /// </summary>
-        /// <param name="leftNode">Left child of the MultiplicationNode</param>
-        /// <param name="rightNode">Right child of the MultiplicationNode</param>
+        /// <param name="leftNode">Left child of the <see cref="MultiplicationNode"/></param>
+        /// <param name="rightNode">Right child of the <see cref="MultiplicationNode"/></param>
         public MultiplicationNode(INode leftNode, INode rightNode) : base(leftNode, rightNode)
         { }
 

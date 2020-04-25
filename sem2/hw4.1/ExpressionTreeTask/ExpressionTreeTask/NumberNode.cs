@@ -8,7 +8,7 @@
         private readonly int _value;
 
         /// <summary>
-        /// Initializes a new instance of the NumberNode with introduced number.
+        /// Initializes a new instance of the <see cref="NumberNode"/> with introduced number.
         /// </summary>
         /// <param name="value">Introduced number.</param>
         public NumberNode(int value) => _value = value;

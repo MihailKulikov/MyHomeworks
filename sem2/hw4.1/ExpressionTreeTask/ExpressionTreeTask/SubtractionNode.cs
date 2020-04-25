@@ -6,10 +6,10 @@
     public class SubtractionNode : OperationNode
     {
         /// <summary>
-        /// Initializes a new instance of the SubtractionNode with introduced left child and right child.
+        /// Initializes a new instance of the <see cref="SubtractionNode"/> with introduced left child and right child.
         /// </summary>
-        /// <param name="leftNode">Left child of the SubtractionNode</param>
-        /// <param name="rightNode">Right child of the SubtractionNode</param>
+        /// <param name="leftNode">Left child of the <see cref="SubtractionNode"/></param>
+        /// <param name="rightNode">Right child of the <see cref="SubtractionNode"/></param>
         public SubtractionNode(INode leftNode, INode rightNode) : base(leftNode, rightNode)
         { }
 

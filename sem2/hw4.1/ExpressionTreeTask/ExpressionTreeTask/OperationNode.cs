@@ -11,7 +11,7 @@
         protected abstract char OperationSymbol { get; }
         
         /// <summary>
-        /// Initializes a new instance of the OperationNode with introduced left child and right child.
+        /// Initializes a new instance of the <see cref="OperationNode"/> with introduced left child and right child.
         /// </summary>
         /// <param name="leftNode"></param>
         /// <param name="rightNode"></param>

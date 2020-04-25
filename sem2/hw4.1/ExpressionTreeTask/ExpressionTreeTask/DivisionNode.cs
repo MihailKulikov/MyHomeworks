@@ -6,10 +6,10 @@
     public class DivisionNode : OperationNode
     {
         /// <summary>
-        /// Initializes a new instance of the DivisionNode with introduced left child and right child.
+        /// Initializes a new instance of the <see cref="DivisionNode"/> with introduced left child and right child.
         /// </summary>
-        /// <param name="leftNode">Left child of the DivisionNode</param>
-        /// <param name="rightNode">Right child of the DivisionNode</param>
+        /// <param name="leftNode">Left child of the <see cref="DivisionNode"/></param>
+        /// <param name="rightNode">Right child of the <see cref="DivisionNode"/></param>
         public DivisionNode(INode leftNode, INode rightNode) : base(leftNode, rightNode)
         { }
 

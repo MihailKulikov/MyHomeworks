@@ -40,17 +40,6 @@ namespace ExpressionTreeTests
                 .Should().Throw<InvalidInputExpressionException>().WithMessage("Unknown operation.");
         }
 
-        [TestCase("1 + 2 * 3")]
-        [TestCase("* 5 3")]
-        [TestCase("5 3 4489")]
-        [TestCase("pwerthht")]
-        [Test]
-        public void Throw_InvalidInputExpressionException_If_Expression_Is_Incorrect(string expression)
-        {
-            _parser.Invoking(x => Parser.BuildTree(expression))
-                .Should().Throw<InvalidInputExpressionException>();
-        }
-
         [TestCase("(* (+ 1 1) 2)", 4)]
         [TestCase("(+ (/ (* (+ 1 10) (- 3 (/ 10 5))) 11) (- 5 3))", 3)]
         [TestCase("(* (+ 1 10) (- 3 (/ 10 5)))",11)]
