@@ -5,8 +5,16 @@ using System.Reflection;
 
 namespace ConsoleGame
 {
+    /// <summary>
+    /// Represents static class for initializing game from file.
+    /// </summary>
     public static class GameInitializer
     {
+        /// <summary>
+        /// Get data of a resource file with specified path.
+        /// </summary>
+        /// <param name="path">Specified path of a resource file.</param>
+        /// <returns>Data of resource file.</returns>
         private static string GetFileData(string path)
         {
             var assembly = Assembly.GetExecutingAssembly();
@@ -15,6 +23,13 @@ namespace ConsoleGame
             return reader.ReadToEnd();
         }
 
+        /// <summary>
+        /// Initialize a new instance of <see cref="Game"/> with map from file with specified path and specified <see cref="IMapWriter"/>.
+        /// </summary>
+        /// <param name="path">Specified path of a resource file.</param>
+        /// <param name="mapWriter">Specified <see cref="IMapWriter"/></param>
+        /// <returns>New instance of <see cref="Game"/></returns>
+        /// <exception cref="InvalidMapException">The map has an incorrect format.</exception>
         public static Game LoadGameWithSpecifiedMapWriterFromFile(string path, IMapWriter mapWriter)
         {
             var fileData = GetFileData(path).Split(Environment.NewLine);
