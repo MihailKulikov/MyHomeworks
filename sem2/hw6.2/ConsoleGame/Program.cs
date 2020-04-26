@@ -1,6 +1,4 @@
-﻿using System.Net.Http.Headers;
-
-namespace ConsoleGame
+﻿namespace ConsoleGame
 {
     internal static class Program
     {

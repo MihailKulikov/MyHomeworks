@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace ConsoleGame
 {
-    public class GameInitializer
+    public static class GameInitializer
     {
         private static string GetFileData(string path)
         {

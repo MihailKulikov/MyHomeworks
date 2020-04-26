@@ -45,18 +45,19 @@ namespace ConsoleGame
 
         private void TryChangeCharacterPosition((int x, int y) newCharacterPosition)
         {
-            if (!IsTheCellSuitable(newCharacterPosition)) return;
+            if (!IsTheCellValid(newCharacterPosition)) return;
             
             _mapWriter.WriteCellOnTargetPosition(_characterPosition, Cell.FreeSpace);
             _mapWriter.WriteCellOnTargetPosition(newCharacterPosition, Cell.Character);
             _characterPosition = newCharacterPosition;
         }
         
-        private bool IsTheCellSuitable((int x, int y) pos)
+        private bool IsTheCellValid((int x, int y) position)
         {
-            if (pos.x < 0 || pos.x > _map.Length - 1) return false;
-            if (pos.y < 0 || pos.y > _map[pos.x].Count - 1) return false;
-            return _map[pos.x][pos.y] == Cell.FreeSpace;
+            var (x, y) = position;
+            if (x < 0 || x > _map.Length - 1 || y < 0 || y > _map[x].Count - 1) return false;
+
+            return _map[x][y] == Cell.FreeSpace;
         }
     }
 }
