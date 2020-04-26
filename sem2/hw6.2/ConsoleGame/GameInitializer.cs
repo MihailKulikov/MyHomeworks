@@ -69,12 +69,12 @@ namespace ConsoleGame
                         }
                         else
                         {
-                            throw new InvalidMapException("There is unfamiliar symbol.");
+                            throw new InvalidMapException(fileData[x][y].ToString());
                         }
                     }
                     else
                     {
-                        throw new InvalidMapException("There is unfamiliar symbol.");
+                        throw new InvalidMapException(fileData[x][y].ToString());
                     }
                 }
             }
