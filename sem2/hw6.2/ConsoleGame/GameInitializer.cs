@@ -32,7 +32,7 @@ namespace ConsoleGame
         /// <exception cref="InvalidMapException">The map has an incorrect format.</exception>
         public static Game LoadGameWithSpecifiedMapWriterFromFile(string path, IMapWriter mapWriter)
         {
-            var fileData = GetFileData(path).Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+            var fileData = GetFileData(path).Split("\n", StringSplitOptions.RemoveEmptyEntries);
             var characterWasAdded = false;
             (int x, int y) characterPosition = (0, 0);
             
