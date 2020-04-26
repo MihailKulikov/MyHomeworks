@@ -69,7 +69,7 @@ namespace ConsoleGame
                         }
                         else
                         {
-                            throw new InvalidMapException(fileData[x][y].ToString());
+                            throw new InvalidMapException(fileData[x]);
                         }
                     }
                     else
