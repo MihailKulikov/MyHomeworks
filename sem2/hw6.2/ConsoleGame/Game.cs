@@ -47,7 +47,7 @@ namespace ConsoleGame
         }
 
         /// <summary>
-        /// Makes actions responsive to pressing the up key
+        /// Makes actions responsive to pressing the up key.
         /// </summary>
         public void OnUp(object sender, EventArgs args)
         {
@@ -56,7 +56,7 @@ namespace ConsoleGame
         }
 
         /// <summary>
-        /// Makes actions responsive to pressing the down key
+        /// Makes actions responsive to pressing the down key.
         /// </summary>
         public void OnDown(object sender, EventArgs args)
         {

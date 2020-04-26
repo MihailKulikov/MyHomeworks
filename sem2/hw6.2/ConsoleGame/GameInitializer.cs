@@ -69,7 +69,7 @@ namespace ConsoleGame
                         }
                         else
                         {
-                            throw new InvalidMapException(fileData[x]);
+                            throw new InvalidMapException("There is unfamiliar symbol.");
                         }
                     }
                     else
