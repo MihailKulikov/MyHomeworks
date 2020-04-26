@@ -2,6 +2,9 @@
 
 namespace ConsoleGame
 {
+    /// <summary>
+    /// Represents event loop.
+    /// </summary>
     public class EventLoop
     {
         public event EventHandler<EventArgs> LeftHandler = (sender, args) => { };
@@ -9,6 +12,9 @@ namespace ConsoleGame
         public event EventHandler<EventArgs> UpHandler = (sender, args) => { };
         public event EventHandler<EventArgs> DownHandler = (sender, args) => { };
         
+        /// <summary>
+        /// Start event loop.
+        /// </summary>
         public void Run()
         {
             while (true)

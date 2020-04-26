@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace ConsoleGame
 {
+    /// <summary>
+    /// Represents a map writer for the game. Provides methods to write at the console.
+    /// </summary>
     public class ConsoleMapWriter : IMapWriter
     {
         public void WriteCellOnTargetPosition((int, int) position, Cell cell)
@@ -15,7 +18,7 @@ namespace ConsoleGame
             Console.Write((char)int.Parse(Enum.Format(typeof(Cell), cell, "d")));
             Console.SetCursorPosition(lastColumnNumber,lastLineNumber);
         }
-
+        
         public void WriteMap(IEnumerable<List<Cell>> map)
         {
             Console.SetCursorPosition(0, 0);

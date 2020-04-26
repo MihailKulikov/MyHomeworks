@@ -31,22 +31,30 @@ namespace ConsoleGame
             {
                 for (var y = 0; y < fileData[x].Length; y++)
                 {
-                    if (Enum.TryParse<Cell>(((int)fileData[x][y]).ToString(), out var cell))
+                    if (Enum.TryParse<Cell>(((int) fileData[x][y]).ToString(), out var cell))
                     {
-                        if (cell == Cell.Character)
+                        if (Enum.IsDefined(typeof(Cell), cell))
                         {
-                            if (characterWasAdded)
+
+                            if (cell == Cell.Character)
                             {
-                                throw new InvalidMapException("There are several characters.");
+                                if (characterWasAdded)
+                                {
+                                    throw new InvalidMapException("There are several characters.");
+                                }
+
+                                characterWasAdded = true;
+                                characterPosition = (x, y);
+                                map[x].Add(Cell.FreeSpace);
                             }
-                            
-                            characterWasAdded = true;
-                            characterPosition = (x, y);
-                            map[x].Add(Cell.FreeSpace);
+                            else
+                            {
+                                map[x].Add(cell);
+                            }
                         }
                         else
                         {
-                            map[x].Add(cell);
+                            throw new InvalidMapException("There is unfamiliar symbol.");
                         }
                     }
                     else

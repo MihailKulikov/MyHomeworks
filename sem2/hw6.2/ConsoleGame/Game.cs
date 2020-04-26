@@ -3,12 +3,21 @@ using System.Collections.Generic;
 
 namespace ConsoleGame
 {
+    /// <summary>
+    /// Represents 2D game.
+    /// </summary>
     public class Game
     {
         private readonly List<Cell>[] _map;
         private readonly IMapWriter _mapWriter;
         private (int x, int y) _characterPosition;
         
+        /// <summary>
+        /// Initialize 
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="characterPosition"></param>
+        /// <param name="mapWriter"></param>
         public Game(List<Cell>[] map, (int x, int y) characterPosition, IMapWriter mapWriter)
         {
             _map = map;
