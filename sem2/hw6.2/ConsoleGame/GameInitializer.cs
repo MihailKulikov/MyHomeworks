@@ -20,6 +20,7 @@ namespace ConsoleGame
             var assembly = Assembly.GetExecutingAssembly();
             using var stream = assembly.GetManifestResourceStream(path);
             using var reader = new StreamReader(stream ?? throw new InvalidMapException($"There is no map with this path: {path}"));
+            
             return reader.ReadToEnd();
         }
 
