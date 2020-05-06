@@ -31,9 +31,8 @@ namespace ConsoleGameTests
             Action act = () =>
                 GameInitializer.LoadGameWithSpecifiedMapWriterFromFile("ConsoleGame.Maps.MapWithTwoCharacters.txt",
                     _mapWriter);
-                
-                act.ShouldThrow<InvalidMapException>()
-                .WithMessage("There are several characters.");
+
+            act.ShouldThrow<InvalidMapException>().WithMessage("There are several characters.");
         }
 
         [Test]

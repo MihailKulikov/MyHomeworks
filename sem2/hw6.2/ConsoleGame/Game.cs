@@ -32,37 +32,25 @@ namespace ConsoleGame
         /// Makes actions responsive to pressing the left key.
         /// </summary>
         public void OnLeft(object sender, EventArgs args)
-        {
-            var newCharacterPosition = (_characterPosition.x, _characterPosition.y - 1);
-            TryChangeCharacterPosition(newCharacterPosition);
-        }
-        
+            => TryChangeCharacterPosition((_characterPosition.x, _characterPosition.y - 1));
+
         /// <summary>
         /// Makes actions responsive to pressing the right key.
         /// </summary>
         public void OnRight(object sender, EventArgs args)
-        {
-            var newCharacterPosition = (_characterPosition.x, _characterPosition.y + 1);
-            TryChangeCharacterPosition(newCharacterPosition);
-        }
+            => TryChangeCharacterPosition((_characterPosition.x, _characterPosition.y + 1));
 
         /// <summary>
         /// Makes actions responsive to pressing the up key.
         /// </summary>
         public void OnUp(object sender, EventArgs args)
-        {
-            var newCharacterPosition = (_characterPosition.x - 1, _characterPosition.y);
-            TryChangeCharacterPosition(newCharacterPosition);
-        }
+            => TryChangeCharacterPosition((_characterPosition.x - 1, _characterPosition.y));
 
         /// <summary>
         /// Makes actions responsive to pressing the down key.
         /// </summary>
         public void OnDown(object sender, EventArgs args)
-        {
-            var newCharacterPosition = (_characterPosition.x + 1, _characterPosition.y);
-            TryChangeCharacterPosition(newCharacterPosition);
-        }
+            => TryChangeCharacterPosition((_characterPosition.x + 1, _characterPosition.y));
 
         /// <summary>
         /// Changes character to the specified position if it possible.

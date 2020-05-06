@@ -32,7 +32,8 @@ namespace ConsoleGame
         /// <exception cref="InvalidMapException">The map has an incorrect format.</exception>
         public static Game LoadGameWithSpecifiedMapWriterFromFile(string path, IMapWriter mapWriter)
         {
-            var fileData = GetFileData(path).Split("\n", StringSplitOptions.RemoveEmptyEntries);
+            var inputFile = GetFileData(path);
+            var fileData = inputFile.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
             var characterWasAdded = false;
             (int x, int y) characterPosition = (0, 0);
             
@@ -69,7 +70,7 @@ namespace ConsoleGame
                         }
                         else
                         {
-                            throw new InvalidMapException("There is unfamiliar symbol.");
+                            throw new InvalidMapException(inputFile);
                         }
                     }
                     else
@@ -79,8 +80,10 @@ namespace ConsoleGame
                 }
             }
 
-            if(!characterWasAdded)
+            if (!characterWasAdded)
+            {
                 throw new InvalidMapException("There is no character.");
+            }
             
             return new Game(map, characterPosition, mapWriter);
         }
