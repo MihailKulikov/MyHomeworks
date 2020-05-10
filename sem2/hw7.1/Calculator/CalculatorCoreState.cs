@@ -1,6 +1,6 @@
 ﻿namespace Calculator
 {
-    enum CalculatorCoreState
+    internal enum CalculatorCoreState
     {
         S1, //Initial,
         S2,//FirstOperandIntroduction,

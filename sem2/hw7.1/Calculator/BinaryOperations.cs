@@ -1,8 +1,7 @@
 ﻿namespace Calculator
 {
-    enum BinaryOperations
+    public enum BinaryOperations
     {
-        Nothing,
         Multiply = '*',
         Add = '+',
         Subtract = '-',

@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace Calculator
 {
-    class CalculatorCore
+    public class CalculatorCore
     {
         private readonly CultureInfo culture = CultureInfo.InvariantCulture;
         public string LabelValue { get; private set; }
@@ -16,6 +16,7 @@ namespace Calculator
         public CalculatorCore()
         {
             TextBoxValue = "0";
+            LabelValue = "";
             currentState = CalculatorCoreState.S1;
         }
 
@@ -400,8 +401,6 @@ namespace Calculator
         {
             switch (lastOperation)
             {
-                case BinaryOperations.Nothing:
-                    break;
                 case BinaryOperations.Multiply:
                     currentResult *= decimal.Parse(TextBoxValue, culture);
                     TextBoxValue = currentResult.ToString(culture);
