@@ -17,66 +17,37 @@ namespace Calculator
         {
             TextBoxValue = "0";
             LabelValue = "";
-            currentState = CalculatorCoreState.S1;
+            currentState = CalculatorCoreState.Initial;
         }
 
-        public void PressButtonWithNum0()
+        public void PressButtonDigits(byte digit)
         {
             switch (currentState)
             {
-                case CalculatorCoreState.S1:
-                    break;
-                case CalculatorCoreState.S2:
-                    D2("0");
-
-                    break;
-                case CalculatorCoreState.S3:
-                    currentState = CalculatorCoreState.S5;
-                    D1("0");
-
-                    break;
-                case CalculatorCoreState.S4:
-                    currentState = CalculatorCoreState.S1;
-                    D1("0");
-
-                    break;
-                case CalculatorCoreState.S5:
-                    D2("0");
-
-                    break;
-                case CalculatorCoreState.S6:
-                    break;
-            }
-        }
-
-        public void PressButtonWithOtherDigits(byte digit)
-        {
-            switch (currentState)
-            {
-                case CalculatorCoreState.S1:
-                    currentState = CalculatorCoreState.S2;
+                case CalculatorCoreState.Initial:
+                    currentState = CalculatorCoreState.FirstOperandIntroduction;
                     D1(digit.ToString(culture));
 
                     break;
-                case CalculatorCoreState.S2:
+                case CalculatorCoreState.FirstOperandIntroduction:
                     D2(digit.ToString(culture));
 
                     break;
-                case CalculatorCoreState.S3:
-                    currentState = CalculatorCoreState.S5;
+                case CalculatorCoreState.BinaryOperationIntroduction:
+                    currentState = CalculatorCoreState.SecondOperandIntroduction;
                     D1(digit.ToString(culture));
 
                     break;
-                case CalculatorCoreState.S4:
-                    currentState = CalculatorCoreState.S2;
+                case CalculatorCoreState.Result:
+                    currentState = CalculatorCoreState.FirstOperandIntroduction;
                     D1(digit.ToString(culture));
 
                     break;
-                case CalculatorCoreState.S5:
+                case CalculatorCoreState.SecondOperandIntroduction:
                     D2(digit.ToString(culture));
 
                     break;
-                case CalculatorCoreState.S6:
+                case CalculatorCoreState.Exception:
                     break;
             }
         }
@@ -85,29 +56,29 @@ namespace Calculator
         {
             switch (currentState)
             {
-                case CalculatorCoreState.S1:
+                case CalculatorCoreState.Initial:
                     break;
-                case CalculatorCoreState.S2:
-                    currentState = CalculatorCoreState.S1;
+                case CalculatorCoreState.FirstOperandIntroduction:
+                    currentState = CalculatorCoreState.Initial;
                     D3();
 
                     break;
-                case CalculatorCoreState.S3:
-                    currentState = CalculatorCoreState.S5;
+                case CalculatorCoreState.BinaryOperationIntroduction:
+                    currentState = CalculatorCoreState.SecondOperandIntroduction;
                     D3();
 
                     break;
-                case CalculatorCoreState.S4:
-                    currentState = CalculatorCoreState.S1;
+                case CalculatorCoreState.Result:
+                    currentState = CalculatorCoreState.Initial;
                     D3();
 
                     break;
-                case CalculatorCoreState.S5:
+                case CalculatorCoreState.SecondOperandIntroduction:
                     D3();
 
                     break;
-                case CalculatorCoreState.S6:
-                    currentState = CalculatorCoreState.S1;
+                case CalculatorCoreState.Exception:
+                    currentState = CalculatorCoreState.Initial;
                     D4();
 
                     break;
@@ -118,30 +89,30 @@ namespace Calculator
         {
             switch (currentState)
             {
-                case CalculatorCoreState.S1:
+                case CalculatorCoreState.Initial:
                     break;
-                case CalculatorCoreState.S2:
-                    currentState = CalculatorCoreState.S1;
+                case CalculatorCoreState.FirstOperandIntroduction:
+                    currentState = CalculatorCoreState.Initial;
                     D3();
 
                     break;
-                case CalculatorCoreState.S3:
-                    currentState = CalculatorCoreState.S1;
+                case CalculatorCoreState.BinaryOperationIntroduction:
+                    currentState = CalculatorCoreState.Initial;
                     D4();
 
                     break;
-                case CalculatorCoreState.S4:
-                    currentState = CalculatorCoreState.S1;
+                case CalculatorCoreState.Result:
+                    currentState = CalculatorCoreState.Initial;
                     D4();
 
                     break;
-                case CalculatorCoreState.S5:
-                    currentState = CalculatorCoreState.S1;
+                case CalculatorCoreState.SecondOperandIntroduction:
+                    currentState = CalculatorCoreState.Initial;
                     D4();
 
                     break;
-                case CalculatorCoreState.S6:
-                    currentState = CalculatorCoreState.S1;
+                case CalculatorCoreState.Exception:
+                    currentState = CalculatorCoreState.Initial;
                     D4();
 
                     break;
@@ -152,21 +123,21 @@ namespace Calculator
         {
             switch (currentState)
             {
-                case CalculatorCoreState.S1:
+                case CalculatorCoreState.Initial:
                     break;
-                case CalculatorCoreState.S2:
+                case CalculatorCoreState.FirstOperandIntroduction:
                     D5();
 
                     break;
-                case CalculatorCoreState.S3:
+                case CalculatorCoreState.BinaryOperationIntroduction:
                     break;
-                case CalculatorCoreState.S4:
+                case CalculatorCoreState.Result:
                     break;
-                case CalculatorCoreState.S5:
+                case CalculatorCoreState.SecondOperandIntroduction:
                     D5();
 
                     break;
-                case CalculatorCoreState.S6:
+                case CalculatorCoreState.Exception:
                     break;
             }
         }
@@ -175,27 +146,27 @@ namespace Calculator
         {
             switch (currentState)
             {
-                case CalculatorCoreState.S1:
-                    currentState = CalculatorCoreState.S3;
+                case CalculatorCoreState.Initial:
+                    currentState = CalculatorCoreState.BinaryOperationIntroduction;
                     D8(binaryOperation);
 
                     break;
-                case CalculatorCoreState.S2:
-                    currentState = CalculatorCoreState.S3;
+                case CalculatorCoreState.FirstOperandIntroduction:
+                    currentState = CalculatorCoreState.BinaryOperationIntroduction;
                     D8(binaryOperation);
 
                     break;
-                case CalculatorCoreState.S3:
+                case CalculatorCoreState.BinaryOperationIntroduction:
                     D9(binaryOperation);
 
                     break;
-                case CalculatorCoreState.S4:
-                    currentState = CalculatorCoreState.S3;
+                case CalculatorCoreState.Result:
+                    currentState = CalculatorCoreState.BinaryOperationIntroduction;
                     D8(binaryOperation);
 
                     break;
-                case CalculatorCoreState.S5:
-                    currentState = CalculatorCoreState.S3;
+                case CalculatorCoreState.SecondOperandIntroduction:
+                    currentState = CalculatorCoreState.BinaryOperationIntroduction;
                     try
                     {
                         D11(binaryOperation);
@@ -203,16 +174,16 @@ namespace Calculator
                     catch (DivideByZeroException e)
                     {
                         TextBoxValue = e.Message;
-                        currentState = CalculatorCoreState.S6;
+                        currentState = CalculatorCoreState.Exception;
                     }
                     catch (OverflowException e)
                     {
                         TextBoxValue = e.Message;
-                        currentState = CalculatorCoreState.S6;
+                        currentState = CalculatorCoreState.Exception;
                     }
 
                     break;
-                case CalculatorCoreState.S6:
+                case CalculatorCoreState.Exception:
                     break;
             }
         }
@@ -221,30 +192,30 @@ namespace Calculator
         {
             switch (currentState)
             {
-                case CalculatorCoreState.S1:
-                    currentState = CalculatorCoreState.S2;
+                case CalculatorCoreState.Initial:
+                    currentState = CalculatorCoreState.FirstOperandIntroduction;
                     D2("0.");
 
                     break;
-                case CalculatorCoreState.S2:
+                case CalculatorCoreState.FirstOperandIntroduction:
                     D6();
 
                     break;
-                case CalculatorCoreState.S3:
-                    currentState = CalculatorCoreState.S5;
+                case CalculatorCoreState.BinaryOperationIntroduction:
+                    currentState = CalculatorCoreState.SecondOperandIntroduction;
                     D1("0.");
 
                     break;
-                case CalculatorCoreState.S4:
-                    currentState = CalculatorCoreState.S2;
+                case CalculatorCoreState.Result:
+                    currentState = CalculatorCoreState.FirstOperandIntroduction;
                     D1("0.");
 
                     break;
-                case CalculatorCoreState.S5:
+                case CalculatorCoreState.SecondOperandIntroduction:
                     D6();
 
                     break;
-                case CalculatorCoreState.S6:
+                case CalculatorCoreState.Exception:
                     break;
             }
         }
@@ -253,49 +224,49 @@ namespace Calculator
         {
             switch (currentState)
             {
-                case CalculatorCoreState.S1:
+                case CalculatorCoreState.Initial:
                     break;
-                case CalculatorCoreState.S2:
-                    currentState = CalculatorCoreState.S4;
+                case CalculatorCoreState.FirstOperandIntroduction:
+                    currentState = CalculatorCoreState.Result;
                     break;
-                case CalculatorCoreState.S3:
-                    currentState = CalculatorCoreState.S4;
+                case CalculatorCoreState.BinaryOperationIntroduction:
+                    currentState = CalculatorCoreState.Result;
                     try
                     {
                         D10();
                     }
                     catch (DivideByZeroException e)
                     {
-                        currentState = CalculatorCoreState.S6;
+                        currentState = CalculatorCoreState.Exception;
                         TextBoxValue = e.Message;
                     }
                     catch (OverflowException e)
                     {
-                        currentState = CalculatorCoreState.S6;
+                        currentState = CalculatorCoreState.Exception;
                         TextBoxValue = e.Message;
                     }
                     break;
-                case CalculatorCoreState.S4:
+                case CalculatorCoreState.Result:
                     break;
-                case CalculatorCoreState.S5:
-                    currentState = CalculatorCoreState.S4;
+                case CalculatorCoreState.SecondOperandIntroduction:
+                    currentState = CalculatorCoreState.Result;
                     try
                     {
                         D10();
                     }
                     catch (DivideByZeroException e)
                     {
-                        currentState = CalculatorCoreState.S6;
+                        currentState = CalculatorCoreState.Exception;
                         TextBoxValue = e.Message;
                     }
                     catch (OverflowException e)
                     {
-                        currentState = CalculatorCoreState.S6;
+                        currentState = CalculatorCoreState.Exception;
                         TextBoxValue = e.Message;
                     }
 
                     break;
-                case CalculatorCoreState.S6:
+                case CalculatorCoreState.Exception:
                     break;
             }
         }
@@ -304,26 +275,26 @@ namespace Calculator
         {
             switch (currentState)
             {
-                case CalculatorCoreState.S1:
+                case CalculatorCoreState.Initial:
                     break;
-                case CalculatorCoreState.S2:
+                case CalculatorCoreState.FirstOperandIntroduction:
                     D7();
 
                     break;
-                case CalculatorCoreState.S3:
-                    currentState = CalculatorCoreState.S5;
+                case CalculatorCoreState.BinaryOperationIntroduction:
+                    currentState = CalculatorCoreState.SecondOperandIntroduction;
                     D7();
 
                     break;
-                case CalculatorCoreState.S4:
+                case CalculatorCoreState.Result:
                     D7();
 
                     break;
-                case CalculatorCoreState.S5:
+                case CalculatorCoreState.SecondOperandIntroduction:
                     D7();
 
                     break;
-                case CalculatorCoreState.S6:
+                case CalculatorCoreState.Exception:
                     break;
             }
         }
@@ -378,12 +349,24 @@ namespace Calculator
 
         private void D7() //NegateTextBox
         {
-            TextBoxValue = (-decimal.Parse(TextBoxValue, culture)).ToString(culture);
+            if (TextBoxValue[^1] == '.')
+            {
+                TextBoxValue = (-decimal.Parse(TextBoxValue, culture)).ToString(culture);
+                TextBoxValue += '.';
+            }
+            else
+            {
+                TextBoxValue = (-decimal.Parse(TextBoxValue, culture)).ToString(culture);
+            }
         }
 
         private void D8(BinaryOperations binaryOperation) //ApplyFirstBinaryOperation
         {
-            TextBoxValue = TextBoxValue.Replace(".", "");
+            if (TextBoxValue[^1] == '.')
+            {
+                TextBoxValue = TextBoxValue.Remove(TextBoxValue.Length - 1);
+            }
+
             LabelValue = TextBoxValue + " " + (char)int.Parse(Enum.Format(typeof(BinaryOperations), binaryOperation, "d"));
             lastOperation = binaryOperation;
             currentResult = decimal.Parse(TextBoxValue, culture);
@@ -403,25 +386,28 @@ namespace Calculator
             {
                 case BinaryOperations.Multiply:
                     currentResult *= decimal.Parse(TextBoxValue, culture);
-                    TextBoxValue = currentResult.ToString(culture);
-
+                    
                     break;
                 case BinaryOperations.Add:
                     currentResult += decimal.Parse(TextBoxValue, culture);
-                    TextBoxValue = currentResult.ToString(culture);
-
+                    
                     break;
                 case BinaryOperations.Subtract:
                     currentResult -= decimal.Parse(TextBoxValue, culture);
-                    TextBoxValue = currentResult.ToString(culture);
-
+                    
                     break;
                 case BinaryOperations.Divide:
                     currentResult /= decimal.Parse(TextBoxValue, culture);
-                    TextBoxValue = currentResult.ToString(culture);
 
                     break;
             }
+
+            if (currentResult == Math.Round(currentResult))
+            {
+                currentResult = Math.Round(currentResult);
+            }
+
+            TextBoxValue = currentResult.ToString(culture);
         }
 
         private void D10() //Summarize
@@ -433,7 +419,10 @@ namespace Calculator
 
         private void D11(BinaryOperations binaryOperation)  //ApplyOtherBinaryOperations
         {
-            TextBoxValue = TextBoxValue.Replace(".", " ");
+            if (TextBoxValue[^1] == '.')
+            {
+                TextBoxValue = TextBoxValue.Remove(TextBoxValue.Length - 1);
+            }
             LabelValue += " " + TextBoxValue;
             PerformLastOperation();
             lastOperation = binaryOperation;

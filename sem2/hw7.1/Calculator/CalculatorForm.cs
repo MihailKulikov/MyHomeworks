@@ -41,70 +41,70 @@ namespace Calculator
 
         private void ButtonNum0_Click(object sender, EventArgs e)
         {
-            core.PressButtonWithNum0();
+            core.PressButtonDigits(0);
             TextBox.Text = core.TextBoxValue;
             Label.Text = core.LabelValue;
         }
 
         private void ButtonNum1_Click(object sender, EventArgs e)
         {
-            core.PressButtonWithOtherDigits(1);
+            core.PressButtonDigits(1);
             TextBox.Text = core.TextBoxValue;
             Label.Text = core.LabelValue;
         }
 
         private void ButtonNum2_Click(object sender, EventArgs e)
         {
-            core.PressButtonWithOtherDigits(2);
+            core.PressButtonDigits(2);
             TextBox.Text = core.TextBoxValue;
             Label.Text = core.LabelValue;
         }
 
         private void ButtonNum3_Click(object sender, EventArgs e)
         {
-            core.PressButtonWithOtherDigits(3);
+            core.PressButtonDigits(3);
             TextBox.Text = core.TextBoxValue;
             Label.Text = core.LabelValue;
         }
 
         private void ButtonNum4_Click(object sender, EventArgs e)
         {
-            core.PressButtonWithOtherDigits(4);
+            core.PressButtonDigits(4);
             TextBox.Text = core.TextBoxValue;
             Label.Text = core.LabelValue;
         }
 
         private void ButtonNum5_Click(object sender, EventArgs e)
         {
-            core.PressButtonWithOtherDigits(5);
+            core.PressButtonDigits(5);
             TextBox.Text = core.TextBoxValue;
             Label.Text = core.LabelValue;
         }
 
         private void ButtonNum6_Click(object sender, EventArgs e)
         {
-            core.PressButtonWithOtherDigits(6);
+            core.PressButtonDigits(6);
             TextBox.Text = core.TextBoxValue;
             Label.Text = core.LabelValue;
         }
 
         private void ButtonNum7_Click(object sender, EventArgs e)
         {
-            core.PressButtonWithOtherDigits(7);
+            core.PressButtonDigits(7);
             TextBox.Text = core.TextBoxValue;
             Label.Text = core.LabelValue;
         }
 
         private void ButtonNum8_Click(object sender, EventArgs e)
         {
-            core.PressButtonWithOtherDigits(8);
+            core.PressButtonDigits(8);
             TextBox.Text = core.TextBoxValue;
             Label.Text = core.LabelValue;
         }
 
         private void ButtonNum9_Click(object sender, EventArgs e)
         {
-            core.PressButtonWithOtherDigits(9);
+            core.PressButtonDigits(9);
             TextBox.Text = core.TextBoxValue;
             Label.Text = core.LabelValue;
         }
