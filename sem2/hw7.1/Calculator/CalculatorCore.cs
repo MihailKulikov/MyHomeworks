@@ -3,6 +3,9 @@ using System.Globalization;
 
 namespace Calculator
 {
+    /// <summary>
+    /// Represents core for computing data and provides methods to simulating user input.
+    /// </summary>
     public class CalculatorCore
     {
         private readonly CultureInfo culture = CultureInfo.InvariantCulture;
@@ -13,6 +16,9 @@ namespace Calculator
         private CalculatorCoreState currentState;
         private const int TextBoxCapacity = 16;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CalculatorCore"/> class.
+        /// </summary>
         public CalculatorCore()
         {
             TextBoxValue = "0";
@@ -20,31 +26,35 @@ namespace Calculator
             currentState = CalculatorCoreState.Initial;
         }
 
+        /// <summary>
+        /// Simulate pressing button with specified digit.
+        /// </summary>
+        /// <param name="digit">Specified digit.</param>
         public void PressButtonDigits(byte digit)
         {
             switch (currentState)
             {
                 case CalculatorCoreState.Initial:
                     currentState = CalculatorCoreState.FirstOperandIntroduction;
-                    D1(digit.ToString(culture));
+                    AssignEnteredValueToTextBox(digit.ToString(culture));
 
                     break;
                 case CalculatorCoreState.FirstOperandIntroduction:
-                    D2(digit.ToString(culture));
+                    AddValueToEndOfTextBox(digit.ToString(culture));
 
                     break;
                 case CalculatorCoreState.BinaryOperationIntroduction:
                     currentState = CalculatorCoreState.SecondOperandIntroduction;
-                    D1(digit.ToString(culture));
+                    AssignEnteredValueToTextBox(digit.ToString(culture));
 
                     break;
                 case CalculatorCoreState.Result:
                     currentState = CalculatorCoreState.FirstOperandIntroduction;
-                    D1(digit.ToString(culture));
+                    AssignEnteredValueToTextBox(digit.ToString(culture));
 
                     break;
                 case CalculatorCoreState.SecondOperandIntroduction:
-                    D2(digit.ToString(culture));
+                    AddValueToEndOfTextBox(digit.ToString(culture));
 
                     break;
                 case CalculatorCoreState.Exception:
@@ -52,6 +62,9 @@ namespace Calculator
             }
         }
 
+        /// <summary>
+        /// Simulate pressing CE button.
+        /// </summary>
         public void PressButtonCE()
         {
             switch (currentState)
@@ -60,31 +73,34 @@ namespace Calculator
                     break;
                 case CalculatorCoreState.FirstOperandIntroduction:
                     currentState = CalculatorCoreState.Initial;
-                    D3();
+                    ResetTextBox();
 
                     break;
                 case CalculatorCoreState.BinaryOperationIntroduction:
                     currentState = CalculatorCoreState.SecondOperandIntroduction;
-                    D3();
+                    ResetTextBox();
 
                     break;
                 case CalculatorCoreState.Result:
                     currentState = CalculatorCoreState.Initial;
-                    D3();
+                    ResetTextBox();
 
                     break;
                 case CalculatorCoreState.SecondOperandIntroduction:
-                    D3();
+                    ResetTextBox();
 
                     break;
                 case CalculatorCoreState.Exception:
                     currentState = CalculatorCoreState.Initial;
-                    D4();
+                    ResetAll();
 
                     break;
             }
         }
 
+        /// <summary>
+        /// Simulate pressing C button.
+        /// </summary>
         public void PressButtonC()
         {
             switch (currentState)
@@ -93,32 +109,35 @@ namespace Calculator
                     break;
                 case CalculatorCoreState.FirstOperandIntroduction:
                     currentState = CalculatorCoreState.Initial;
-                    D3();
+                    ResetTextBox();
 
                     break;
                 case CalculatorCoreState.BinaryOperationIntroduction:
                     currentState = CalculatorCoreState.Initial;
-                    D4();
+                    ResetAll();
 
                     break;
                 case CalculatorCoreState.Result:
                     currentState = CalculatorCoreState.Initial;
-                    D4();
+                    ResetAll();
 
                     break;
                 case CalculatorCoreState.SecondOperandIntroduction:
                     currentState = CalculatorCoreState.Initial;
-                    D4();
+                    ResetAll();
 
                     break;
                 case CalculatorCoreState.Exception:
                     currentState = CalculatorCoreState.Initial;
-                    D4();
+                    ResetAll();
 
                     break;
             }
         }
 
+        /// <summary>
+        /// Simulate pressing button backspace.
+        /// </summary>
         public void PressButtonBack()
         {
             switch (currentState)
@@ -126,7 +145,7 @@ namespace Calculator
                 case CalculatorCoreState.Initial:
                     break;
                 case CalculatorCoreState.FirstOperandIntroduction:
-                    D5();
+                    RemoveLastDigit();
 
                     break;
                 case CalculatorCoreState.BinaryOperationIntroduction:
@@ -134,7 +153,7 @@ namespace Calculator
                 case CalculatorCoreState.Result:
                     break;
                 case CalculatorCoreState.SecondOperandIntroduction:
-                    D5();
+                    RemoveLastDigit();
 
                     break;
                 case CalculatorCoreState.Exception:
@@ -142,34 +161,38 @@ namespace Calculator
             }
         }
 
+        /// <summary>
+        /// Simulate pressing button with specified binary operation.
+        /// </summary>
+        /// <param name="binaryOperation">Specified binary operation.</param>
         public void PressBinaryOperationButton(BinaryOperations binaryOperation)
         {
             switch (currentState)
             {
                 case CalculatorCoreState.Initial:
                     currentState = CalculatorCoreState.BinaryOperationIntroduction;
-                    D8(binaryOperation);
+                    ApplyFirstBinaryOperation(binaryOperation);
 
                     break;
                 case CalculatorCoreState.FirstOperandIntroduction:
                     currentState = CalculatorCoreState.BinaryOperationIntroduction;
-                    D8(binaryOperation);
+                    ApplyFirstBinaryOperation(binaryOperation);
 
                     break;
                 case CalculatorCoreState.BinaryOperationIntroduction:
-                    D9(binaryOperation);
+                    ChangeBinaryOperation(binaryOperation);
 
                     break;
                 case CalculatorCoreState.Result:
                     currentState = CalculatorCoreState.BinaryOperationIntroduction;
-                    D8(binaryOperation);
+                    ApplyFirstBinaryOperation(binaryOperation);
 
                     break;
                 case CalculatorCoreState.SecondOperandIntroduction:
                     currentState = CalculatorCoreState.BinaryOperationIntroduction;
                     try
                     {
-                        D11(binaryOperation);
+                        ApplyOtherBinaryOperations(binaryOperation);
                     }
                     catch (DivideByZeroException e)
                     {
@@ -188,31 +211,34 @@ namespace Calculator
             }
         }
 
+        /// <summary>
+        /// Simulate pressing point button.
+        /// </summary>
         public void PressButtonPoint()
         {
             switch (currentState)
             {
                 case CalculatorCoreState.Initial:
                     currentState = CalculatorCoreState.FirstOperandIntroduction;
-                    D2("0.");
+                    AddValueToEndOfTextBox("0.");
 
                     break;
                 case CalculatorCoreState.FirstOperandIntroduction:
-                    D6();
+                    TryToAddPoint();
 
                     break;
                 case CalculatorCoreState.BinaryOperationIntroduction:
                     currentState = CalculatorCoreState.SecondOperandIntroduction;
-                    D1("0.");
+                    AssignEnteredValueToTextBox("0.");
 
                     break;
                 case CalculatorCoreState.Result:
                     currentState = CalculatorCoreState.FirstOperandIntroduction;
-                    D1("0.");
+                    AssignEnteredValueToTextBox("0.");
 
                     break;
                 case CalculatorCoreState.SecondOperandIntroduction:
-                    D6();
+                    TryToAddPoint();
 
                     break;
                 case CalculatorCoreState.Exception:
@@ -220,6 +246,9 @@ namespace Calculator
             }
         }
 
+        /// <summary>
+        /// Simulate pressing equal button.
+        /// </summary>
         public void PressEqualButton()
         {
             switch (currentState)
@@ -233,7 +262,7 @@ namespace Calculator
                     currentState = CalculatorCoreState.Result;
                     try
                     {
-                        D10();
+                        Summarize();
                     }
                     catch (DivideByZeroException e)
                     {
@@ -252,7 +281,7 @@ namespace Calculator
                     currentState = CalculatorCoreState.Result;
                     try
                     {
-                        D10();
+                        Summarize();
                     }
                     catch (DivideByZeroException e)
                     {
@@ -271,6 +300,9 @@ namespace Calculator
             }
         }
 
+        /// <summary>
+        /// Simulate pressing negate button.
+        /// </summary>
         public void PressNegateButton()
         {
             switch (currentState)
@@ -278,33 +310,33 @@ namespace Calculator
                 case CalculatorCoreState.Initial:
                     break;
                 case CalculatorCoreState.FirstOperandIntroduction:
-                    D7();
+                    NegateTextBox();
 
                     break;
                 case CalculatorCoreState.BinaryOperationIntroduction:
                     currentState = CalculatorCoreState.SecondOperandIntroduction;
-                    D7();
+                    NegateTextBox();
 
                     break;
                 case CalculatorCoreState.Result:
-                    D7();
+                    NegateTextBox();
 
                     break;
                 case CalculatorCoreState.SecondOperandIntroduction:
-                    D7();
+                    NegateTextBox();
 
                     break;
                 case CalculatorCoreState.Exception:
                     break;
             }
         }
-
-        private void D1(string input) //AssignEnteredDigitToTextBox
+        
+        private void AssignEnteredValueToTextBox(string value)
         {
-            TextBoxValue = input;
+            TextBoxValue = value;
         }
 
-        private void D2(string input) //AddValueToEndOfTextBox
+        private void AddValueToEndOfTextBox(string input)
         {
             if (TextBoxValue == "0")
             {
@@ -319,18 +351,18 @@ namespace Calculator
             }
         }
 
-        private void D3() //ResetTextBox
+        private void ResetTextBox() 
         {
             TextBoxValue = "0";
         }
 
-        private void D4() //ResetAll
+        private void ResetAll()
         {
             TextBoxValue = "0";
             LabelValue = "";
         }
 
-        private void D5() //RemoveLastDigit
+        private void RemoveLastDigit() 
         {
             TextBoxValue = TextBoxValue.Remove(TextBoxValue.Length - 1);
             if (!decimal.TryParse(TextBoxValue, NumberStyles.Any, culture, out _))
@@ -339,7 +371,7 @@ namespace Calculator
             }
         }
 
-        private void D6() //TryToAddPoint
+        private void TryToAddPoint()
         {
             if (!TextBoxValue.Contains("."))
             {
@@ -347,7 +379,7 @@ namespace Calculator
             }
         }
 
-        private void D7() //NegateTextBox
+        private void NegateTextBox() 
         {
             if (TextBoxValue[^1] == '.')
             {
@@ -360,7 +392,7 @@ namespace Calculator
             }
         }
 
-        private void D8(BinaryOperations binaryOperation) //ApplyFirstBinaryOperation
+        private void ApplyFirstBinaryOperation(BinaryOperations binaryOperation)
         {
             if (TextBoxValue[^1] == '.')
             {
@@ -372,7 +404,7 @@ namespace Calculator
             currentResult = decimal.Parse(TextBoxValue, culture);
         }
 
-        private void D9(BinaryOperations binaryOperation) //ChangeBinaryOperation
+        private void ChangeBinaryOperation(BinaryOperations binaryOperation)
         {
             lastOperation = binaryOperation;
 
@@ -410,19 +442,20 @@ namespace Calculator
             TextBoxValue = currentResult.ToString(culture);
         }
 
-        private void D10() //Summarize
+        private void Summarize()
         {
             PerformLastOperation();
 
             LabelValue = "";
         }
 
-        private void D11(BinaryOperations binaryOperation)  //ApplyOtherBinaryOperations
+        private void ApplyOtherBinaryOperations(BinaryOperations binaryOperation)
         {
             if (TextBoxValue[^1] == '.')
             {
                 TextBoxValue = TextBoxValue.Remove(TextBoxValue.Length - 1);
             }
+            
             LabelValue += " " + TextBoxValue;
             PerformLastOperation();
             lastOperation = binaryOperation;

@@ -3,14 +3,19 @@ using System.Windows.Forms;
 
 namespace Calculator
 {
+    /// <summary>
+    /// Represents calculator desktop application.
+    /// </summary>
     public partial class CalculatorForm : Form
     {
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool HideCaret(IntPtr hWnd);
 
         private readonly CalculatorCore core;
-
-
+        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CalculatorForm"/> class.
+        /// </summary>
         public CalculatorForm()
         {
             InitializeComponent();
