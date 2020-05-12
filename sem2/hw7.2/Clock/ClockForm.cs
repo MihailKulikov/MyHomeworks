@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace Clock
 {
+    /// <summary>
+    /// Represents analog clock desktop application.
+    /// </summary>
     public partial class ClockForm : Form
     {
         private const float FrameThicknessRelativeToSquareLength = 0.025F;
@@ -16,6 +19,9 @@ namespace Clock
         private const float MinuteHandLengthRelativeToSquareLength = 0.3F;
         private const float HourHandLengthRelativeToSquareLength = 0.2F;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ClockForm"/> class.
+        /// </summary>
         public ClockForm()
         {
             InitializeComponent();
