@@ -5,34 +5,41 @@ using System.Linq;
 
 namespace SetRealisation
 {
-    public class HashSet<T> : ISet<T>
+    public class MyHashSet<T> : ISet<T>
     {
-        private int count;
         private const int InitialSize = 4;
         private LinkedList<T>[] buckets;
         private const int LoadFactor = 2;
         private const int NumberToIncrease = 2;
 
-        public bool IsReadOnly { get; }
+        bool ICollection<T>.IsReadOnly => false;
 
-        public int Count => count;
+        public int Count { get; private set; }
 
         public IEqualityComparer<T> Comparer { get; }
 
-        public HashSet() : this(EqualityComparer<T>.Default) { }
+        public MyHashSet() : this(EqualityComparer<T>.Default) { }
 
-        public HashSet(IEqualityComparer<T> comparer)
+        public MyHashSet(IEqualityComparer<T> comparer) : this(new T[0], comparer) { }
+        
+        public MyHashSet(IEnumerable<T> collection) : this(collection, EqualityComparer<T>.Default) { }
+
+        public MyHashSet(IEnumerable<T> collection, IEqualityComparer<T> comparer)
         {
-            count = 0;
+            Count = 0;
             buckets = new LinkedList<T>[InitialSize];
-            
+
             for (var i = 0; i < buckets.Length; i++)
             {
                 buckets[i] = new LinkedList<T>();
             }
             
             Comparer = comparer;
-            IsReadOnly = false;
+
+            foreach (var item in collection)
+            {
+                Add(item);
+            }
         }
         
         private void CheckAverageLoad()
@@ -51,12 +58,9 @@ namespace SetRealisation
                 newBuckets[i] = new LinkedList<T>();
             }
 
-            foreach (var chain in buckets)
+            foreach (var item in this)
             {
-                foreach (var item in chain)
-                {
-                    newBuckets[GetArrayPosition(item, newBuckets.Length)].AddFirst(item);
-                }
+                newBuckets[GetArrayPosition(item, newBuckets.Length)].AddFirst(item);
             }
 
             buckets = newBuckets;
@@ -82,7 +86,7 @@ namespace SetRealisation
             if (!Contains(item))
             {
                 buckets[GetArrayPosition(item, buckets.Length)].AddFirst(item);
-                count++;
+                Count++;
             }
             
             CheckAverageLoad();
@@ -97,10 +101,7 @@ namespace SetRealisation
 
             foreach (var item in other)
             {
-                if (Remove(item))
-                {
-                    count--;
-                }
+                Remove(item);
             }
         }
 
@@ -111,38 +112,76 @@ namespace SetRealisation
                 throw new ArgumentNullException(nameof(other));
             }
 
-            foreach (var chain in buckets)
+            var itemsToRemove = new LinkedList<T>();
+            
+            foreach (var item in this.Where(item => !other.Contains(item)))
             {
-                foreach (var item in chain.Where(item => !other.Contains(item)))
-                {
-                    Remove(item);
-                }
+                itemsToRemove.AddLast(item);
+            }
+
+            foreach (var itemToRemove in itemsToRemove)
+            {
+                Remove(itemToRemove);
             }
         }
 
         public bool IsProperSubsetOf(IEnumerable<T> other)
         {
-            throw new System.NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+
+            var otherAsList = other.ToList();
+            return otherAsList.Any(item => !Contains(item)) && this.All(otherAsList.Contains);
         }
 
         public bool IsProperSupersetOf(IEnumerable<T> other)
         {
-            throw new System.NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+
+            var otherAsList = other.ToList();
+
+            return this.Any(item => !otherAsList.Contains(item)) && otherAsList.All(Contains);
         }
 
         public bool IsSubsetOf(IEnumerable<T> other)
         {
-            throw new System.NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+
+            var otherAsList = other.ToList();
+
+            return this.All(otherAsList.Contains);
         }
 
         public bool IsSupersetOf(IEnumerable<T> other)
         {
-            throw new System.NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+
+            var otherAsList = other.ToList();
+
+            return otherAsList.All(Contains);
         }
 
         public bool Overlaps(IEnumerable<T> other)
         {
-            throw new System.NotImplementedException();
+            if (other == null)
+            {
+                throw new ArgumentNullException(nameof(other));
+            }
+
+            var otherAsList = other.ToList();
+
+            return otherAsList.Any(Contains);
         }
 
         public bool SetEquals(IEnumerable<T> other)
@@ -152,8 +191,8 @@ namespace SetRealisation
                 throw new ArgumentNullException();
             }
 
-            var otherList = other as T[] ?? other.ToArray();
-            return otherList.All(Contains) && this.All(otherList.Contains);
+            var otherAsList = other.ToList();
+            return otherAsList.All(Contains) && this.All(otherAsList.Contains);
         }
 
         public void SymmetricExceptWith(IEnumerable<T> other)
@@ -163,7 +202,7 @@ namespace SetRealisation
                 throw new ArgumentNullException(nameof(other));
             }
 
-            foreach (var item in other)
+            foreach (var item in other.GroupBy(item => item, Comparer).Select(group => group.Key))
             {
                 if (Contains(item))
                 {
@@ -202,7 +241,7 @@ namespace SetRealisation
             }
 
             buckets[GetArrayPosition(item, buckets.Length)].AddFirst(item);
-            count++;
+            Count++;
             
             CheckAverageLoad();
 
@@ -216,7 +255,7 @@ namespace SetRealisation
                 buckets[i] = new LinkedList<T>();
             }
 
-            count = 0;
+            Count = 0;
         }
 
         public bool Contains(T item)
@@ -236,10 +275,9 @@ namespace SetRealisation
                 throw new ArgumentOutOfRangeException(nameof(arrayIndex));
             }
 
-            if (array.Length - arrayIndex < count)
+            if (array.Length - arrayIndex < Count)
             {
-                throw new ArgumentException(
-                    "The number of elements in the source ICollection<T> is greater than the available space from arrayIndex to the end of the destination array.");
+                throw new ArgumentException(nameof(arrayIndex));
             }
 
             foreach (var item in this)
@@ -251,15 +289,15 @@ namespace SetRealisation
 
         public bool Remove(T item)
         {
-            if (buckets[GetArrayPosition(item, buckets.Length)].Remove(item))
+            foreach (var itemToRemove in buckets[GetArrayPosition(item, buckets.Length)].Where(element => Comparer.Equals(item, element)))
             {
-                count--;
-                
+                buckets[GetArrayPosition(item, buckets.Length)].Remove(itemToRemove);
+                Count--;
+                    
                 return true;
             }
 
             return false;
-
         }
     }
 }
