@@ -635,5 +635,13 @@ namespace SetRealisationTest
 
             hashSetForStrings.Contains(secondString).Should().BeFalse();
         }
+
+        [Test]
+        public void Throw_ArgumentNullException_When_Creating_With_Collection_Which_Is_Null()
+        {
+            Action action = () => new MyHashSet<Box>(null, new BoxSameDimensionsComparer());
+
+            action.Should().Throw<ArgumentNullException>();
+        }
     }
 }
