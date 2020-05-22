@@ -4,6 +4,9 @@ using System.Windows.Forms;
 
 namespace FindPairsGame
 {
+    /// <summary>
+    /// Represents GUI for Find Pairs Game.
+    /// </summary>
     public partial class FindPairsForm : Form
     {
         private const string WinMessage = "You won!";
@@ -11,6 +14,10 @@ namespace FindPairsGame
         private readonly Button[,] buttons;
         private readonly FindPairsCore core;
 
+        /// <summary>
+        /// Initialize new instance of Find Pairs Game with specified size.
+        /// </summary>
+        /// <param name="size">Specified size.</param>
         public FindPairsForm(int size)
         {
             core = new FindPairsCore(size);
@@ -69,7 +76,7 @@ namespace FindPairsGame
                 for (var y = 0; y < buttons.GetLength(1); y++)
                 {
                     if (buttons[x, y] != (Button) sender) continue;
-                    buttons[x, y].Text = core.Cells[x, y].ToString();
+                    buttons[x, y].Text = core.CellsValue[x, y].ToString();
                     buttons[x, y].Enabled = false;
                     System.Threading.Thread.Sleep(500);
 

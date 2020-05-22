@@ -1,19 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 
 namespace FindPairsGame
 {
+    /// <summary>
+    /// Represents core for Find Pairs Game
+    /// </summary>
     public class FindPairsCore
     {
-        public int[,] Cells { get; }
+        public int[,] CellsValue { get; }
         private States currentState = States.FirstCellWaiting;
         private (int x, int y) lastClickedCellCoordinates;
         private int enabledCellsCount;
 
+        /// <summary>
+        /// Initialize new instance of <see cref="FindPairsCore"/> with specified size.
+        /// </summary>
+        /// <param name="size">Specified size.</param>
         public FindPairsCore(int size)
         {
-            Cells = new int[size, size];
+            CellsValue = new int[size, size];
             enabledCellsCount = size * size;
             InitializeField(size);
         }
@@ -28,17 +34,22 @@ namespace FindPairsGame
             }
 
             var random = new Random();
-            for (var i = 0; i < Cells.GetLength(0); i++)
+            for (var i = 0; i < CellsValue.GetLength(0); i++)
             {
-                for (var j = 0; j < Cells.GetLength(1); j++)
+                for (var j = 0; j < CellsValue.GetLength(1); j++)
                 {
                     var randomNumber = random.Next(0, cellsValue.Count);
-                    Cells[i, j] = cellsValue[randomNumber];
+                    CellsValue[i, j] = cellsValue[randomNumber];
                     cellsValue.RemoveAt(randomNumber);
                 }
             }
         }
 
+        /// <summary>
+        /// Change cells visible on click.
+        /// </summary>
+        /// <param name="coordinates">Coordinates of button which was clicked.</param>
+        /// <returns>Coordinates of buttons that should be enable.</returns>
         public (int, int)[] ChangeCellsVisibleOnClick((int x, int y) coordinates)
         {
             switch (currentState)
@@ -49,8 +60,8 @@ namespace FindPairsGame
                     return Array.Empty<(int, int)>();
                 case States.SecondCellWaiting:
                     currentState = States.FirstCellWaiting;
-                    if (Cells[coordinates.x, coordinates.y] ==
-                        Cells[lastClickedCellCoordinates.x, lastClickedCellCoordinates.y])
+                    if (CellsValue[coordinates.x, coordinates.y] ==
+                        CellsValue[lastClickedCellCoordinates.x, lastClickedCellCoordinates.y])
                     {
                         enabledCellsCount -= 2;
                         return Array.Empty<(int, int)>();
@@ -64,6 +75,10 @@ namespace FindPairsGame
             }
         }
 
+        /// <summary>
+        /// Checks is game over.
+        /// </summary>
+        /// <returns>true if is game over; false if it is not.</returns>
         public bool IsGameOver()
             => enabledCellsCount == 0;
     }
