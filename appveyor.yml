@@ -4,6 +4,8 @@ before_build:
 environment:
   matrix:
   - solution_name: sem2/hw6.2/hw6.2.sln
+  - solution_name: sem2/hw4.2/hw4.2.sln
+  - solution_name: sem2/hw4.1/ExpressionTreeTask/ExpressionTreeTask.sln
   - solution_name: sem2/hw6.1/hw6.1.sln
   - solution_name: sem2/hw3.2/hw3.2.sln
   - solution_name: sem2/hw3.1/hw3.1.sln
@@ -13,6 +15,7 @@ environment:
   - solution_name: sem2/hw2.1/hw2.1.sln
   - solution_name: sem2/hw2.2/hw2.2.sln
   - solution_name: sem2/hw2.3/hw2.3.sln
+  - solution_name: sem2/Queue/Queue.sln
   
 build_script:
   - msbuild %solution_name%
