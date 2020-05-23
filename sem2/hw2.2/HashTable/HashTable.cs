@@ -88,9 +88,9 @@ namespace HashTable
             if (!IsContains(value))
             {
                 _buckets[GetArrayPosition(value, _buckets.Length)].AddElementByIndex(value, 0);
+                _itemCount++;
             }
 
-            _itemCount++;
             CheckAverageLoad();
         }
 
