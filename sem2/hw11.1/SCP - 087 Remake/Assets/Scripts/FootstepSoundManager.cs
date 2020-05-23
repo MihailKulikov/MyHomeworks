@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Represents footstep sound manager. 
+/// </summary>
 public class FootstepSoundManager : MonoBehaviour
 {
     private CharacterController controller;

@@ -1,8 +1,17 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Provides class which is responsible for the movement of the camera using the player’s mouse.
+/// </summary>
 public class MouseLook : MonoBehaviour
 {
+    /// <summary>
+    /// Mouse sensitivity value. The larger the value, the faster the cursor moves.
+    /// </summary>
     public float mouseSensitivity = 100f;
+    /// <summary>
+    /// Transform of player.
+    /// </summary>
     public Transform playerBody;
     
     private float xRotation;

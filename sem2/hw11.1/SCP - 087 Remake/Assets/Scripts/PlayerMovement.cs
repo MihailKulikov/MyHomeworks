@@ -3,6 +3,9 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using Vector3 = UnityEngine.Vector3;
 
+/// <summary>
+/// Represents class which is responsible for the movement of player using keyboard.
+/// </summary>
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 10f;
