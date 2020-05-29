@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <nullabe>enable</nullabe>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="Maps\CorrectMap.txt" />
+      <None Remove="Maps\Map.txt" />
+      <None Remove="Maps\MapWithoutCharacter.txt" />
+      <None Remove="Maps\MapWithTwoCharacters.txt" />
+      <None Remove="Maps\MapWithWrongSymbol.txt" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="Maps\CorrectMap.txt" />
+      <EmbeddedResource Include="Maps\MapWithWrongSymbol.txt" />
+      <None Remove="Maps\GoodMap.txt" />
+      <EmbeddedResource Include="Maps\GoodMap.txt" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Properties\" />
+    </ItemGroup>
+
+  <ItemGroup>
+      <EmbeddedResource Include="Maps\Map.txt" />
+      <EmbeddedResource Include="Maps\MapWithoutCharacter.txt" />
+      <EmbeddedResource Include="Maps\MapWithTwoCharacters.txt" />
+    </ItemGroup>
+
+</Project>
