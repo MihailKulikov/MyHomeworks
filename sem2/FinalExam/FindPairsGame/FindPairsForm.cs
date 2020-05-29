@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace FindPairsGame
@@ -10,10 +12,14 @@ namespace FindPairsGame
     public partial class FindPairsForm : Form
     {
         private const string WinMessage = "You won!";
+        private const int ShowDelayInMilliseconds = 500;
+        
         private readonly TableLayoutPanel tableLayoutPanel;
         private readonly Button[,] buttons;
         private readonly FindPairsCore core;
-
+        private readonly Queue<(int x, int y)> clickedButtonsCoordinate = new Queue<(int x, int y)>();
+        private readonly Queue<System.Timers.Timer> timers = new Queue<System.Timers.Timer>();
+        
         /// <summary>
         /// Initialize new instance of Find Pairs Game with specified size.
         /// </summary>
@@ -22,7 +28,6 @@ namespace FindPairsGame
         {
             core = new FindPairsCore(size);
             InitializeComponent();
-            var tabIndex = 0;
 
             tableLayoutPanel = new TableLayoutPanel
             {
@@ -58,9 +63,8 @@ namespace FindPairsGame
                             GraphicsUnit.Point, 0),
                         Name = $"button{i}{j}",
                         UseVisualStyleBackColor = false,
-                        TabIndex = tabIndex
+                        TabStop = false
                     };
-                    tabIndex++;
                     buttons[i, j].Click += Button_Click;
                     tableLayoutPanel.Controls.Add(buttons[i, j], j, i);
                 }
@@ -78,15 +82,26 @@ namespace FindPairsGame
                     if (buttons[x, y] != (Button) sender) continue;
                     buttons[x, y].Text = core.CellsValue[x, y].ToString();
                     buttons[x, y].Enabled = false;
-                    System.Threading.Thread.Sleep(500);
-
-                    foreach (var (xCor, yCor) in core.ChangeCellsVisibleOnClick((x, y)))
-                    {
-                        buttons[xCor, yCor].Enabled = true;
-                        buttons[xCor, yCor].Text = "";
-                    }
+                    
+                    clickedButtonsCoordinate.Enqueue((x, y));
+                    var newTimer = new System.Timers.Timer {Interval = ShowDelayInMilliseconds, AutoReset = false, Enabled = true};
+                    newTimer.Elapsed += OnTimedEvent;
+                    timers.Enqueue(newTimer);
                 }
             }
+        }
+
+        private void OnTimedEvent(object sender, ElapsedEventArgs e)
+        {
+            var firstClickedButtonCoordinates = clickedButtonsCoordinate.Dequeue();
+            foreach (var (xCor, yCor) in core.ChangeCellsVisibleOnClick(firstClickedButtonCoordinates))
+            {
+                buttons[xCor, yCor].Enabled = true;
+                buttons[xCor, yCor].Text = "";
+            }
+
+            var firstTimer = timers.Dequeue();
+            firstTimer.Dispose();
             
             if (core.IsGameOver())
             {

@@ -12,7 +12,7 @@ namespace FindPairsGame
         [STAThread]
         private static void Main(string[] args)
         {
-            var size = 4;
+            var size = 16;
             if (args.Where(arg => int.TryParse(arg, out size)).Any(arg => size / 2 == 1))
             {
                 throw new ArgumentException(nameof(size));

@@ -39,7 +39,6 @@
             this.Name = "FindPairsForm";
             this.Text = "Find Pair";
             this.ResumeLayout(false);
-
         }
 
         #endregion
