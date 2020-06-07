@@ -106,7 +106,7 @@ namespace SetRealisation
 
             buckets = newBuckets;
         }
-        
+
         /// <summary>
         /// Сounts the index of the chain for this value using a hash function.
         /// </summary>
@@ -114,28 +114,21 @@ namespace SetRealisation
         /// <param name="lengthOfBuckets">Length of the current buckets.</param>
         /// <returns>Index of the chain in which the element should be placed.</returns>
         private int GetArrayPosition(T value, int lengthOfBuckets)
-        {
-            return Math.Abs(Comparer.GetHashCode(value) % lengthOfBuckets);
-        }
-        
+            => Math.Abs(Comparer.GetHashCode(value) % lengthOfBuckets);
+
         /// <summary>
         /// Returns an enumerator that iterates through a <see cref="MyHashSet{T}"/> object.
         /// </summary>
         /// <returns>A <see cref="IEnumerator{T}"/> object for the <see cref="MyHashSet{T}"/> object.</returns>
         public IEnumerator<T> GetEnumerator()
-        {
-            return buckets.SelectMany(chain => chain).GetEnumerator();
-        }
+            => buckets.SelectMany(chain => chain).GetEnumerator();
 
         /// <summary>
         /// Returns an enumerator that iterates through a collection.
         /// </summary>
         /// <returns>An <see cref="IEnumerator"/> object that can be used to iterate through the collection.</returns>
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-        
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
         /// <summary>
         /// Adds an item to an <see cref="ICollection{T}"/> object.
         /// </summary>
@@ -161,6 +154,17 @@ namespace SetRealisation
             if (other == null)
             {
                 throw new ArgumentNullException(nameof(other));
+            }
+
+            if (ReferenceEquals(this, other))
+            {
+                Count = 0;
+                buckets = new LinkedList<T>[InitialSize];
+            
+                for (var i = 0; i < buckets.Length; i++)
+                {
+                    buckets[i] = new LinkedList<T>();
+                }
             }
 
             foreach (var item in other)
@@ -387,12 +391,10 @@ namespace SetRealisation
         /// </summary>
         /// <param name="item">The element to locate in the <see cref="MyHashSet{T}"/> object.</param>
         /// <returns>true if the <see cref="MyHashSet{T}"/> object contains the specified element; otherwise, false.</returns>
-        public bool Contains(T item)
-        {
-            return buckets[GetArrayPosition(item, buckets.Length)].Any(element => Comparer.Equals(element, item));
-        }
+        public bool Contains(T item) 
+            => buckets[GetArrayPosition(item, buckets.Length)].Any(element => Comparer.Equals(element, item));
 
-        /// <summary>
+            /// <summary>
         /// Copies the elements of a <see cref="MyHashSet{T}"/> object to an array, starting at the specified array index.
         /// </summary>
         /// <param name="array">The one-dimensional array that is the destination of the elements copied from the <see cref="MyHashSet{T}"/> object. The array must have zero-based indexing.</param>

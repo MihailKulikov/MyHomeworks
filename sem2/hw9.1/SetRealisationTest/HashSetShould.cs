@@ -654,5 +654,90 @@ namespace SetRealisationTest
 
             hashSet.Should().BeEmpty();
         }
+
+        [Test]
+        public void Should_Correctly_IntersectWith_ReferenceEqual_Collection()
+        {
+            hashSet = new MyHashSet<Box>(boxes, new BoxSameDimensionsComparer());
+            var secondHashSet = hashSet;
+            
+            hashSet.IntersectWith(secondHashSet);
+
+            hashSet.Should().BeEquivalentTo(boxes);
+        }
+
+        [Test]
+        public void Should_ReturnFalse_After_Executing_IsProperSubsetOf_ReferenceEqual_Collection()
+        {
+            hashSet = new MyHashSet<Box>(boxes, new BoxSameDimensionsComparer());
+            var secondHashSet = hashSet;
+
+            hashSet.IsProperSubsetOf(secondHashSet).Should().BeFalse();
+        }
+
+        [Test]
+        public void Should_ReturnFalse_After_Executing_IsProperSupersetOf_ReferenceEqual_Collection()
+        {
+            hashSet=new MyHashSet<Box>(boxes, new BoxSameDimensionsComparer());
+            var secondHashSet = hashSet;
+
+            hashSet.IsProperSupersetOf(secondHashSet).Should().BeFalse();
+        }
+
+        [Test]
+        public void Should_ReturnTrue_After_Executing_IsSubsetOf_ReferenceEqual_Collection()
+        {
+            hashSet = new MyHashSet<Box>(boxes, new BoxSameDimensionsComparer());
+            var secondHashSet = hashSet;
+
+            hashSet.IsSubsetOf(secondHashSet).Should().BeTrue();
+        }
+
+        [Test]
+        public void Should_ReturnTrue_After_Executing_IsSupersetOf_ReferenceEqual_Collection()
+        {
+            hashSet = new MyHashSet<Box>(boxes, new BoxSameDimensionsComparer());
+            var secondHashSet = hashSet;
+
+            hashSet.IsSupersetOf(secondHashSet).Should().BeTrue();
+        }
+
+        [Test]
+        public void Should_ReturnTrue_After_Overlaps_With_ReferenceEqual_Collection()
+        {
+            hashSet = new MyHashSet<Box>(boxes, new BoxSameDimensionsComparer());
+            var secondHashSet = hashSet;
+
+            hashSet.Overlaps(secondHashSet).Should().BeTrue();
+        }
+
+        [Test]
+        public void Should_ReturnTrue_After_SetEquals_With_ReferenceEqual_Collection()
+        {
+            hashSet = new MyHashSet<Box>(boxes, new BoxSameDimensionsComparer());
+            var secondHashSet = hashSet;
+
+            hashSet.SetEquals(secondHashSet).Should().BeTrue();
+        }
+
+        public void Should_Correctly_SymmetricExceptWith_ReferenceEqual_Collection()
+        {
+            hashSet = new MyHashSet<Box>(boxes, new BoxSameDimensionsComparer());
+            var secondHashSet = hashSet;
+            
+            hashSet.SymmetricExceptWith(secondHashSet);
+
+            hashSet.Should().BeEmpty();
+        }
+
+        public void Should_Correctly_UnionWith_ReferenceEqual_Collection()
+        {
+            hashSet = new MyHashSet<Box>(boxes, new BoxSameDimensionsComparer());
+            var secondHashSet = hashSet;
+            
+            hashSet.UnionWith(secondHashSet);
+
+            hashSet.Should().BeEquivalentTo(boxes);
+        }
     }
 }
