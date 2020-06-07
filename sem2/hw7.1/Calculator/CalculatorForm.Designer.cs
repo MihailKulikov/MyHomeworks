@@ -144,7 +144,7 @@
             this.ButtonNum7.TabIndex = 27;
             this.ButtonNum7.Text = "7";
             this.ButtonNum7.UseVisualStyleBackColor = false;
-            this.ButtonNum7.Click += new System.EventHandler(this.ButtonNum7_Click);
+            this.ButtonNum7.Click += new System.EventHandler(this.ButtonDigit_Click);
             // 
             // ButtonNum8
             // 
@@ -157,7 +157,7 @@
             this.ButtonNum8.TabIndex = 26;
             this.ButtonNum8.Text = "8";
             this.ButtonNum8.UseVisualStyleBackColor = false;
-            this.ButtonNum8.Click += new System.EventHandler(this.ButtonNum8_Click);
+            this.ButtonNum8.Click += new System.EventHandler(this.ButtonDigit_Click);
             // 
             // ButtonNum9
             // 
@@ -170,7 +170,7 @@
             this.ButtonNum9.TabIndex = 25;
             this.ButtonNum9.Text = "9";
             this.ButtonNum9.UseVisualStyleBackColor = false;
-            this.ButtonNum9.Click += new System.EventHandler(this.ButtonNum9_Click);
+            this.ButtonNum9.Click += new System.EventHandler(this.ButtonDigit_Click);
             // 
             // ButtonCE
             // 
@@ -287,7 +287,7 @@
             this.ButtonNum4.TabIndex = 22;
             this.ButtonNum4.Text = "4";
             this.ButtonNum4.UseVisualStyleBackColor = false;
-            this.ButtonNum4.Click += new System.EventHandler(this.ButtonNum4_Click);
+            this.ButtonNum4.Click += new System.EventHandler(this.ButtonDigit_Click);
             // 
             // ButtonNum5
             // 
@@ -300,7 +300,7 @@
             this.ButtonNum5.TabIndex = 23;
             this.ButtonNum5.Text = "5";
             this.ButtonNum5.UseVisualStyleBackColor = false;
-            this.ButtonNum5.Click += new System.EventHandler(this.ButtonNum5_Click);
+            this.ButtonNum5.Click += new System.EventHandler(this.ButtonDigit_Click);
             // 
             // ButtonNum6
             // 
@@ -313,7 +313,7 @@
             this.ButtonNum6.TabIndex = 24;
             this.ButtonNum6.Text = "6";
             this.ButtonNum6.UseVisualStyleBackColor = false;
-            this.ButtonNum6.Click += new System.EventHandler(this.ButtonNum6_Click);
+            this.ButtonNum6.Click += new System.EventHandler(this.ButtonDigit_Click);
             // 
             // ButtonNum1
             // 
@@ -326,7 +326,7 @@
             this.ButtonNum1.TabIndex = 19;
             this.ButtonNum1.Text = "1";
             this.ButtonNum1.UseVisualStyleBackColor = false;
-            this.ButtonNum1.Click += new System.EventHandler(this.ButtonNum1_Click);
+            this.ButtonNum1.Click += new System.EventHandler(this.ButtonDigit_Click);
             // 
             // ButtonNum2
             // 
@@ -339,7 +339,7 @@
             this.ButtonNum2.TabIndex = 20;
             this.ButtonNum2.Text = "2";
             this.ButtonNum2.UseVisualStyleBackColor = false;
-            this.ButtonNum2.Click += new System.EventHandler(this.ButtonNum2_Click);
+            this.ButtonNum2.Click += new System.EventHandler(this.ButtonDigit_Click);
             // 
             // ButtonNum3
             // 
@@ -352,7 +352,7 @@
             this.ButtonNum3.TabIndex = 21;
             this.ButtonNum3.Text = "3";
             this.ButtonNum3.UseVisualStyleBackColor = false;
-            this.ButtonNum3.Click += new System.EventHandler(this.ButtonNum3_Click);
+            this.ButtonNum3.Click += new System.EventHandler(this.ButtonDigit_Click);
             // 
             // ButtonNegate
             // 
@@ -378,7 +378,7 @@
             this.ButtonNum0.TabIndex = 18;
             this.ButtonNum0.Text = "0";
             this.ButtonNum0.UseVisualStyleBackColor = false;
-            this.ButtonNum0.Click += new System.EventHandler(this.ButtonNum0_Click);
+            this.ButtonNum0.Click += new System.EventHandler(this.ButtonDigit_Click);
             // 
             // ButtonPoint
             // 
@@ -416,8 +416,6 @@
             this.MinimumSize = new System.Drawing.Size(480, 750);
             this.Name = "CalculatorForm";
             this.Text = "Calculator";
-            this.Load += new System.EventHandler(this.CalculatorForm_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CalculatorForm_Paint);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

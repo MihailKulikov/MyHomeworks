@@ -8,9 +8,6 @@ namespace Calculator
     /// </summary>
     public partial class CalculatorForm : Form
     {
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        private static extern bool HideCaret(IntPtr hWnd);
-
         private readonly CalculatorCore core;
         
         /// <summary>
@@ -19,97 +16,15 @@ namespace Calculator
         public CalculatorForm()
         {
             InitializeComponent();
-            TextBox.GotFocus += TextBox_GotFocus;
-            this.LostFocus += CalculatorForm_LostFocus;
             core = new CalculatorCore();
         }
 
-        private void CalculatorForm_LostFocus(object sender, EventArgs e)
+        private void ButtonDigit_Click(object sender, EventArgs e)
         {
-            HideCaret(TextBox.Handle);
-        }
-
-        private void CalculatorForm_Load(object sender, EventArgs e)
-        {
-            TextBox.SelectionStart = 0;
-        }
-
-        private void CalculatorForm_Paint(object sender, PaintEventArgs e)
-        {
-            HideCaret(TextBox.Handle);
-        }
-
-        private void TextBox_GotFocus(object sender, EventArgs e)
-        {
-            HideCaret(TextBox.Handle);
-        }
-
-        private void ButtonNum0_Click(object sender, EventArgs e)
-        {
-            core.PressButtonDigits(0);
-            TextBox.Text = core.TextBoxValue;
-            Label.Text = core.LabelValue;
-        }
-
-        private void ButtonNum1_Click(object sender, EventArgs e)
-        {
-            core.PressButtonDigits(1);
-            TextBox.Text = core.TextBoxValue;
-            Label.Text = core.LabelValue;
-        }
-
-        private void ButtonNum2_Click(object sender, EventArgs e)
-        {
-            core.PressButtonDigits(2);
-            TextBox.Text = core.TextBoxValue;
-            Label.Text = core.LabelValue;
-        }
-
-        private void ButtonNum3_Click(object sender, EventArgs e)
-        {
-            core.PressButtonDigits(3);
-            TextBox.Text = core.TextBoxValue;
-            Label.Text = core.LabelValue;
-        }
-
-        private void ButtonNum4_Click(object sender, EventArgs e)
-        {
-            core.PressButtonDigits(4);
-            TextBox.Text = core.TextBoxValue;
-            Label.Text = core.LabelValue;
-        }
-
-        private void ButtonNum5_Click(object sender, EventArgs e)
-        {
-            core.PressButtonDigits(5);
-            TextBox.Text = core.TextBoxValue;
-            Label.Text = core.LabelValue;
-        }
-
-        private void ButtonNum6_Click(object sender, EventArgs e)
-        {
-            core.PressButtonDigits(6);
-            TextBox.Text = core.TextBoxValue;
-            Label.Text = core.LabelValue;
-        }
-
-        private void ButtonNum7_Click(object sender, EventArgs e)
-        {
-            core.PressButtonDigits(7);
-            TextBox.Text = core.TextBoxValue;
-            Label.Text = core.LabelValue;
-        }
-
-        private void ButtonNum8_Click(object sender, EventArgs e)
-        {
-            core.PressButtonDigits(8);
-            TextBox.Text = core.TextBoxValue;
-            Label.Text = core.LabelValue;
-        }
-
-        private void ButtonNum9_Click(object sender, EventArgs e)
-        {
-            core.PressButtonDigits(9);
+            var button = (Button) sender;
+            
+            core.PressButtonDigits(byte.Parse(button.Text));
+            
             TextBox.Text = core.TextBoxValue;
             Label.Text = core.LabelValue;
         }
