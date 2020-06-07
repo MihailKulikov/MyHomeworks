@@ -643,5 +643,16 @@ namespace SetRealisationTest
 
             action.Should().Throw<ArgumentNullException>();
         }
+
+        [Test]
+        public void Should_Correctly_ExceptWith_ReferenceEqual_Collection()
+        {
+            hashSet = new MyHashSet<Box>(boxes, new BoxSameVolumeComparer());
+            var secondHashSet = hashSet;
+
+            hashSet.ExceptWith(secondHashSet);
+
+            hashSet.Should().BeEmpty();
+        }
     }
 }
