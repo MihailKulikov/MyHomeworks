@@ -8,12 +8,160 @@ namespace Calculator
     /// </summary>
     public class CalculatorCore
     {
-        private readonly CultureInfo culture = CultureInfo.InvariantCulture;
+        public abstract class CalculatorCoreState
+        {
+            public abstract void PressButtonDigits(byte digit, CalculatorCore core);
+            public abstract void PressButtonCE(CalculatorCore core);
+            public abstract void PressButtonC(CalculatorCore core);
+            public abstract void PressButtonBack(CalculatorCore core);
+            public abstract void PressBinaryOperationButton(BinaryOperations binaryOperation, CalculatorCore core);
+            public abstract void PressButtonPoint(CalculatorCore core);
+            public abstract void PressEqualButton(CalculatorCore core);
+            public abstract void PressNegateButton(CalculatorCore core);
+
+            protected void SetState(CalculatorCore core, CalculatorCoreState state)
+            {
+                core.currentState = state;
+            }
+            
+            protected void AssignEnteredValueToTextBox(string value, CalculatorCore core)
+            {
+                core.TextBoxValue = value;
+            }
+
+            protected void AddValueToEndOfTextBox(string input, CalculatorCore core)
+            {
+                if (core.TextBoxValue == "0")
+                {
+                    core.TextBoxValue = input;
+                }
+                else
+                {
+                    if (core.TextBoxValue.Length < TextBoxCapacity)
+                    {
+                        core.TextBoxValue += input;
+                    }
+                }
+            }
+
+            protected void ResetTextBox(CalculatorCore core)
+            {
+                core.TextBoxValue = "0";
+            }
+
+            protected void ResetAll(CalculatorCore core)
+            {
+                core.TextBoxValue = "0";
+                core.LabelValue = "";
+            }
+
+            protected void RemoveLastDigit(CalculatorCore core)
+            {
+                core.TextBoxValue = core.TextBoxValue.Remove(core.TextBoxValue.Length - 1);
+                if (!decimal.TryParse(core.TextBoxValue, NumberStyles.Any, core.Culture, out _))
+                {
+                    core.TextBoxValue = "0";
+                }
+            }
+
+            protected void TryToAddPoint(CalculatorCore core)
+            {
+                if (!core.TextBoxValue.Contains("."))
+                {
+                    core.TextBoxValue += ".";
+                }
+            }
+
+            protected void NegateTextBox(CalculatorCore core)
+            {
+                if (core.TextBoxValue[^1] == '.')
+                {
+                    core.TextBoxValue = (-decimal.Parse(core.TextBoxValue, core.Culture)).ToString(core.Culture);
+                    core.TextBoxValue += '.';
+                }
+                else
+                {
+                    core.TextBoxValue = (-decimal.Parse(core.TextBoxValue, core.Culture)).ToString(core.Culture);
+                }
+            }
+
+            protected void ApplyFirstBinaryOperation(BinaryOperations binaryOperation, CalculatorCore core)
+            {
+                if (core.TextBoxValue[^1] == '.')
+                {
+                    core.TextBoxValue = core.TextBoxValue.Remove(core.TextBoxValue.Length - 1);
+                }
+
+                core.LabelValue = core.TextBoxValue + " " +
+                             (char) int.Parse(Enum.Format(typeof(BinaryOperations), binaryOperation, "d"));
+                core.lastOperation = binaryOperation;
+                core.currentResult = decimal.Parse(core.TextBoxValue, core.Culture);
+            }
+
+            protected void ChangeBinaryOperation(BinaryOperations binaryOperation, CalculatorCore core)
+            {
+                core.lastOperation = binaryOperation;
+
+                core.LabelValue = core.LabelValue.Remove(core.LabelValue.Length - 1);
+                core.LabelValue += (char) int.Parse(Enum.Format(typeof(BinaryOperations), binaryOperation, "d"));
+            }
+            
+            private void PerformLastOperation(CalculatorCore core)
+            {
+                switch (core.lastOperation)
+                {
+                    case BinaryOperations.Multiply:
+                        core.currentResult *= decimal.Parse(core.TextBoxValue, core.Culture);
+
+                        break;
+                    case BinaryOperations.Add:
+                        core.currentResult += decimal.Parse(core.TextBoxValue, core.Culture);
+
+                        break;
+                    case BinaryOperations.Subtract:
+                        core.currentResult -= decimal.Parse(core.TextBoxValue, core.Culture);
+
+                        break;
+                    case BinaryOperations.Divide:
+                        core.currentResult /= decimal.Parse(core.TextBoxValue, core.Culture);
+
+                        break;
+                }
+
+                if (core.currentResult == Math.Round(core.currentResult))
+                {
+                    core.currentResult = Math.Round(core.currentResult);
+                }
+
+                core.TextBoxValue = core.currentResult.ToString(core.Culture);
+            }
+
+            protected void Summarize(CalculatorCore core)
+            {
+                PerformLastOperation(core);
+                core.LabelValue = "";
+            }
+
+            protected void ApplyOtherBinaryOperations(BinaryOperations binaryOperation, CalculatorCore core)
+            {
+                if (core.TextBoxValue[^1] == '.')
+                {
+                    core.TextBoxValue = core.TextBoxValue.Remove(core.TextBoxValue.Length - 1);
+                }
+
+                core.LabelValue += " " + core.TextBoxValue;
+                PerformLastOperation(core);
+                core.lastOperation = binaryOperation;
+                core.LabelValue += " " + (char) int.Parse(Enum.Format(typeof(BinaryOperations), binaryOperation, "d"));
+            }
+        }
+
+        public CultureInfo Culture => CultureInfo.InvariantCulture;
         public string LabelValue { get; private set; }
         public string TextBoxValue { get; private set; }
         private decimal currentResult;
         private BinaryOperations lastOperation;
-        private CalculatorCoreState currentState;
+        private CalculatorCoreState currentState = new InitialCalculatorState();
         private const int TextBoxCapacity = 16;
 
         /// <summary>
@@ -23,7 +171,6 @@ namespace Calculator
         {
             TextBoxValue = "0";
             LabelValue = "";
-            currentState = CalculatorCoreState.Initial;
         }
 
         /// <summary>
@@ -32,34 +179,7 @@ namespace Calculator
         /// <param name="digit">Specified digit.</param>
         public void PressButtonDigits(byte digit)
         {
-            switch (currentState)
-            {
-                case CalculatorCoreState.Initial:
-                    currentState = CalculatorCoreState.FirstOperandIntroduction;
-                    AssignEnteredValueToTextBox(digit.ToString(culture));
-
-                    break;
-                case CalculatorCoreState.FirstOperandIntroduction:
-                    AddValueToEndOfTextBox(digit.ToString(culture));
-
-                    break;
-                case CalculatorCoreState.BinaryOperationIntroduction:
-                    currentState = CalculatorCoreState.SecondOperandIntroduction;
-                    AssignEnteredValueToTextBox(digit.ToString(culture));
-
-                    break;
-                case CalculatorCoreState.Result:
-                    currentState = CalculatorCoreState.FirstOperandIntroduction;
-                    AssignEnteredValueToTextBox(digit.ToString(culture));
-
-                    break;
-                case CalculatorCoreState.SecondOperandIntroduction:
-                    AddValueToEndOfTextBox(digit.ToString(culture));
-
-                    break;
-                case CalculatorCoreState.Exception:
-                    break;
-            }
+            currentState.PressButtonDigits(digit, this);
         }
 
         /// <summary>
@@ -67,35 +187,7 @@ namespace Calculator
         /// </summary>
         public void PressButtonCE()
         {
-            switch (currentState)
-            {
-                case CalculatorCoreState.Initial:
-                    break;
-                case CalculatorCoreState.FirstOperandIntroduction:
-                    currentState = CalculatorCoreState.Initial;
-                    ResetTextBox();
-
-                    break;
-                case CalculatorCoreState.BinaryOperationIntroduction:
-                    currentState = CalculatorCoreState.SecondOperandIntroduction;
-                    ResetTextBox();
-
-                    break;
-                case CalculatorCoreState.Result:
-                    currentState = CalculatorCoreState.Initial;
-                    ResetTextBox();
-
-                    break;
-                case CalculatorCoreState.SecondOperandIntroduction:
-                    ResetTextBox();
-
-                    break;
-                case CalculatorCoreState.Exception:
-                    currentState = CalculatorCoreState.Initial;
-                    ResetAll();
-
-                    break;
-            }
+            currentState.PressButtonCE(this);
         }
 
         /// <summary>
@@ -103,36 +195,7 @@ namespace Calculator
         /// </summary>
         public void PressButtonC()
         {
-            switch (currentState)
-            {
-                case CalculatorCoreState.Initial:
-                    break;
-                case CalculatorCoreState.FirstOperandIntroduction:
-                    currentState = CalculatorCoreState.Initial;
-                    ResetTextBox();
-
-                    break;
-                case CalculatorCoreState.BinaryOperationIntroduction:
-                    currentState = CalculatorCoreState.Initial;
-                    ResetAll();
-
-                    break;
-                case CalculatorCoreState.Result:
-                    currentState = CalculatorCoreState.Initial;
-                    ResetAll();
-
-                    break;
-                case CalculatorCoreState.SecondOperandIntroduction:
-                    currentState = CalculatorCoreState.Initial;
-                    ResetAll();
-
-                    break;
-                case CalculatorCoreState.Exception:
-                    currentState = CalculatorCoreState.Initial;
-                    ResetAll();
-
-                    break;
-            }
+            currentState.PressButtonC(this);
         }
 
         /// <summary>
@@ -140,25 +203,7 @@ namespace Calculator
         /// </summary>
         public void PressButtonBack()
         {
-            switch (currentState)
-            {
-                case CalculatorCoreState.Initial:
-                    break;
-                case CalculatorCoreState.FirstOperandIntroduction:
-                    RemoveLastDigit();
-
-                    break;
-                case CalculatorCoreState.BinaryOperationIntroduction:
-                    break;
-                case CalculatorCoreState.Result:
-                    break;
-                case CalculatorCoreState.SecondOperandIntroduction:
-                    RemoveLastDigit();
-
-                    break;
-                case CalculatorCoreState.Exception:
-                    break;
-            }
+            currentState.PressButtonBack(this);
         }
 
         /// <summary>
@@ -167,48 +212,7 @@ namespace Calculator
         /// <param name="binaryOperation">Specified binary operation.</param>
         public void PressBinaryOperationButton(BinaryOperations binaryOperation)
         {
-            switch (currentState)
-            {
-                case CalculatorCoreState.Initial:
-                    currentState = CalculatorCoreState.BinaryOperationIntroduction;
-                    ApplyFirstBinaryOperation(binaryOperation);
-
-                    break;
-                case CalculatorCoreState.FirstOperandIntroduction:
-                    currentState = CalculatorCoreState.BinaryOperationIntroduction;
-                    ApplyFirstBinaryOperation(binaryOperation);
-
-                    break;
-                case CalculatorCoreState.BinaryOperationIntroduction:
-                    ChangeBinaryOperation(binaryOperation);
-
-                    break;
-                case CalculatorCoreState.Result:
-                    currentState = CalculatorCoreState.BinaryOperationIntroduction;
-                    ApplyFirstBinaryOperation(binaryOperation);
-
-                    break;
-                case CalculatorCoreState.SecondOperandIntroduction:
-                    currentState = CalculatorCoreState.BinaryOperationIntroduction;
-                    try
-                    {
-                        ApplyOtherBinaryOperations(binaryOperation);
-                    }
-                    catch (DivideByZeroException e)
-                    {
-                        TextBoxValue = e.Message;
-                        currentState = CalculatorCoreState.Exception;
-                    }
-                    catch (OverflowException e)
-                    {
-                        TextBoxValue = e.Message;
-                        currentState = CalculatorCoreState.Exception;
-                    }
-
-                    break;
-                case CalculatorCoreState.Exception:
-                    break;
-            }
+            currentState.PressBinaryOperationButton(binaryOperation, this);
         }
 
         /// <summary>
@@ -216,34 +220,7 @@ namespace Calculator
         /// </summary>
         public void PressButtonPoint()
         {
-            switch (currentState)
-            {
-                case CalculatorCoreState.Initial:
-                    currentState = CalculatorCoreState.FirstOperandIntroduction;
-                    AddValueToEndOfTextBox("0.");
-
-                    break;
-                case CalculatorCoreState.FirstOperandIntroduction:
-                    TryToAddPoint();
-
-                    break;
-                case CalculatorCoreState.BinaryOperationIntroduction:
-                    currentState = CalculatorCoreState.SecondOperandIntroduction;
-                    AssignEnteredValueToTextBox("0.");
-
-                    break;
-                case CalculatorCoreState.Result:
-                    currentState = CalculatorCoreState.FirstOperandIntroduction;
-                    AssignEnteredValueToTextBox("0.");
-
-                    break;
-                case CalculatorCoreState.SecondOperandIntroduction:
-                    TryToAddPoint();
-
-                    break;
-                case CalculatorCoreState.Exception:
-                    break;
-            }
+            currentState.PressButtonPoint(this);
         }
 
         /// <summary>
@@ -251,53 +228,7 @@ namespace Calculator
         /// </summary>
         public void PressEqualButton()
         {
-            switch (currentState)
-            {
-                case CalculatorCoreState.Initial:
-                    break;
-                case CalculatorCoreState.FirstOperandIntroduction:
-                    currentState = CalculatorCoreState.Result;
-                    break;
-                case CalculatorCoreState.BinaryOperationIntroduction:
-                    currentState = CalculatorCoreState.Result;
-                    try
-                    {
-                        Summarize();
-                    }
-                    catch (DivideByZeroException e)
-                    {
-                        currentState = CalculatorCoreState.Exception;
-                        TextBoxValue = e.Message;
-                    }
-                    catch (OverflowException e)
-                    {
-                        currentState = CalculatorCoreState.Exception;
-                        TextBoxValue = e.Message;
-                    }
-                    break;
-                case CalculatorCoreState.Result:
-                    break;
-                case CalculatorCoreState.SecondOperandIntroduction:
-                    currentState = CalculatorCoreState.Result;
-                    try
-                    {
-                        Summarize();
-                    }
-                    catch (DivideByZeroException e)
-                    {
-                        currentState = CalculatorCoreState.Exception;
-                        TextBoxValue = e.Message;
-                    }
-                    catch (OverflowException e)
-                    {
-                        currentState = CalculatorCoreState.Exception;
-                        TextBoxValue = e.Message;
-                    }
-
-                    break;
-                case CalculatorCoreState.Exception:
-                    break;
-            }
+            currentState.PressEqualButton(this);
         }
 
         /// <summary>
@@ -305,161 +236,7 @@ namespace Calculator
         /// </summary>
         public void PressNegateButton()
         {
-            switch (currentState)
-            {
-                case CalculatorCoreState.Initial:
-                    break;
-                case CalculatorCoreState.FirstOperandIntroduction:
-                    NegateTextBox();
-
-                    break;
-                case CalculatorCoreState.BinaryOperationIntroduction:
-                    currentState = CalculatorCoreState.SecondOperandIntroduction;
-                    NegateTextBox();
-
-                    break;
-                case CalculatorCoreState.Result:
-                    NegateTextBox();
-
-                    break;
-                case CalculatorCoreState.SecondOperandIntroduction:
-                    NegateTextBox();
-
-                    break;
-                case CalculatorCoreState.Exception:
-                    break;
-            }
-        }
-        
-        private void AssignEnteredValueToTextBox(string value)
-        {
-            TextBoxValue = value;
-        }
-
-        private void AddValueToEndOfTextBox(string input)
-        {
-            if (TextBoxValue == "0")
-            {
-                TextBoxValue = input;
-            }
-            else
-            {
-                if (TextBoxValue.Length < TextBoxCapacity)
-                {
-                    TextBoxValue += input;
-                }
-            }
-        }
-
-        private void ResetTextBox() 
-        {
-            TextBoxValue = "0";
-        }
-
-        private void ResetAll()
-        {
-            TextBoxValue = "0";
-            LabelValue = "";
-        }
-
-        private void RemoveLastDigit() 
-        {
-            TextBoxValue = TextBoxValue.Remove(TextBoxValue.Length - 1);
-            if (!decimal.TryParse(TextBoxValue, NumberStyles.Any, culture, out _))
-            {
-                TextBoxValue = "0";
-            }
-        }
-
-        private void TryToAddPoint()
-        {
-            if (!TextBoxValue.Contains("."))
-            {
-                TextBoxValue += ".";
-            }
-        }
-
-        private void NegateTextBox() 
-        {
-            if (TextBoxValue[^1] == '.')
-            {
-                TextBoxValue = (-decimal.Parse(TextBoxValue, culture)).ToString(culture);
-                TextBoxValue += '.';
-            }
-            else
-            {
-                TextBoxValue = (-decimal.Parse(TextBoxValue, culture)).ToString(culture);
-            }
-        }
-
-        private void ApplyFirstBinaryOperation(BinaryOperations binaryOperation)
-        {
-            if (TextBoxValue[^1] == '.')
-            {
-                TextBoxValue = TextBoxValue.Remove(TextBoxValue.Length - 1);
-            }
-
-            LabelValue = TextBoxValue + " " + (char)int.Parse(Enum.Format(typeof(BinaryOperations), binaryOperation, "d"));
-            lastOperation = binaryOperation;
-            currentResult = decimal.Parse(TextBoxValue, culture);
-        }
-
-        private void ChangeBinaryOperation(BinaryOperations binaryOperation)
-        {
-            lastOperation = binaryOperation;
-
-            LabelValue = LabelValue.Remove(LabelValue.Length - 1);
-            LabelValue += (char)int.Parse(Enum.Format(typeof(BinaryOperations), binaryOperation, "d"));
-        }
-
-        private void PerformLastOperation()
-        {
-            switch (lastOperation)
-            {
-                case BinaryOperations.Multiply:
-                    currentResult *= decimal.Parse(TextBoxValue, culture);
-                    
-                    break;
-                case BinaryOperations.Add:
-                    currentResult += decimal.Parse(TextBoxValue, culture);
-                    
-                    break;
-                case BinaryOperations.Subtract:
-                    currentResult -= decimal.Parse(TextBoxValue, culture);
-                    
-                    break;
-                case BinaryOperations.Divide:
-                    currentResult /= decimal.Parse(TextBoxValue, culture);
-
-                    break;
-            }
-
-            if (currentResult == Math.Round(currentResult))
-            {
-                currentResult = Math.Round(currentResult);
-            }
-
-            TextBoxValue = currentResult.ToString(culture);
-        }
-
-        private void Summarize()
-        {
-            PerformLastOperation();
-
-            LabelValue = "";
-        }
-
-        private void ApplyOtherBinaryOperations(BinaryOperations binaryOperation)
-        {
-            if (TextBoxValue[^1] == '.')
-            {
-                TextBoxValue = TextBoxValue.Remove(TextBoxValue.Length - 1);
-            }
-            
-            LabelValue += " " + TextBoxValue;
-            PerformLastOperation();
-            lastOperation = binaryOperation;
-            LabelValue += " " + (char)int.Parse(Enum.Format(typeof(BinaryOperations), binaryOperation, "d"));
+            currentState.PressNegateButton(this);
         }
     }
 }
