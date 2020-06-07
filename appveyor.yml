@@ -4,6 +4,7 @@ before_build:
 environment:
   matrix:
   - solution_name: sem2/hw7.2/clock.sln
+  - solution_name: sem2/FinalExam/FinalExam.sln
   - solution_name: sem2/hw6.2/hw6.2.sln
   - solution_name: sem2/hw4.2/hw4.2.sln
   - solution_name: sem2/hw4.1/ExpressionTreeTask/ExpressionTreeTask.sln
