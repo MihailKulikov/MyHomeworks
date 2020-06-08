@@ -19,6 +19,16 @@ namespace Calculator
             core = new CalculatorCore();
         }
 
+        private void TextBox_Enter(object sender, EventArgs e)
+        {
+            labelForRefocusing.Focus();
+        }
+
+        private void TextBox_Leave(object sender, EventArgs e)
+        {
+            Cursor = Cursors.Default;
+        }
+
         private void ButtonDigit_Click(object sender, EventArgs e)
         {
             var button = (Button) sender;
