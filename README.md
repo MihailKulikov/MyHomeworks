@@ -15,7 +15,7 @@ Here's homework from programming lessons.
 [Homework №7](https://github.com/MihailKulikov/MyHomeworks#homework-7) |
 [Homework №9](https://github.com/MihailKulikov/MyHomeworks#homework-9) |
 [Homework №10](https://github.com/MihailKulikov/MyHomeworks#homework-10) |
-[Homework №10](https://github.com/MihailKulikov/MyHomeworks#homework-11) |
+[Homework №11](https://github.com/MihailKulikov/MyHomeworks#homework-11) |
 
 ## Homework №1
 
