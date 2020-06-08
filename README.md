@@ -13,6 +13,9 @@ Here's homework from programming lessons.
 [Homework №5](https://github.com/MihailKulikov/MyHomeworks#homework-5) |
 [Homework №6](https://github.com/MihailKulikov/MyHomeworks#homework-6) |
 [Homework №7](https://github.com/MihailKulikov/MyHomeworks#homework-7) |
+[Homework №9](https://github.com/MihailKulikov/MyHomeworks#homework-9) |
+[Homework №10](https://github.com/MihailKulikov/MyHomeworks#homework-10) |
+[Homework №10](https://github.com/MihailKulikov/MyHomeworks#homework-11) |
 
 ## Homework №1
 
@@ -74,4 +77,18 @@ Here's homework from programming lessons.
 ## Homework №7
 
 1. Написать калькулятор с пользовательским интерфейсом (по примеру стандартного виндового калькулятора). [solution](https://github.com/MihailKulikov/MyHomeworks/tree/master/sem2/hw7.1)
+
 2. Сделать часы (приложение, показывающее текущее системное время) со стрелками (часовой, минутной и секундной). Здесь юнит-тесты можно не писать. [solution](https://github.com/MihailKulikov/MyHomeworks/tree/master/sem2/hw7.2)
+
+## Homework №9
+
+1. Создать генерик-класс, реализующий АТД "Множество". Множество должно реализовывать интерфейс System.Collections.Generic.ISet. Ожидается асимптотическая трудоёмкость основных операций не хуже в среднем логарифмической (то есть несбалансированное двоичное дерево тоже пойдёт). Проверить в тестах, что по множеству можно ходить foreach. [solution](https://github.com/MihailKulikov/MyHomeworks/tree/master/sem2/hw9.1)
+
+## Homework №10
+
+1.Нарисовать на UML диаграмму классов для игры "реверси", с несколькими видами "ботов", которые могли бы играть вместо человека. Диаграмма должна быть довольно подробным проектом системы. Реализовывать этот проект не нужно. Желательно пользоваться средствами визуального моделирования наподобие Visual Paradigm (https://www.visual-paradigm.com/download/community.jsp), присылать скриншоты с диаграммой и исходники (файлы .vpp в случае Visual Paradigm) [solution](https://github.com/MihailKulikov/MyHomeworks/tree/master/sem2/hw10.1)
+
+## Homework №11
+
+1. Необязательная задача, которой можно закрыть любую домашнюю работу из предыдущих:
+Сделать с помощью Unity очередной клон компьютерной игры SCP-087 (https://ru.wikipedia.org/wiki/SCP-087). Игра в жанре сурвайвал-хоррор должна представлять собой спуск с фонариком по тёмной бесконечной лестнице, при этом с вероятностью N% (где N передаётся как параметр командной строки) на очередной лестничной клетке появляется ужасное нечто и убивает главного героя, на чём игра заканчивается, показав сообщение, что игрок проиграл. Моделировать главного героя не требуется, "летающей камеры" достаточно, в качестве ужасного нечто можно использовать любую достаточно ужасную 3д-модель (шар, куб или чайник вполне подойдут). Желательно (хотя и не обязательно) звуковое сопровождение, создающее гнятущую атмосферу экзистенциального ужаса, и соответствующие текстуры на стенах. См. также http://scpfoundation.net/scp-087. [solution](https://github.com/MihailKulikov/MyHomeworks/tree/master/sem2/hw11.1/SCP%20-%20087%20Remake)
