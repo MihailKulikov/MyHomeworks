@@ -8,15 +8,59 @@ namespace Calculator
     /// </summary>
     public class CalculatorCore
     {
+        /// <summary>
+        /// Represents states for the <see cref="CalculatorCore"/> class.
+        /// </summary>
         public abstract class CalculatorCoreState
         {
+            /// <summary>
+            /// Simulate pressing button with specified digit for target intance of the <see cref="CalculatorCore"/> class.
+            /// </summary>
+            /// <param name="digit">Specified digit.</param>
+            /// <param name="core">Target instance of <see cref="CalculatorCore"/> class.</param>
             public abstract void PressButtonDigits(byte digit, CalculatorCore core);
+
+            /// <summary>
+            /// Simulate pressing CE button.
+            /// </summary>
+            /// <param name="core">Target instance of the <see cref="CalculatorCore"/> class.</param>
             public abstract void PressButtonCE(CalculatorCore core);
+
+            /// <summary>
+            /// Simulate pressing C button for target intance of the <see cref="CalculatorCore"/> class.
+            /// </summary>
+            /// <param name="core">Target instance of <see cref="CalculatorCore"/> class.</param>
             public abstract void PressButtonC(CalculatorCore core);
+
+            /// <summary>
+            /// Simulate pressing button backspace for target intance of the <see cref="CalculatorCore"/> class.
+            /// </summary>
+            /// <param name="core">Target instance of <see cref="CalculatorCore"/> class.</param>
             public abstract void PressButtonBack(CalculatorCore core);
+
+            /// <summary>
+            /// Simulate pressing button with specified binary operation for target intance of the <see cref="CalculatorCore"/> class.
+            /// </summary>
+            /// <param name="binaryOperation">Specified binary operation.</param>
+            /// <param name="core">Target instance of <see cref="CalculatorCore"/> class.</param>
             public abstract void PressBinaryOperationButton(BinaryOperations binaryOperation, CalculatorCore core);
+
+            /// <summary>
+            /// Simulate pressing point button for target intance of the <see cref="CalculatorCore"/> class.
+            /// </summary>
+            /// <param name="core">Target instance of <see cref="CalculatorCore"/> class.</param>
             public abstract void PressButtonPoint(CalculatorCore core);
+
+            /// <summary>
+            /// Simulate pressing equal button for target intance of the <see cref="CalculatorCore"/> class.
+            /// </summary>
+            /// <param name="core">Target instance of <see cref="CalculatorCore"/> class.</param>
             public abstract void PressEqualButton(CalculatorCore core);
+
+            /// <summary>
+            /// Simulate pressing negate button for target intance of the <see cref="CalculatorCore"/> class.
+            /// </summary>
+            /// <param name="core">Target instance of <see cref="CalculatorCore"/> class.</param>
             public abstract void PressNegateButton(CalculatorCore core);
 
             protected void SetState(CalculatorCore core, CalculatorCoreState state)
@@ -156,9 +200,21 @@ namespace Calculator
             }
         }
 
+        /// <summary>
+        /// CultureInfo for this instance of the <see cref="CalculatorCore"/> class. 
+        /// </summary>
         public CultureInfo Culture => CultureInfo.InvariantCulture;
+
+        /// <summary>
+        /// String which memorize expression.
+        /// </summary>
         public string LabelValue { get; private set; }
+
+        /// <summary>
+        /// String which memorize operand and result of expression.
+        /// </summary>
         public string TextBoxValue { get; private set; }
+
         private decimal currentResult;
         private BinaryOperations lastOperation;
         private CalculatorCoreState currentState = new InitialCalculatorState();
