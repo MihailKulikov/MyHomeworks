@@ -13,6 +13,7 @@ environment:
   - solution_name: sem2/hw2.2/hw2.2.sln
   - solution_name: sem2/hw2.3/hw2.3.sln
   - solution_name: sem2/hw7.1/hw7.1.sln
+  - solution_name: sem2/Queue/Queue.sln
   
 build_script:
   - msbuild %solution_name%
