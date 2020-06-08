@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CalculatorForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Calculator.CalculatorForm));
             this.TextBox = new System.Windows.Forms.TextBox();
             this.Label = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -57,11 +57,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // TextBox
-            // 
-            this.TextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TextBox.Anchor = ((System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.TextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.TextBox.BackColor = System.Drawing.SystemColors.ControlLight;
             this.TextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -81,9 +77,6 @@
             this.TextBox.WordWrap = false;
             this.TextBox.Enter += new System.EventHandler(this.TextBox_Enter);
             this.TextBox.Leave += new System.EventHandler(this.TextBox_Leave);
-            // 
-            // Label
-            // 
             this.Label.AutoSize = true;
             this.Label.BackColor = System.Drawing.SystemColors.ControlLight;
             this.Label.Dock = System.Windows.Forms.DockStyle.Left;
@@ -96,12 +89,7 @@
             this.Label.Size = new System.Drawing.Size(0, 25);
             this.Label.TabIndex = 3;
             this.Label.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -139,12 +127,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.65F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(509, 612);
             this.tableLayoutPanel1.TabIndex = 6;
-            // 
-            // ButtonNum7
-            // 
-            this.ButtonNum7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonNum7.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonNum7.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ButtonNum7.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonNum7.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -156,12 +139,7 @@
             this.ButtonNum7.Text = "7";
             this.ButtonNum7.UseVisualStyleBackColor = false;
             this.ButtonNum7.Click += new System.EventHandler(this.ButtonDigit_Click);
-            // 
-            // ButtonNum8
-            // 
-            this.ButtonNum8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonNum8.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonNum8.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ButtonNum8.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonNum8.Location = new System.Drawing.Point(130, 126);
@@ -172,12 +150,7 @@
             this.ButtonNum8.Text = "8";
             this.ButtonNum8.UseVisualStyleBackColor = false;
             this.ButtonNum8.Click += new System.EventHandler(this.ButtonDigit_Click);
-            // 
-            // ButtonNum9
-            // 
-            this.ButtonNum9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonNum9.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonNum9.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ButtonNum9.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonNum9.Location = new System.Drawing.Point(257, 126);
@@ -188,12 +161,7 @@
             this.ButtonNum9.Text = "9";
             this.ButtonNum9.UseVisualStyleBackColor = false;
             this.ButtonNum9.Click += new System.EventHandler(this.ButtonDigit_Click);
-            // 
-            // ButtonCE
-            // 
-            this.ButtonCE.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonCE.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonCE.BackColor = System.Drawing.SystemColors.Control;
             this.ButtonCE.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonCE.Location = new System.Drawing.Point(3, 4);
@@ -204,12 +172,7 @@
             this.ButtonCE.Text = "CE";
             this.ButtonCE.UseVisualStyleBackColor = false;
             this.ButtonCE.Click += new System.EventHandler(this.ButtonCE_Click);
-            // 
-            // ButtonC
-            // 
-            this.ButtonC.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonC.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonC.BackColor = System.Drawing.SystemColors.Control;
             this.ButtonC.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonC.Location = new System.Drawing.Point(130, 4);
@@ -220,12 +183,7 @@
             this.ButtonC.Text = "C";
             this.ButtonC.UseVisualStyleBackColor = false;
             this.ButtonC.Click += new System.EventHandler(this.ButtonC_Click);
-            // 
-            // ButtonBack
-            // 
-            this.ButtonBack.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonBack.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonBack.BackColor = System.Drawing.SystemColors.Control;
             this.ButtonBack.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonBack.Location = new System.Drawing.Point(257, 4);
@@ -236,12 +194,7 @@
             this.ButtonBack.Text = "<=";
             this.ButtonBack.UseVisualStyleBackColor = false;
             this.ButtonBack.Click += new System.EventHandler(this.ButtonBack_Click);
-            // 
-            // ButtonDivision
-            // 
-            this.ButtonDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonDivision.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonDivision.BackColor = System.Drawing.SystemColors.Control;
             this.ButtonDivision.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonDivision.Location = new System.Drawing.Point(384, 4);
@@ -252,12 +205,7 @@
             this.ButtonDivision.Text = "/";
             this.ButtonDivision.UseVisualStyleBackColor = false;
             this.ButtonDivision.Click += new System.EventHandler(this.ButtonDivision_Click);
-            // 
-            // ButtonMultiply
-            // 
-            this.ButtonMultiply.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonMultiply.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonMultiply.BackColor = System.Drawing.SystemColors.Control;
             this.ButtonMultiply.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonMultiply.Location = new System.Drawing.Point(384, 126);
@@ -268,12 +216,7 @@
             this.ButtonMultiply.Text = "*";
             this.ButtonMultiply.UseVisualStyleBackColor = false;
             this.ButtonMultiply.Click += new System.EventHandler(this.ButtonMultiply_Click);
-            // 
-            // ButtonSubtraction
-            // 
-            this.ButtonSubtraction.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonSubtraction.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonSubtraction.BackColor = System.Drawing.SystemColors.Control;
             this.ButtonSubtraction.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonSubtraction.Location = new System.Drawing.Point(384, 248);
@@ -284,12 +227,7 @@
             this.ButtonSubtraction.Text = "-";
             this.ButtonSubtraction.UseVisualStyleBackColor = false;
             this.ButtonSubtraction.Click += new System.EventHandler(this.ButtonSubtraction_Click);
-            // 
-            // ButtonPlus
-            // 
-            this.ButtonPlus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonPlus.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonPlus.BackColor = System.Drawing.SystemColors.Control;
             this.ButtonPlus.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonPlus.Location = new System.Drawing.Point(384, 370);
@@ -300,12 +238,7 @@
             this.ButtonPlus.Text = "+";
             this.ButtonPlus.UseVisualStyleBackColor = false;
             this.ButtonPlus.Click += new System.EventHandler(this.ButtonPlus_Click);
-            // 
-            // ButtonEquality
-            // 
-            this.ButtonEquality.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonEquality.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonEquality.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.ButtonEquality.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonEquality.Location = new System.Drawing.Point(384, 492);
@@ -316,12 +249,7 @@
             this.ButtonEquality.Text = "=";
             this.ButtonEquality.UseVisualStyleBackColor = false;
             this.ButtonEquality.Click += new System.EventHandler(this.ButtonEquality_Click);
-            // 
-            // ButtonNum4
-            // 
-            this.ButtonNum4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonNum4.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonNum4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ButtonNum4.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonNum4.Location = new System.Drawing.Point(3, 248);
@@ -332,12 +260,7 @@
             this.ButtonNum4.Text = "4";
             this.ButtonNum4.UseVisualStyleBackColor = false;
             this.ButtonNum4.Click += new System.EventHandler(this.ButtonDigit_Click);
-            // 
-            // ButtonNum5
-            // 
-            this.ButtonNum5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonNum5.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonNum5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ButtonNum5.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonNum5.Location = new System.Drawing.Point(130, 248);
@@ -348,12 +271,7 @@
             this.ButtonNum5.Text = "5";
             this.ButtonNum5.UseVisualStyleBackColor = false;
             this.ButtonNum5.Click += new System.EventHandler(this.ButtonDigit_Click);
-            // 
-            // ButtonNum6
-            // 
-            this.ButtonNum6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonNum6.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonNum6.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ButtonNum6.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonNum6.Location = new System.Drawing.Point(257, 248);
@@ -364,12 +282,7 @@
             this.ButtonNum6.Text = "6";
             this.ButtonNum6.UseVisualStyleBackColor = false;
             this.ButtonNum6.Click += new System.EventHandler(this.ButtonDigit_Click);
-            // 
-            // ButtonNum1
-            // 
-            this.ButtonNum1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonNum1.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonNum1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ButtonNum1.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonNum1.Location = new System.Drawing.Point(3, 370);
@@ -380,12 +293,7 @@
             this.ButtonNum1.Text = "1";
             this.ButtonNum1.UseVisualStyleBackColor = false;
             this.ButtonNum1.Click += new System.EventHandler(this.ButtonDigit_Click);
-            // 
-            // ButtonNum2
-            // 
-            this.ButtonNum2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonNum2.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonNum2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ButtonNum2.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonNum2.Location = new System.Drawing.Point(130, 370);
@@ -396,12 +304,7 @@
             this.ButtonNum2.Text = "2";
             this.ButtonNum2.UseVisualStyleBackColor = false;
             this.ButtonNum2.Click += new System.EventHandler(this.ButtonDigit_Click);
-            // 
-            // ButtonNum3
-            // 
-            this.ButtonNum3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonNum3.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonNum3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ButtonNum3.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonNum3.Location = new System.Drawing.Point(257, 370);
@@ -412,12 +315,7 @@
             this.ButtonNum3.Text = "3";
             this.ButtonNum3.UseVisualStyleBackColor = false;
             this.ButtonNum3.Click += new System.EventHandler(this.ButtonDigit_Click);
-            // 
-            // ButtonNegate
-            // 
-            this.ButtonNegate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonNegate.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonNegate.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ButtonNegate.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonNegate.Location = new System.Drawing.Point(3, 492);
@@ -428,12 +326,7 @@
             this.ButtonNegate.Text = "+/-";
             this.ButtonNegate.UseVisualStyleBackColor = false;
             this.ButtonNegate.Click += new System.EventHandler(this.ButtonNegate_Click);
-            // 
-            // ButtonNum0
-            // 
-            this.ButtonNum0.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonNum0.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonNum0.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ButtonNum0.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonNum0.Location = new System.Drawing.Point(130, 492);
@@ -444,12 +337,7 @@
             this.ButtonNum0.Text = "0";
             this.ButtonNum0.UseVisualStyleBackColor = false;
             this.ButtonNum0.Click += new System.EventHandler(this.ButtonDigit_Click);
-            // 
-            // ButtonPoint
-            // 
-            this.ButtonPoint.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ButtonPoint.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonPoint.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ButtonPoint.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ButtonPoint.Location = new System.Drawing.Point(257, 492);
@@ -460,9 +348,6 @@
             this.ButtonPoint.Text = ",";
             this.ButtonPoint.UseVisualStyleBackColor = false;
             this.ButtonPoint.Click += new System.EventHandler(this.ButtonPoint_Click);
-            // 
-            // panel1
-            // 
             this.panel1.AutoScroll = true;
             this.panel1.Controls.Add(this.Label);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -471,16 +356,10 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(509, 78);
             this.panel1.TabIndex = 7;
-            // 
-            // labelForRefocusing
-            // 
             this.labelForRefocusing.Location = new System.Drawing.Point(2, 197);
             this.labelForRefocusing.Name = "labelForRefocusing";
             this.labelForRefocusing.Size = new System.Drawing.Size(10, 10);
             this.labelForRefocusing.TabIndex = 4;
-            // 
-            // CalculatorForm
-            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -489,7 +368,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.TextBox);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(531, 924);
             this.Name = "CalculatorForm";
@@ -499,7 +378,6 @@
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         private System.Windows.Forms.Button ButtonBack;
@@ -523,13 +401,12 @@
         private System.Windows.Forms.Button ButtonPoint;
         private System.Windows.Forms.Button ButtonSubtraction;
         private System.Windows.Forms.Label Label;
+        private System.Windows.Forms.Label labelForRefocusing;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox TextBox;
 
         #endregion
-
-        private System.Windows.Forms.Label labelForRefocusing;
     }
 }
 

@@ -1,21 +1,31 @@
-﻿namespace Calculator
+﻿namespace Calculator.CalculatorCoreStates
 {
-    public class InitialCalculatorState : CalculatorCore.CalculatorCoreState
+    /// <summary>
+    /// Represents state of first operand introduction for the <see cref="CalculatorCore"/> class.
+    /// </summary>
+    public class FirstOperandIntroductionCalculatorCoreState : CalculatorCore.CalculatorCoreState
     {
         public override void PressButtonDigits(byte digit, CalculatorCore core)
         {
-            SetState(core, new FirstOperandIntroductionCalculatorCoreState());
-            AssignEnteredValueToTextBox(digit.ToString(core.Culture), core);
+            AddValueToEndOfTextBox(digit.ToString(core.Culture), core);
         }
 
         public override void PressButtonCE(CalculatorCore core)
-        { }
+        {
+            SetState(core, new InitialCalculatorState());
+            ResetTextBox(core);
+        }
 
         public override void PressButtonC(CalculatorCore core)
-        { }
+        {
+            SetState(core, new InitialCalculatorState());
+            ResetTextBox(core);
+        }
 
         public override void PressButtonBack(CalculatorCore core)
-        { }
+        {
+            RemoveLastDigit(core);
+        }
 
         public override void PressBinaryOperationButton(BinaryOperations binaryOperation, CalculatorCore core)
         {
@@ -25,14 +35,17 @@
 
         public override void PressButtonPoint(CalculatorCore core)
         {
-            SetState(core, new FirstOperandIntroductionCalculatorCoreState());
-            AddValueToEndOfTextBox("0.", core);
+            TryToAddPoint(core);
         }
 
         public override void PressEqualButton(CalculatorCore core)
-        { }
+        {
+            SetState(core, new ResultCalculatorCoreState());
+        }
 
         public override void PressNegateButton(CalculatorCore core)
-        { }
+        {
+            NegateTextBox(core);
+        }
     }
 }

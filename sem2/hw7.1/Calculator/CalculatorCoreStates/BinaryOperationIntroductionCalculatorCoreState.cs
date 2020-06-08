@@ -1,7 +1,10 @@
 ﻿using System;
 
-namespace Calculator
+namespace Calculator.CalculatorCoreStates
 {
+    /// <summary>
+    /// Represents state of binary operation introduction for the <see cref="CalculatorCore"/> class.
+    /// </summary>
     public class BinaryOperationIntroductionCalculatorCoreState : CalculatorCore.CalculatorCoreState
     {
         public override void PressButtonDigits(byte digit, CalculatorCore core)

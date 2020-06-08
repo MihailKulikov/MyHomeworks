@@ -1,5 +1,8 @@
-﻿namespace Calculator
+﻿namespace Calculator.CalculatorCoreStates
 {
+    /// <summary>
+    /// Represents state of exception for the <see cref="CalculatorCore"/> class.
+    /// </summary>
     public class ExceptionCalculatorCoreState : CalculatorCore.CalculatorCoreState
     {
         public override void PressButtonDigits(byte digit, CalculatorCore core)
