@@ -12,6 +12,7 @@ Here's homework from programming lessons.
 [Homework №4](https://github.com/MihailKulikov/MyHomeworks#homework-4) |
 [Homework №5](https://github.com/MihailKulikov/MyHomeworks#homework-5) |
 [Homework №6](https://github.com/MihailKulikov/MyHomeworks#homework-6) |
+[Homework №7](https://github.com/MihailKulikov/MyHomeworks#homework-7) |
 
 ## Homework №1
 
@@ -69,3 +70,8 @@ Here's homework from programming lessons.
 Если умеете генерики, подумайте, как сделать тип функций наиболее общим. [solution](https://github.com/MihailKulikov/MyHomeworks/tree/master/sem2/hw6.1)
 
 2. На базе класса, генерирующего события по нажатию на клавиши управления курсором (EventLoop с пары), реализовать консольное приложение, позволяющее управлять персонажем, перемещающимся по карте. Карта состоит из свободного пространства и стен, и должна грузиться из файла. Приложение должно отображать карту и персонажа (символом @) в окне консоли, и позволять персонажу перемещаться по карте, реагируя на клавиши управления курсором. Будут полезны свойства Console.CursorLeft и Console.CursorTop. [solution](https://github.com/MihailKulikov/MyHomeworks/tree/master/sem2/hw6.2)
+
+## Homework №7
+
+1. Написать калькулятор с пользовательским интерфейсом (по примеру стандартного виндового калькулятора). [solution](https://github.com/MihailKulikov/MyHomeworks/tree/master/sem2/hw7.1)
+2. Сделать часы (приложение, показывающее текущее системное время) со стрелками (часовой, минутной и секундной). Здесь юнит-тесты можно не писать. [solution](https://github.com/MihailKulikov/MyHomeworks/tree/master/sem2/hw7.2)
